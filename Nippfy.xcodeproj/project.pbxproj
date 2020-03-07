@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		075DBA569AA196D8FA4C8664 /* Pods_NippfyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 695AB60110DC7B99AC66CCFD /* Pods_NippfyTests.framework */; };
 		656ECC38240A8275007F93D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC37240A8275007F93D4 /* AppDelegate.swift */; };
 		656ECC3A240A8275007F93D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC39240A8275007F93D4 /* SceneDelegate.swift */; };
 		656ECC3C240A8275007F93D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC3B240A8275007F93D4 /* ViewController.swift */; };
@@ -45,6 +46,8 @@
 		656ECCAD240A8631007F93D4 /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECCA7240A8631007F93D4 /* ForgottenPasswordViewController.swift */; };
 		656ECCAE240A8631007F93D4 /* ForgottenPasswordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECCA8240A8631007F93D4 /* ForgottenPasswordInteractor.swift */; };
 		656ECCB0240A8761007F93D4 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 656ECCAF240A8760007F93D4 /* Readme.md */; };
+		675F427D34CFD01AC9BF5A13 /* Pods_Nippfy_NippfyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC33ACB83B948F1188827CB2 /* Pods_Nippfy_NippfyUITests.framework */; };
+		98264F551602B5B889AB320C /* Pods_Nippfy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 246A700076AD5F4E89680694 /* Pods_Nippfy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		105BC543A6BA721FF050746C /* Pods-Nippfy-NippfyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nippfy-NippfyUITests.release.xcconfig"; path = "Target Support Files/Pods-Nippfy-NippfyUITests/Pods-Nippfy-NippfyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		246A700076AD5F4E89680694 /* Pods_Nippfy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nippfy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		656ECC34240A8275007F93D4 /* Nippfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nippfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		656ECC37240A8275007F93D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		656ECC39240A8275007F93D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +114,13 @@
 		656ECCA7240A8631007F93D4 /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		656ECCA8240A8631007F93D4 /* ForgottenPasswordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordInteractor.swift; sourceTree = "<group>"; };
 		656ECCAF240A8760007F93D4 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		695AB60110DC7B99AC66CCFD /* Pods_NippfyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NippfyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7826E1169C89AC3890AE313C /* Pods-NippfyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NippfyTests.release.xcconfig"; path = "Target Support Files/Pods-NippfyTests/Pods-NippfyTests.release.xcconfig"; sourceTree = "<group>"; };
+		85E1111C06CE7CEC94C0A6A0 /* Pods-Nippfy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nippfy.release.xcconfig"; path = "Target Support Files/Pods-Nippfy/Pods-Nippfy.release.xcconfig"; sourceTree = "<group>"; };
+		B07F66E0803C7922310E54D1 /* Pods-Nippfy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nippfy.debug.xcconfig"; path = "Target Support Files/Pods-Nippfy/Pods-Nippfy.debug.xcconfig"; sourceTree = "<group>"; };
+		BC33ACB83B948F1188827CB2 /* Pods_Nippfy_NippfyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nippfy_NippfyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4228A84CE399AA704CAACE /* Pods-Nippfy-NippfyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nippfy-NippfyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Nippfy-NippfyUITests/Pods-Nippfy-NippfyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E86BE1F21FD193601F70F2DD /* Pods-NippfyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NippfyTests.debug.xcconfig"; path = "Target Support Files/Pods-NippfyTests/Pods-NippfyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98264F551602B5B889AB320C /* Pods_Nippfy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				075DBA569AA196D8FA4C8664 /* Pods_NippfyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,12 +144,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				675F427D34CFD01AC9BF5A13 /* Pods_Nippfy_NippfyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5175BB4A368949F81D96A43A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				246A700076AD5F4E89680694 /* Pods_Nippfy.framework */,
+				BC33ACB83B948F1188827CB2 /* Pods_Nippfy_NippfyUITests.framework */,
+				695AB60110DC7B99AC66CCFD /* Pods_NippfyTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		59398115250EAF913FE0878E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B07F66E0803C7922310E54D1 /* Pods-Nippfy.debug.xcconfig */,
+				85E1111C06CE7CEC94C0A6A0 /* Pods-Nippfy.release.xcconfig */,
+				CE4228A84CE399AA704CAACE /* Pods-Nippfy-NippfyUITests.debug.xcconfig */,
+				105BC543A6BA721FF050746C /* Pods-Nippfy-NippfyUITests.release.xcconfig */,
+				E86BE1F21FD193601F70F2DD /* Pods-NippfyTests.debug.xcconfig */,
+				7826E1169C89AC3890AE313C /* Pods-NippfyTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		656ECC2B240A8275007F93D4 = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +183,8 @@
 				656ECC4D240A8279007F93D4 /* NippfyTests */,
 				656ECC58240A8279007F93D4 /* NippfyUITests */,
 				656ECC35240A8275007F93D4 /* Products */,
+				59398115250EAF913FE0878E /* Pods */,
+				5175BB4A368949F81D96A43A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -337,9 +378,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 656ECC5E240A8279007F93D4 /* Build configuration list for PBXNativeTarget "Nippfy" */;
 			buildPhases = (
+				E70AE426DAF81D78EC1B41A5 /* [CP] Check Pods Manifest.lock */,
 				656ECC30240A8275007F93D4 /* Sources */,
 				656ECC31240A8275007F93D4 /* Frameworks */,
 				656ECC32240A8275007F93D4 /* Resources */,
+				086F0879CF26765C4C551431 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -354,6 +397,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 656ECC61240A8279007F93D4 /* Build configuration list for PBXNativeTarget "NippfyTests" */;
 			buildPhases = (
+				76F3356D53108309B9CF38ED /* [CP] Check Pods Manifest.lock */,
 				656ECC46240A8279007F93D4 /* Sources */,
 				656ECC47240A8279007F93D4 /* Frameworks */,
 				656ECC48240A8279007F93D4 /* Resources */,
@@ -372,9 +416,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 656ECC64240A8279007F93D4 /* Build configuration list for PBXNativeTarget "NippfyUITests" */;
 			buildPhases = (
+				9774B0EEFD3B91EF93AAA0AD /* [CP] Check Pods Manifest.lock */,
 				656ECC51240A8279007F93D4 /* Sources */,
 				656ECC52240A8279007F93D4 /* Frameworks */,
 				656ECC53240A8279007F93D4 /* Resources */,
+				6BBAA9772D558A056BF8BA94 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -457,6 +503,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		086F0879CF26765C4C551431 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nippfy/Pods-Nippfy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nippfy/Pods-Nippfy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Nippfy/Pods-Nippfy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6BBAA9772D558A056BF8BA94 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nippfy-NippfyUITests/Pods-Nippfy-NippfyUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Nippfy-NippfyUITests/Pods-Nippfy-NippfyUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Nippfy-NippfyUITests/Pods-Nippfy-NippfyUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76F3356D53108309B9CF38ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NippfyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9774B0EEFD3B91EF93AAA0AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nippfy-NippfyUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E70AE426DAF81D78EC1B41A5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Nippfy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		656ECC30240A8275007F93D4 /* Sources */ = {
@@ -664,6 +813,7 @@
 		};
 		656ECC5F240A8279007F93D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B07F66E0803C7922310E54D1 /* Pods-Nippfy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -683,6 +833,7 @@
 		};
 		656ECC60240A8279007F93D4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85E1111C06CE7CEC94C0A6A0 /* Pods-Nippfy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -702,6 +853,7 @@
 		};
 		656ECC62240A8279007F93D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E86BE1F21FD193601F70F2DD /* Pods-NippfyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -724,6 +876,7 @@
 		};
 		656ECC63240A8279007F93D4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7826E1169C89AC3890AE313C /* Pods-NippfyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -746,6 +899,7 @@
 		};
 		656ECC65240A8279007F93D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE4228A84CE399AA704CAACE /* Pods-Nippfy-NippfyUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -766,6 +920,7 @@
 		};
 		656ECC66240A8279007F93D4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 105BC543A6BA721FF050746C /* Pods-Nippfy-NippfyUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
