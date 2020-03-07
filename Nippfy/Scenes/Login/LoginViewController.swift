@@ -69,6 +69,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        view.backgroundColor = .blue
         doSomething()
     }
     

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,6 +46,7 @@
 		656ECCAD240A8631007F93D4 /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECCA7240A8631007F93D4 /* ForgottenPasswordViewController.swift */; };
 		656ECCAE240A8631007F93D4 /* ForgottenPasswordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECCA8240A8631007F93D4 /* ForgottenPasswordInteractor.swift */; };
 		656ECCB0240A8761007F93D4 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 656ECCAF240A8760007F93D4 /* Readme.md */; };
+		65CD69672413B244000AB56C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65CD69692413B244000AB56C /* Localizable.strings */; };
 		675F427D34CFD01AC9BF5A13 /* Pods_Nippfy_NippfyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC33ACB83B948F1188827CB2 /* Pods_Nippfy_NippfyUITests.framework */; };
 		98264F551602B5B889AB320C /* Pods_Nippfy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 246A700076AD5F4E89680694 /* Pods_Nippfy.framework */; };
 /* End PBXBuildFile section */
@@ -114,6 +115,10 @@
 		656ECCA7240A8631007F93D4 /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		656ECCA8240A8631007F93D4 /* ForgottenPasswordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordInteractor.swift; sourceTree = "<group>"; };
 		656ECCAF240A8760007F93D4 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		65CD69632413B224000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		65CD69642413B225000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		65CD69682413B244000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65CD696A2413B24C000AB56C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		695AB60110DC7B99AC66CCFD /* Pods_NippfyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NippfyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7826E1169C89AC3890AE313C /* Pods-NippfyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NippfyTests.release.xcconfig"; path = "Target Support Files/Pods-NippfyTests/Pods-NippfyTests.release.xcconfig"; sourceTree = "<group>"; };
 		85E1111C06CE7CEC94C0A6A0 /* Pods-Nippfy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nippfy.release.xcconfig"; path = "Target Support Files/Pods-Nippfy/Pods-Nippfy.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,7 +176,6 @@
 				E86BE1F21FD193601F70F2DD /* Pods-NippfyTests.debug.xcconfig */,
 				7826E1169C89AC3890AE313C /* Pods-NippfyTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -201,6 +205,7 @@
 		656ECC36240A8275007F93D4 /* Nippfy */ = {
 			isa = PBXGroup;
 			children = (
+				65CD69602413B046000AB56C /* Localizable */,
 				656ECC7E240A8561007F93D4 /* Scenes */,
 				656ECC7D240A854E007F93D4 /* Delegates */,
 				656ECC7C240A8538007F93D4 /* Storyboards */,
@@ -371,6 +376,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		65CD69602413B046000AB56C /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				65CD69692413B244000AB56C /* Localizable.strings */,
+			);
+			path = Localizable;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -462,6 +475,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 656ECC2B240A8275007F93D4;
 			productRefGroup = 656ECC35240A8275007F93D4 /* Products */;
@@ -481,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				656ECCB0240A8761007F93D4 /* Readme.md in Resources */,
+				65CD69672413B244000AB56C /* Localizable.strings in Resources */,
 				656ECC44240A8279007F93D4 /* LaunchScreen.storyboard in Resources */,
 				656ECC69240A83EA007F93D4 /* Colors.xcassets in Resources */,
 				656ECC41240A8279007F93D4 /* Assets.xcassets in Resources */,
@@ -682,6 +697,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				656ECC3E240A8275007F93D4 /* Base */,
+				65CD69632413B224000AB56C /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -690,8 +706,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				656ECC43240A8279007F93D4 /* Base */,
+				65CD69642413B225000AB56C /* es */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		65CD69692413B244000AB56C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65CD69682413B244000AB56C /* es */,
+				65CD696A2413B24C000AB56C /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -701,6 +727,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -761,6 +788,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
