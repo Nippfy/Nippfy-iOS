@@ -46,6 +46,8 @@
 		656ECCAD240A8631007F93D4 /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECCA7240A8631007F93D4 /* ForgottenPasswordViewController.swift */; };
 		656ECCAE240A8631007F93D4 /* ForgottenPasswordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECCA8240A8631007F93D4 /* ForgottenPasswordInteractor.swift */; };
 		656ECCB0240A8761007F93D4 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 656ECCAF240A8760007F93D4 /* Readme.md */; };
+		65BFF1B1241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */; };
+		65BFF1B2241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.19.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */; };
 		65CD69672413B244000AB56C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65CD69692413B244000AB56C /* Localizable.strings */; };
 		675F427D34CFD01AC9BF5A13 /* Pods_Nippfy_NippfyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC33ACB83B948F1188827CB2 /* Pods_Nippfy_NippfyUITests.framework */; };
 		98264F551602B5B889AB320C /* Pods_Nippfy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 246A700076AD5F4E89680694 /* Pods_Nippfy.framework */; };
@@ -115,6 +117,8 @@
 		656ECCA7240A8631007F93D4 /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		656ECCA8240A8631007F93D4 /* ForgottenPasswordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordInteractor.swift; sourceTree = "<group>"; };
 		656ECCAF240A8760007F93D4 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2020-03-15 at 20.35.08.png"; sourceTree = "<group>"; };
+		65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2020-03-15 at 20.35.19.png"; sourceTree = "<group>"; };
 		65CD69632413B224000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		65CD69642413B225000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		65CD69682413B244000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -240,6 +244,7 @@
 		656ECC67240A83D4007F93D4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				65BFF1AE241ECAFA00D03F26 /* Readme Images */,
 				656ECC40240A8279007F93D4 /* Assets.xcassets */,
 				656ECC68240A83EA007F93D4 /* Colors.xcassets */,
 			);
@@ -376,6 +381,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		65BFF1AE241ECAFA00D03F26 /* Readme Images */ = {
+			isa = PBXGroup;
+			children = (
+				65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */,
+				65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */,
+			);
+			path = "Readme Images";
+			sourceTree = "<group>";
+		};
 		65CD69602413B046000AB56C /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,10 +510,12 @@
 			files = (
 				656ECCB0240A8761007F93D4 /* Readme.md in Resources */,
 				65CD69672413B244000AB56C /* Localizable.strings in Resources */,
+				65BFF1B2241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.19.png in Resources */,
 				656ECC44240A8279007F93D4 /* LaunchScreen.storyboard in Resources */,
 				656ECC69240A83EA007F93D4 /* Colors.xcassets in Resources */,
 				656ECC41240A8279007F93D4 /* Assets.xcassets in Resources */,
 				656ECC3F240A8275007F93D4 /* Main.storyboard in Resources */,
+				65BFF1B1241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.08.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
