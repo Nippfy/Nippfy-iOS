@@ -9,11 +9,35 @@
 import Foundation
 import UIKit
 
+extension UITextField {
+    func setIcon(_ image: UIImage) {
+        let iconView = UIImageView(frame:
+            CGRect(x: 10, y: 5, width: 20, height: 20))
+        iconView.image = image
+        let iconContainerView: UIView = UIView(frame:
+            CGRect(x: 20, y: 0, width: 35, height: 30))
+        iconContainerView.addSubview(iconView)
+        leftView = iconContainerView
+        leftViewMode = .always
+    }
+}
+
 extension UIView {
     func addSubviewForAutolayout(_ subview: UIView) {
         subview.translatesAutoresizingMaskIntoConstraints = false
         addSubview(subview)
     }
+}
+
+extension UIView {
+    
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+    }
+    
 }
 
 let imageCache = NSCache<AnyObject, AnyObject>()
@@ -57,29 +81,29 @@ class CustomImageView: UIImageView {
 }
 
 extension UILabel {
-
+    
     func setLineSpacing(lineSpacing: CGFloat = 0.0, lineHeightMultiple: CGFloat = 0.0) {
-
+        
         guard let labelText = self.text else { return }
-
+        
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
         paragraphStyle.lineHeightMultiple = lineHeightMultiple
-
+        
         let attributedString:NSMutableAttributedString
         if let labelattributedText = self.attributedText {
             attributedString = NSMutableAttributedString(attributedString: labelattributedText)
         } else {
             attributedString = NSMutableAttributedString(string: labelText)
         }
-
+        
         // (Swift 4.2 and above) Line spacing attribute
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
-
-
+        
+        
         // (Swift 4.1 and 4.0) Line spacing attribute
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
-
+        
         self.attributedText = attributedString
     }
 }
