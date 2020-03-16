@@ -20,6 +20,13 @@ extension UITextField {
         leftView = iconContainerView
         leftViewMode = .always
     }
+    
+    func setInnerPadding() {
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+        leftView = paddingView
+        rightView = paddingView
+        leftViewMode = .always
+    }
 }
 
 extension UIView {
