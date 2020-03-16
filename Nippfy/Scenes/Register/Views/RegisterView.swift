@@ -9,6 +9,8 @@
 import Foundation
 import LBTATools
 import UIKit
+import CountryPickerView
+import SKCountryPicker
 
 class RegisterView: UIView {
     
@@ -100,7 +102,7 @@ class RegisterView: UIView {
     
     lazy var nameLabel: UILabel = {
         var label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.text = "Name *"
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
@@ -116,7 +118,7 @@ class RegisterView: UIView {
     
     lazy var nameTextField: UITextField = {
         var tf = UITextField()
-        tf.placeholder = "Name"
+        tf.placeholder = "John"
         tf.setInnerPadding()
         // tf.setIcon(UIImage(named: "mail")!)
         tf.backgroundColor = UIColor(named: "Card Background")
@@ -125,7 +127,7 @@ class RegisterView: UIView {
     
     lazy var surnameLabel: UILabel = {
         var label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.text = "Surname *"
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
@@ -141,7 +143,7 @@ class RegisterView: UIView {
     
     lazy var surnameTextField: UITextField = {
         var tf = UITextField()
-        tf.placeholder = "Surname"
+        tf.placeholder = "Gregor"
         tf.setInnerPadding()
         // tf.setIcon(UIImage(named: "password")!)
         tf.backgroundColor = UIColor(named: "Card Background")
@@ -150,13 +152,40 @@ class RegisterView: UIView {
     
     lazy var phoneLabel: UILabel = {
         var label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.text = "Phone number *"
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.text = "Phone number and region *"
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.textColor = UIColor(named: "Normal Words")
         return label
     }()
+    
+    lazy var selectCountryButton: UIImageView = {
+        var button = UIImageView()
+        button.image = UIImage(named: "flag")
+        button.isUserInteractionEnabled = true
+        button.contentMode = .scaleAspectFit
+        return button
+    }()
+    
+    lazy var dialCodeLabel: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.text = "+ 1234"
+        // label.backgroundColor = .blue
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.textColor = UIColor(named: "Normal Words")
+        label.textColor = .black
+        return label
+    }()
+    
+    /*
+     lazy var countryPicker: CountryPickerView = {
+     var picker = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+     return picker
+     }()
+     */
     
     lazy var phoneSeparatorLine: UIView = {
         var sp = UIView()
@@ -164,9 +193,17 @@ class RegisterView: UIView {
         return sp
     }()
     
+    lazy var verticalPhoneSeparatorLine: UIView = {
+        var sp = UIView()
+        sp.backgroundColor = .lightGray
+        return sp
+    }()
+    
     lazy var phoneTextField: UITextField = {
         var tf = UITextField()
-        tf.placeholder = "Phone number"
+        // tf.placeholder = "123456789"
+        tf.attributedPlaceholder = NSAttributedString(string: "123456789",
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         tf.setInnerPadding()
         tf.keyboardType = .phonePad
         tf.backgroundColor = UIColor(named: "Card Background")
@@ -251,7 +288,7 @@ extension RegisterView {
         scrollViewElement0.addSubviewForAutolayout(nameTextField)
         scrollViewElement0.addSubviewForAutolayout(nameSeparatorLine)
         
-        nameLabel.anchor(top: scrollViewElement0.topAnchor, leading: scrollViewElement0.leadingAnchor, bottom: nil, trailing: scrollViewElement0.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 0))
+        nameLabel.anchor(top: scrollViewElement0.topAnchor, leading: scrollViewElement0.leadingAnchor, bottom: nil, trailing: scrollViewElement0.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20), size: CGSize(width: 0, height: 0))
         
         nameTextField.anchor(top: nameLabel.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 50))
         
@@ -261,7 +298,7 @@ extension RegisterView {
         scrollViewElement0.addSubviewForAutolayout(surnameTextField)
         scrollViewElement0.addSubviewForAutolayout(surnameSeparatorLine)
         
-        surnameLabel.anchor(top: nameSeparatorLine.topAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
+        surnameLabel.anchor(top: nameSeparatorLine.topAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
         
         surnameTextField.anchor(top: surnameLabel.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 50))
         
@@ -271,15 +308,25 @@ extension RegisterView {
         scrollViewElement0.addSubviewForAutolayout(phoneTextField)
         scrollViewElement0.addSubviewForAutolayout(phoneSeparatorLine)
         
-        phoneLabel.anchor(top: surnameSeparatorLine.topAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
+        scrollViewElement0.addSubviewForAutolayout(selectCountryButton)
+        scrollViewElement0.addSubviewForAutolayout(dialCodeLabel)
+        scrollViewElement0.addSubviewForAutolayout(verticalPhoneSeparatorLine)
         
-        phoneTextField.anchor(top: phoneLabel.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 50))
+        phoneLabel.anchor(top: surnameSeparatorLine.topAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
+        
+        selectCountryButton.anchor(top: phoneLabel.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 50, height: 50))
+        dialCodeLabel.anchor(top: selectCountryButton.topAnchor, leading: selectCountryButton.trailingAnchor, bottom: selectCountryButton.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0), size: CGSize(width: 60, height: 0))
+        verticalPhoneSeparatorLine.anchor(top: dialCodeLabel.topAnchor, leading: dialCodeLabel.trailingAnchor, bottom: dialCodeLabel.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 7, left: 0, bottom: 7, right: 0), size: CGSize(width: 1, height: 0))
+        
+        
+        
+        phoneTextField.anchor(top: dialCodeLabel.topAnchor, leading: verticalPhoneSeparatorLine.trailingAnchor, bottom: dialCodeLabel.bottomAnchor, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 50))
         
         phoneSeparatorLine.anchor(top: phoneTextField.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 1))
         
         
         
+        
     }
-    
     
 }

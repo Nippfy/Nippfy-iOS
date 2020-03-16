@@ -8,6 +8,8 @@ target 'Nippfy' do
   # Pods for Nippfy
 
   pod 'LBTATools'
+  pod 'CountryPickerView'
+  pod 'SKCountryPicker'
 
   target 'NippfyTests' do
     inherit! :search_paths

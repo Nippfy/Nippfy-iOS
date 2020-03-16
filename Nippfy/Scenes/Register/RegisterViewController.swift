@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import SKCountryPicker
 
 protocol RegisterDisplayLogic: class
 {
@@ -73,8 +74,33 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
         super.viewDidLoad()
         view = myView
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(countryButtonPressed))
+        myView.selectCountryButton.addGestureRecognizer(tap)
+        // myView.selectCountryButton.addTarget(self, action: #selector(countryButtonPressed), for: .touchUpInside)
+        
         prepareNavBar()
         doSomething()
+    }
+    
+    @objc func countryButtonPressed() {
+        print("BUTTON PRESSED")
+        
+        let countryController = CountryPickerWithSectionViewController.presentController(on: self) { [weak self] (country: Country) in
+            
+            guard let self = self else { return }
+            
+            self.myView.selectCountryButton.image = country.flag
+            self.myView.dialCodeLabel.text = country.dialingCode
+            // country.f
+            // self.myView.selectCountryButton.setBackgroundImage(country.flag, for: .normal)
+            
+            // self.countryImageView.image = country.flag
+            // self.countryCodeButton.setTitle(country.dialingCode, for: .normal)
+            
+        }
+        
+        // can customize the countryPicker here e.g font and color
+        countryController.detailColor = UIColor.red
     }
     
     // MARK: Do something
