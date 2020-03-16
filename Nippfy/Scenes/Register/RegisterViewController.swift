@@ -22,6 +22,8 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
     var interactor: RegisterBusinessLogic?
     var router: (NSObjectProtocol & RegisterRoutingLogic & RegisterDataPassing)?
     
+    var myView = RegisterView()
+    
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -69,6 +71,9 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        view = myView
+        
+        prepareNavBar()
         doSomething()
     }
     
@@ -87,3 +92,23 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
         //nameTextField.text = viewModel.name
     }
 }
+
+
+// Prepare NavBar
+extension RegisterViewController {
+    
+    fileprivate func prepareNavBar() {
+        view.backgroundColor = UIColor(named: "Background")
+        title = "Nippfy"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.layoutIfNeeded()
+    }
+    
+}
+

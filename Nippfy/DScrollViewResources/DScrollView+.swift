@@ -94,15 +94,15 @@ extension UIView {
     }
     
     @discardableResult
-    public func addScrollView(_ scrollView: DScrollView, withSafeArea: DViewSafeArea = .none, hasStatusBarCover: Bool = false, statusBarBackgroundColor: UIColor = .white, container: DScrollViewContainer, elements: [UIView]) -> UIView {
-        addSubview(scrollView)
+    public func addScrollView(in view: UIView,  _ scrollView: DScrollView, withSafeArea: DViewSafeArea = .none, hasStatusBarCover: Bool = false, statusBarBackgroundColor: UIColor = .white, container: DScrollViewContainer, elements: [UIView]) -> UIView {
+        view.addSubview(scrollView)
         scrollView.addSubview(container)
         
         if hasStatusBarCover {
             addStatusBarCover(backgroundColor: statusBarBackgroundColor)
         }
         
-        scrollView.edgeTo(self, safeArea: withSafeArea)
+        scrollView.edgeTo(view)
         container.edgeTo(scrollView)
         
         elements.forEach { (element) in
