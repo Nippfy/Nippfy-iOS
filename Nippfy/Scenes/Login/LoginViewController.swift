@@ -72,23 +72,22 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     {
         super.viewDidLoad()
         view = myView
-        view.backgroundColor = UIColor(named: "Background")
-        title = "Nippfy"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        // self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")]
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.layoutIfNeeded()
-        
+        prepareView()
         doSomething()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        // Personalize the back button between scenes
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.tintColor = UIColor(named: "Small Titles")
     }
     
     // MARK: Do something
@@ -104,5 +103,50 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     func displaySomething(viewModel: Login.Something.ViewModel)
     {
         //nameTextField.text = viewModel.name
+    }
+}
+
+extension LoginViewController {
+    
+    func prepareView() {
+        view.backgroundColor = UIColor(named: "Background")
+        title = "Nippfy"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.layoutIfNeeded()
+        
+        self.navigationController?.navigationBar.backItem?.title = "Custom"
+        
+        prepareButtonsActions()
+    }
+    
+    func prepareButtonsActions() {
+        myView.createAccountButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        myView.forgotPasswordButton.addTarget(self, action: #selector(forgotPasswordButtonTapped), for: .touchUpInside)
+        myView.signInButton.addTarget(self, action: #selector(sigInButtonTapped), for: .touchUpInside)
+    }
+    
+}
+
+// MARK: User Interactions
+extension LoginViewController {
+    
+    @objc func registerButtonTapped() {
+        print("REGISTER TAPPED")
+        router?.routeRegisterScene()
+    }
+    
+    @objc func forgotPasswordButtonTapped() {
+        print("FORGOT PASSWORD TAPPED")
+        router?.routeForgotPasswordScene()
+    }
+    
+    @objc func sigInButtonTapped() {
+        print("SIGN IN TAPPED")
     }
 }

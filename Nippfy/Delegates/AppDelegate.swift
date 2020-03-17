@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         
         // Initial View Controller 
-        let rootViewController = UINavigationController(rootViewController: ForgottenPasswordViewController())
+        let rootViewController = UINavigationController(rootViewController: LoginViewController())
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         

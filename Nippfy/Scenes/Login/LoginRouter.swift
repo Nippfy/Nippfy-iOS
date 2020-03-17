@@ -15,6 +15,8 @@ import UIKit
 @objc protocol LoginRoutingLogic
 {
     //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeForgotPasswordScene()
+    func routeRegisterScene()
 }
 
 protocol LoginDataPassing
@@ -24,37 +26,34 @@ protocol LoginDataPassing
 
 class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing
 {
+    
     weak var viewController: LoginViewController?
     var dataStore: LoginDataStore?
     
-    // MARK: Routing
+    func routeForgotPasswordScene() {
+        let destinationVC = ForgottenPasswordViewController()
+        navigateToForgotPasswordScene(source: viewController!, destination: destinationVC)
+    }
     
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func routeRegisterScene() {
+        let destinationVC = RegisterViewController()
+        navigateToRegisterScene(source: viewController!, destination: destinationVC)
+    }
     
     // MARK: Navigation
     
-    //func navigateToSomewhere(source: LoginViewController, destination: SomewhereViewController)
-    //{
-    //  source.show(destination, sender: nil)
-    //}
+    func navigateToForgotPasswordScene(source: LoginViewController, destination: ForgottenPasswordViewController)
+    {
+        // source.present(destination, animated: true, completion: nil)
+        source.show(destination, sender: self)
+    }
     
-    // MARK: Passing data
+    func navigateToRegisterScene(source: LoginViewController, destination: RegisterViewController)
+    {
+        source.show(destination, sender: self)
+        // source.show(destination, animated: true, completion: nil)
+        // source.present(UINavigationController(rootViewController: destination), animated: true, completion: nil)
+    }
     
-    //func passDataToSomewhere(source: LoginDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    
 }
