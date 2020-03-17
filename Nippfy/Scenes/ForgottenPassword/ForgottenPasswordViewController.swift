@@ -22,6 +22,8 @@ class ForgottenPasswordViewController: UIViewController, ForgottenPasswordDispla
     var interactor: ForgottenPasswordBusinessLogic?
     var router: (NSObjectProtocol & ForgottenPasswordRoutingLogic & ForgottenPasswordDataPassing)?
     
+    var myView = ForgottenPasswordView()
+    
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -69,6 +71,8 @@ class ForgottenPasswordViewController: UIViewController, ForgottenPasswordDispla
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        view = myView
+        prepareNavBar()
         doSomething()
     }
     
@@ -87,3 +91,22 @@ class ForgottenPasswordViewController: UIViewController, ForgottenPasswordDispla
         //nameTextField.text = viewModel.name
     }
 }
+
+// Prepare NavBar
+extension ForgottenPasswordViewController {
+    
+    fileprivate func prepareNavBar() {
+        view.backgroundColor = UIColor(named: "Background")
+        title = "Nippfy"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.layoutIfNeeded()
+    }
+    
+}
+
