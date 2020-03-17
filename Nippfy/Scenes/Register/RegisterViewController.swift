@@ -87,6 +87,7 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
         
         let countryController = CountryPickerWithSectionViewController.presentController(on: self) { [weak self] (country: Country) in
             
+            
             guard let self = self else { return }
             
             self.myView.selectCountryButton.image = country.flag
@@ -100,7 +101,10 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
         }
         
         // can customize the countryPicker here e.g font and color
-        countryController.detailColor = UIColor.red
+        countryController.detailColor = UIColor(named: "Normal Words")!
+        countryController.labelColor = UIColor(named: "Small Titles")!
+        countryController.flagStyle = .circular
+        // countryController.
     }
     
     // MARK: Do something

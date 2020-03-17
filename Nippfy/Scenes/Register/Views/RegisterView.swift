@@ -27,20 +27,20 @@ class RegisterView: UIView {
     }()
     
     lazy var scrollViewElement0: UIView = {
-        var scrollViewElement = DScrollViewElement(height: 600)
+        var scrollViewElement = DScrollViewElement(height: 400)
         // scrollViewElement.backgroundColor = UIColor(named: "Background")
         return scrollViewElement
     }()
     
     lazy var bottomContainer: UIView = {
         var view = UIView()
-        view.backgroundColor = .blue
+        // view.backgroundColor = .blue
         view.layer.cornerRadius = 30
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 1
         view.layer.shadowOffset = .zero
-        view.layer.shadowRadius = 5
+        view.layer.shadowRadius = 7
         return view
     }()
     
@@ -171,7 +171,7 @@ class RegisterView: UIView {
     lazy var dialCodeLabel: UILabel = {
         var label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.text = "+ 1234"
+        label.text = "+ 1"
         // label.backgroundColor = .blue
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
@@ -206,6 +206,34 @@ class RegisterView: UIView {
         attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         tf.setInnerPadding()
         tf.keyboardType = .phonePad
+        tf.backgroundColor = UIColor(named: "Card Background")
+        return tf
+    }()
+    
+    lazy var emailLabel: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.text = "Email *"
+        // label.backgroundColor = .blue
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.textColor = UIColor(named: "Normal Words")
+        // label.textColor = .black
+        return label
+    }()
+    
+    lazy var emailSeparatorLine: UIView = {
+        var sp = UIView()
+        sp.backgroundColor = UIColor(named: "Buttons Background")
+        return sp
+    }()
+    
+    lazy var emailTextField: UITextField = {
+        var tf = UITextField()
+        // tf.placeholder = "123456789"
+        tf.placeholder = "abc@gmail.com"
+        tf.setInnerPadding()
+        tf.keyboardType = .emailAddress
         tf.backgroundColor = UIColor(named: "Card Background")
         return tf
     }()
@@ -314,7 +342,7 @@ extension RegisterView {
         
         phoneLabel.anchor(top: surnameSeparatorLine.topAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
         
-        selectCountryButton.anchor(top: phoneLabel.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 50, height: 50))
+        selectCountryButton.anchor(top: phoneLabel.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), size: CGSize(width: 50, height: 50))
         dialCodeLabel.anchor(top: selectCountryButton.topAnchor, leading: selectCountryButton.trailingAnchor, bottom: selectCountryButton.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0), size: CGSize(width: 60, height: 0))
         verticalPhoneSeparatorLine.anchor(top: dialCodeLabel.topAnchor, leading: dialCodeLabel.trailingAnchor, bottom: dialCodeLabel.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 7, left: 0, bottom: 7, right: 0), size: CGSize(width: 1, height: 0))
         
@@ -324,9 +352,15 @@ extension RegisterView {
         
         phoneSeparatorLine.anchor(top: phoneTextField.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 1))
         
+        scrollViewElement0.addSubviewForAutolayout(emailLabel)
+        scrollViewElement0.addSubviewForAutolayout(emailTextField)
+        scrollViewElement0.addSubviewForAutolayout(emailSeparatorLine)
         
+        emailLabel.anchor(top: phoneSeparatorLine.topAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
         
+        emailTextField.anchor(top: emailLabel.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 50))
         
+        emailSeparatorLine.anchor(top: emailTextField.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 1))
     }
     
 }
