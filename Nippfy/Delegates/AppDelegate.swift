@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         
         // Initial View Controller 
-        let rootViewController = UINavigationController(rootViewController: PaymentViewController())
+        let rootViewController = UINavigationController(rootViewController: WalletViewController())
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         

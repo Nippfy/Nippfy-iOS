@@ -22,6 +22,8 @@ class WalletViewController: UIViewController, WalletDisplayLogic
     var interactor: WalletBusinessLogic?
     var router: (NSObjectProtocol & WalletRoutingLogic & WalletDataPassing)?
     
+    var myView = WalletView()
+    
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -69,6 +71,7 @@ class WalletViewController: UIViewController, WalletDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        prepareView()
         doSomething()
     }
     
@@ -86,4 +89,44 @@ class WalletViewController: UIViewController, WalletDisplayLogic
     {
         //nameTextField.text = viewModel.name
     }
+}
+
+// MARK: Prepare View
+extension WalletViewController {
+    
+    func prepareView() {
+        view = myView
+        
+        view.backgroundColor = UIColor(named: "Background")
+        title = "Wallet"
+        
+        prepareNavBar()
+    }
+    
+    func prepareNavBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")]
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.layoutIfNeeded()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addButtonTapped))
+        
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(named: "Small Titles")], for: .normal)
+        
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(named: "Normal Words")], for: .selected)
+    }
+    
+    
+}
+
+// MARK: User Interactions
+extension WalletViewController {
+    
+    @objc func addButtonTapped() {
+        print("ADD BUTTON TAPPED")
+    }
+    
 }
