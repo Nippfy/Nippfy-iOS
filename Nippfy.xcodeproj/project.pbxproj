@@ -46,6 +46,22 @@
 		656ECCAD240A8631007F93D4 /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECCA7240A8631007F93D4 /* ForgottenPasswordViewController.swift */; };
 		656ECCAE240A8631007F93D4 /* ForgottenPasswordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECCA8240A8631007F93D4 /* ForgottenPasswordInteractor.swift */; };
 		656ECCB0240A8761007F93D4 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 656ECCAF240A8760007F93D4 /* Readme.md */; };
+		656F81AF2422910D004AE4CF /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81AE2422910D004AE4CF /* PaymentView.swift */; };
+		656F81B62422911F004AE4CF /* PaymentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81B02422911F004AE4CF /* PaymentPresenter.swift */; };
+		656F81B72422911F004AE4CF /* PaymentWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81B12422911F004AE4CF /* PaymentWorker.swift */; };
+		656F81B82422911F004AE4CF /* PaymentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81B22422911F004AE4CF /* PaymentRouter.swift */; };
+		656F81B92422911F004AE4CF /* PaymentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81B32422911F004AE4CF /* PaymentModels.swift */; };
+		656F81BA2422911F004AE4CF /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81B42422911F004AE4CF /* PaymentViewController.swift */; };
+		656F81BB2422911F004AE4CF /* PaymentInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81B52422911F004AE4CF /* PaymentInteractor.swift */; };
+		656F81BD2422942D004AE4CF /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81BC2422942D004AE4CF /* UIViewControllerExtension.swift */; };
+		656F81C12422AB1D004AE4CF /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C02422AB1D004AE4CF /* WalletView.swift */; };
+		656F81C82422AB3A004AE4CF /* WalletPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C22422AB3A004AE4CF /* WalletPresenter.swift */; };
+		656F81C92422AB3A004AE4CF /* WalletWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C32422AB3A004AE4CF /* WalletWorker.swift */; };
+		656F81CA2422AB3A004AE4CF /* WalletRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C42422AB3A004AE4CF /* WalletRouter.swift */; };
+		656F81CB2422AB3A004AE4CF /* WalletModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C52422AB3A004AE4CF /* WalletModels.swift */; };
+		656F81CC2422AB3A004AE4CF /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C62422AB3A004AE4CF /* WalletViewController.swift */; };
+		656F81CD2422AB3A004AE4CF /* WalletInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C72422AB3A004AE4CF /* WalletInteractor.swift */; };
+		656F81CF2423797A004AE4CF /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81CE24237979004AE4CF /* UIDeviceExtension.swift */; };
 		65BFF1B1241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */; };
 		65BFF1B2241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.19.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */; };
 		65CD69672413B244000AB56C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65CD69692413B244000AB56C /* Localizable.strings */; };
@@ -117,6 +133,22 @@
 		656ECCA7240A8631007F93D4 /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		656ECCA8240A8631007F93D4 /* ForgottenPasswordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordInteractor.swift; sourceTree = "<group>"; };
 		656ECCAF240A8760007F93D4 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		656F81AE2422910D004AE4CF /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		656F81B02422911F004AE4CF /* PaymentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPresenter.swift; sourceTree = "<group>"; };
+		656F81B12422911F004AE4CF /* PaymentWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWorker.swift; sourceTree = "<group>"; };
+		656F81B22422911F004AE4CF /* PaymentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRouter.swift; sourceTree = "<group>"; };
+		656F81B32422911F004AE4CF /* PaymentModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModels.swift; sourceTree = "<group>"; };
+		656F81B42422911F004AE4CF /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		656F81B52422911F004AE4CF /* PaymentInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInteractor.swift; sourceTree = "<group>"; };
+		656F81BC2422942D004AE4CF /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		656F81C02422AB1D004AE4CF /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
+		656F81C22422AB3A004AE4CF /* WalletPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPresenter.swift; sourceTree = "<group>"; };
+		656F81C32422AB3A004AE4CF /* WalletWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletWorker.swift; sourceTree = "<group>"; };
+		656F81C42422AB3A004AE4CF /* WalletRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRouter.swift; sourceTree = "<group>"; };
+		656F81C52422AB3A004AE4CF /* WalletModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletModels.swift; sourceTree = "<group>"; };
+		656F81C62422AB3A004AE4CF /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		656F81C72422AB3A004AE4CF /* WalletInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInteractor.swift; sourceTree = "<group>"; };
+		656F81CE24237979004AE4CF /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2020-03-15 at 20.35.08.png"; sourceTree = "<group>"; };
 		65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2020-03-15 at 20.35.19.png"; sourceTree = "<group>"; };
 		65CD69632413B224000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -256,6 +288,8 @@
 			children = (
 				656ECC6B240A8413007F93D4 /* UIViewExtension.swift */,
 				656ECC6D240A8430007F93D4 /* UIButtonExtension.swift */,
+				656F81BC2422942D004AE4CF /* UIViewControllerExtension.swift */,
+				656F81CE24237979004AE4CF /* UIDeviceExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -308,6 +342,8 @@
 		656ECC7E240A8561007F93D4 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				656F81BE2422AB0D004AE4CF /* Wallet */,
+				656F81AC242290F2004AE4CF /* Payment */,
 				656ECC81240A8578007F93D4 /* ForgottenPassword */,
 				656ECC80240A8573007F93D4 /* Register */,
 				656ECC7F240A856D007F93D4 /* Login */,
@@ -377,6 +413,50 @@
 			isa = PBXGroup;
 			children = (
 				656ECC91240A85DB007F93D4 /* LoginView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		656F81AC242290F2004AE4CF /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				656F81AD242290FF004AE4CF /* Views */,
+				656F81B02422911F004AE4CF /* PaymentPresenter.swift */,
+				656F81B12422911F004AE4CF /* PaymentWorker.swift */,
+				656F81B22422911F004AE4CF /* PaymentRouter.swift */,
+				656F81B32422911F004AE4CF /* PaymentModels.swift */,
+				656F81B42422911F004AE4CF /* PaymentViewController.swift */,
+				656F81B52422911F004AE4CF /* PaymentInteractor.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		656F81AD242290FF004AE4CF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				656F81AE2422910D004AE4CF /* PaymentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		656F81BE2422AB0D004AE4CF /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				656F81BF2422AB13004AE4CF /* Views */,
+				656F81C22422AB3A004AE4CF /* WalletPresenter.swift */,
+				656F81C32422AB3A004AE4CF /* WalletWorker.swift */,
+				656F81C42422AB3A004AE4CF /* WalletRouter.swift */,
+				656F81C52422AB3A004AE4CF /* WalletModels.swift */,
+				656F81C62422AB3A004AE4CF /* WalletViewController.swift */,
+				656F81C72422AB3A004AE4CF /* WalletInteractor.swift */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		656F81BF2422AB13004AE4CF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				656F81C02422AB1D004AE4CF /* WalletView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -648,11 +728,17 @@
 				656ECCA9240A8631007F93D4 /* ForgottenPasswordPresenter.swift in Sources */,
 				656ECC6E240A8430007F93D4 /* UIButtonExtension.swift in Sources */,
 				656ECCAB240A8631007F93D4 /* ForgottenPasswordRouter.swift in Sources */,
+				656F81AF2422910D004AE4CF /* PaymentView.swift in Sources */,
+				656F81B72422911F004AE4CF /* PaymentWorker.swift in Sources */,
 				656ECCA0240A85FD007F93D4 /* RegisterInteractor.swift in Sources */,
 				656ECC8F240A859F007F93D4 /* LoginViewController.swift in Sources */,
+				656F81BA2422911F004AE4CF /* PaymentViewController.swift in Sources */,
 				656ECC90240A859F007F93D4 /* LoginInteractor.swift in Sources */,
+				656F81CA2422AB3A004AE4CF /* WalletRouter.swift in Sources */,
 				656ECC9D240A85FD007F93D4 /* RegisterRouter.swift in Sources */,
 				656ECCAA240A8631007F93D4 /* ForgottenPasswordWorker.swift in Sources */,
+				656F81CC2422AB3A004AE4CF /* WalletViewController.swift in Sources */,
+				656F81B92422911F004AE4CF /* PaymentModels.swift in Sources */,
 				656ECC38240A8275007F93D4 /* AppDelegate.swift in Sources */,
 				656ECC8B240A859F007F93D4 /* LoginPresenter.swift in Sources */,
 				656ECC9E240A85FD007F93D4 /* RegisterModels.swift in Sources */,
@@ -660,17 +746,27 @@
 				656ECCA2240A8621007F93D4 /* ForgottenPasswordView.swift in Sources */,
 				656ECC71240A846F007F93D4 /* DScrollView+.swift in Sources */,
 				656ECC94240A85F2007F93D4 /* RegisterView.swift in Sources */,
+				656F81CB2422AB3A004AE4CF /* WalletModels.swift in Sources */,
 				656ECC73240A848D007F93D4 /* DScrollViewElement.swift in Sources */,
+				656F81B62422911F004AE4CF /* PaymentPresenter.swift in Sources */,
 				656ECC9B240A85FD007F93D4 /* RegisterPresenter.swift in Sources */,
+				656F81B82422911F004AE4CF /* PaymentRouter.swift in Sources */,
 				656ECCAE240A8631007F93D4 /* ForgottenPasswordInteractor.swift in Sources */,
 				656ECC9F240A85FD007F93D4 /* RegisterViewController.swift in Sources */,
 				656ECC92240A85DB007F93D4 /* LoginView.swift in Sources */,
 				656ECC7B240A84EA007F93D4 /* Repository.swift in Sources */,
 				656ECC9C240A85FD007F93D4 /* RegisterWorker.swift in Sources */,
 				656ECC8E240A859F007F93D4 /* LoginModels.swift in Sources */,
+				656F81C12422AB1D004AE4CF /* WalletView.swift in Sources */,
 				656ECCAD240A8631007F93D4 /* ForgottenPasswordViewController.swift in Sources */,
+				656F81C82422AB3A004AE4CF /* WalletPresenter.swift in Sources */,
+				656F81CF2423797A004AE4CF /* UIDeviceExtension.swift in Sources */,
+				656F81CD2422AB3A004AE4CF /* WalletInteractor.swift in Sources */,
 				656ECC75240A84A9007F93D4 /* DScrollViewContainer.swift in Sources */,
+				656F81BB2422911F004AE4CF /* PaymentInteractor.swift in Sources */,
+				656F81C92422AB3A004AE4CF /* WalletWorker.swift in Sources */,
 				656ECC3A240A8275007F93D4 /* SceneDelegate.swift in Sources */,
+				656F81BD2422942D004AE4CF /* UIViewControllerExtension.swift in Sources */,
 				656ECC8D240A859F007F93D4 /* LoginRouter.swift in Sources */,
 				656ECC8C240A859F007F93D4 /* LoginWorker.swift in Sources */,
 				656ECCAC240A8631007F93D4 /* ForgottenPasswordModels.swift in Sources */,
