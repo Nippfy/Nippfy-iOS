@@ -65,6 +65,7 @@
 		65BFF1B1241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */; };
 		65BFF1B2241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.19.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */; };
 		65CD69672413B244000AB56C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65CD69692413B244000AB56C /* Localizable.strings */; };
+		65E6E75224242EB1001E6736 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E6E75124242EB1001E6736 /* TransactionCell.swift */; };
 		675F427D34CFD01AC9BF5A13 /* Pods_Nippfy_NippfyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC33ACB83B948F1188827CB2 /* Pods_Nippfy_NippfyUITests.framework */; };
 		98264F551602B5B889AB320C /* Pods_Nippfy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 246A700076AD5F4E89680694 /* Pods_Nippfy.framework */; };
 /* End PBXBuildFile section */
@@ -155,6 +156,7 @@
 		65CD69642413B225000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		65CD69682413B244000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65CD696A2413B24C000AB56C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65E6E75124242EB1001E6736 /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		695AB60110DC7B99AC66CCFD /* Pods_NippfyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NippfyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7826E1169C89AC3890AE313C /* Pods-NippfyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NippfyTests.release.xcconfig"; path = "Target Support Files/Pods-NippfyTests/Pods-NippfyTests.release.xcconfig"; sourceTree = "<group>"; };
 		85E1111C06CE7CEC94C0A6A0 /* Pods-Nippfy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nippfy.release.xcconfig"; path = "Target Support Files/Pods-Nippfy/Pods-Nippfy.release.xcconfig"; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				656F81C02422AB1D004AE4CF /* WalletView.swift */,
+				65E6E75124242EB1001E6736 /* TransactionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -761,6 +764,7 @@
 				656ECCAD240A8631007F93D4 /* ForgottenPasswordViewController.swift in Sources */,
 				656F81C82422AB3A004AE4CF /* WalletPresenter.swift in Sources */,
 				656F81CF2423797A004AE4CF /* UIDeviceExtension.swift in Sources */,
+				65E6E75224242EB1001E6736 /* TransactionCell.swift in Sources */,
 				656F81CD2422AB3A004AE4CF /* WalletInteractor.swift in Sources */,
 				656ECC75240A84A9007F93D4 /* DScrollViewContainer.swift in Sources */,
 				656F81BB2422911F004AE4CF /* PaymentInteractor.swift in Sources */,

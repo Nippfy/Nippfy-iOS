@@ -11,6 +11,13 @@ import LBTATools
 
 class WalletView: UIView {
     
+    var transactionsCollectionView: UICollectionView = {
+        var layout = UICollectionViewFlowLayout()
+        var cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = UIColor(named: "Card Background")
+        return cv
+    }()
+    
     lazy var backgrounContainer: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor(named: "Card Background")
@@ -60,10 +67,9 @@ class WalletView: UIView {
     func setUpUI() {
         
         setUpTopLabels()
-        setUpSendButton()
         setUpContainer()
         
-        // setUpMiddleContainer()
+        setUpMiddleContainer()
         calculateFontSizes()
     }
     
@@ -80,10 +86,6 @@ class WalletView: UIView {
         coinBalanceLabel.anchor(top: balanceLabel.topAnchor, leading: balanceLabel.trailingAnchor, bottom: balanceLabel.bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
     }
     
-    fileprivate func setUpSendButton() {
-        
-    }
-    
     fileprivate func setUpContainer() {
         addSubviewForAutolayout(backgrounContainer)
         backgrounContainer.anchor(top: balanceLabel.bottomAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 20, bottom: 20, right: 20), size: CGSize(width: 0, height: 0))
@@ -91,6 +93,8 @@ class WalletView: UIView {
     }
     
     fileprivate func setUpMiddleContainer() {
+        backgrounContainer.addSubviewForAutolayout(transactionsCollectionView)
+        transactionsCollectionView.anchor(top: backgrounContainer.topAnchor, leading: backgrounContainer.leadingAnchor, bottom: backgrounContainer.bottomAnchor, trailing: backgrounContainer.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12), size: CGSize(width: 0, height: 0))
         
     }
     

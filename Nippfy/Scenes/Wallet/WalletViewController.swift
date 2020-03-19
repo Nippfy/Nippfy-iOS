@@ -17,10 +17,12 @@ protocol WalletDisplayLogic: class
     func displaySomething(viewModel: Wallet.Something.ViewModel)
 }
 
-class WalletViewController: UIViewController, WalletDisplayLogic
+class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     var interactor: WalletBusinessLogic?
     var router: (NSObjectProtocol & WalletRoutingLogic & WalletDataPassing)?
+    
+    let transactionsCellID = "transactionsID"
     
     var myView = WalletView()
     
@@ -101,6 +103,7 @@ extension WalletViewController {
         title = "Wallet"
         
         prepareNavBar()
+        setUpCollectionView()
     }
     
     func prepareNavBar() {
@@ -127,6 +130,52 @@ extension WalletViewController {
     
     @objc func addButtonTapped() {
         print("ADD BUTTON TAPPED")
+    }
+    
+}
+
+// MARK: Collection View Methods
+
+extension WalletViewController {
+    
+    func setUpCollectionView() {
+        myView.transactionsCollectionView.delegate = self
+        myView.transactionsCollectionView.dataSource = self
+        myView.transactionsCollectionView.keyboardDismissMode = .interactive
+        myView.transactionsCollectionView.alwaysBounceVertical = true
+        myView.transactionsCollectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 30, right: 0)
+        myView.transactionsCollectionView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        
+        myView.transactionsCollectionView.register(TransactionCell.self, forCellWithReuseIdentifier: transactionsCellID)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: transactionsCellID, for: indexPath) as! TransactionCell
+        
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = .red
+        } else {
+            cell.backgroundColor = .yellow
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = myView.transactionsCollectionView.frame.width
+        
+        return CGSize(width: width, height: 100)
+    }
+    
+    // Spacing between cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
     }
     
 }
