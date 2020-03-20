@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		075DBA569AA196D8FA4C8664 /* Pods_NippfyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 695AB60110DC7B99AC66CCFD /* Pods_NippfyTests.framework */; };
 		65313E2E2424DBD500843642 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E2D2424DBD500843642 /* MenuView.swift */; };
+		65313E312425061800843642 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E302425061800843642 /* TabBarViewController.swift */; };
 		656ECC38240A8275007F93D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC37240A8275007F93D4 /* AppDelegate.swift */; };
 		656ECC3A240A8275007F93D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC39240A8275007F93D4 /* SceneDelegate.swift */; };
 		656ECC3C240A8275007F93D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC3B240A8275007F93D4 /* ViewController.swift */; };
@@ -92,6 +93,7 @@
 		105BC543A6BA721FF050746C /* Pods-Nippfy-NippfyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nippfy-NippfyUITests.release.xcconfig"; path = "Target Support Files/Pods-Nippfy-NippfyUITests/Pods-Nippfy-NippfyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		246A700076AD5F4E89680694 /* Pods_Nippfy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nippfy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65313E2D2424DBD500843642 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		65313E302425061800843642 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		656ECC34240A8275007F93D4 /* Nippfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nippfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		656ECC37240A8275007F93D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		656ECC39240A8275007F93D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -217,6 +219,14 @@
 				7826E1169C89AC3890AE313C /* Pods-NippfyTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		65313E2F242505F800843642 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				65313E302425061800843642 /* TabBarViewController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		656ECC2B240A8275007F93D4 = {
@@ -346,6 +356,7 @@
 		656ECC7E240A8561007F93D4 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				65313E2F242505F800843642 /* TabBar */,
 				656F81BE2422AB0D004AE4CF /* Wallet */,
 				656F81AC242290F2004AE4CF /* Payment */,
 				656ECC81240A8578007F93D4 /* ForgottenPassword */,
@@ -767,6 +778,7 @@
 				656ECCAD240A8631007F93D4 /* ForgottenPasswordViewController.swift in Sources */,
 				656F81C82422AB3A004AE4CF /* WalletPresenter.swift in Sources */,
 				656F81CF2423797A004AE4CF /* UIDeviceExtension.swift in Sources */,
+				65313E312425061800843642 /* TabBarViewController.swift in Sources */,
 				65E6E75224242EB1001E6736 /* TransactionCell.swift in Sources */,
 				656F81CD2422AB3A004AE4CF /* WalletInteractor.swift in Sources */,
 				656ECC75240A84A9007F93D4 /* DScrollViewContainer.swift in Sources */,

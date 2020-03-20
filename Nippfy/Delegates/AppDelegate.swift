@@ -18,8 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         
         // Initial View Controller 
-        let rootViewController = UINavigationController(rootViewController: WalletViewController())
-        window?.rootViewController = rootViewController
+        let rootViewController = UINavigationController(rootViewController: TabBarViewController())
+        let rootViewController2 = TabBarViewController()
+        window?.rootViewController = rootViewController2
         window?.makeKeyAndVisible()
         
         return true
