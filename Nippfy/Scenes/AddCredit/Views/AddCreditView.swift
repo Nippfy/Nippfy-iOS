@@ -9,27 +9,7 @@
 import Foundation
 import LBTATools
 
-class WalletView: UIView {
-    
-    lazy var menuContainer: UIView = {
-        var view = UIView()
-        view.backgroundColor = UIColor(named: "Card Background")
-        // view.backgroundColor = .blue
-        view.layer.cornerRadius = 30
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.5
-        view.layer.shadowOffset = .zero
-        view.layer.shadowRadius = 5
-        return view
-    }()
-    
-    lazy var blackView: UIView = {
-        var view = UIView()
-        view.backgroundColor = .black
-        view.alpha = 0
-        return view
-    }()
+class AddCreditView: UIView {
     
     lazy var transactionsTopLabel: UILabel = {
         var label = UILabel()
@@ -84,8 +64,6 @@ class WalletView: UIView {
         return bt
     }()
     
-    var menuContainerHeight: NSLayoutConstraint?
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpUI()
@@ -102,8 +80,6 @@ class WalletView: UIView {
         
         setUpMiddleContainer()
         calculateFontSizes()
-        
-        // setUpBackgroundView()
     }
     
     fileprivate func setUpTopLabels() {
@@ -133,72 +109,6 @@ class WalletView: UIView {
         backgrounContainer.addSubviewForAutolayout(transactionsCollectionView)
         transactionsCollectionView.anchor(top: transactionsTopLabel.bottomAnchor, leading: backgrounContainer.leadingAnchor, bottom: backgrounContainer.bottomAnchor, trailing: backgrounContainer.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 12, bottom: 12, right: 12), size: CGSize(width: 0, height: 0))
         
-    }
-    
-    fileprivate func setUpBackgroundView() {
-        
-        // addSubviewForAutolayout(menuContainer)
-        
-        // menuContainerHeight = menuContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0)
-        // menuContainerHeight = menuContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7)
-        
-        NSLayoutConstraint.activate([
-            menuContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            menuContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            menuContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
-        ])
-        
-        menuContainerHeight?.isActive = true
-        
-        
-    }
-    
-    var midHeight: CGFloat = 0
-    
-    func showMenu() {
-        
-        if let window = UIApplication.shared.keyWindow {
-            
-            midHeight = window.frame.height * 0.6
-            
-            print("MID HEIGHT \(midHeight), \(midHeight*2)")
-            
-            
-            blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
-            
-            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeMenu)))
-            
-            window.addSubviewForAutolayout(blackView)
-            window.addSubviewForAutolayout(menuContainer)
-            
-            
-            menuContainer.frame = CGRect(x: 0, y: window.frame.height, width: window.frame
-                .width, height: midHeight)
-            // setUpBackgroundView()
-            blackView.frame = window.frame
-            blackView.alpha = 0
-            
-            
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.blackView.alpha = 1
-                
-                self.menuContainer.frame = CGRect(x: 0, y: window.frame.height - self.midHeight, width: self.menuContainer.frame.width, height: self.menuContainer.frame.height)
-            }, completion: nil)
-            
-        }
-    }
-    
-    @objc func closeMenu() {
-        UIView.animate(withDuration: 0.5) {
-            print("CLOSING MENU")
-            self.blackView.alpha = 0
-            
-            if let window = UIApplication.shared.keyWindow {
-                
-                self.menuContainer.frame = CGRect(x: 0, y: window.frame.height, width: self.menuContainer.frame.width, height: self.menuContainer.frame.height)
-                
-            }
-        }
     }
     
     fileprivate func calculateFontSizes() {

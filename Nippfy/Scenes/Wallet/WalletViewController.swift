@@ -22,6 +22,7 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
     var interactor: WalletBusinessLogic?
     var router: (NSObjectProtocol & WalletRoutingLogic & WalletDataPassing)?
     
+    let blackView = UIView()
     let transactionsCellID = "transactionsID"
     
     var myView = WalletView()
@@ -130,6 +131,10 @@ extension WalletViewController {
     
     @objc func addButtonTapped() {
         print("ADD BUTTON TAPPED")
+        
+        myView.showMenu()
+        
+        
     }
     
 }
