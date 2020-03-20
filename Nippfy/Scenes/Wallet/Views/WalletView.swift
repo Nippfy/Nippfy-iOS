@@ -11,6 +11,56 @@ import LBTATools
 
 class WalletView: UIView {
     
+    lazy var cancelButton: UIButton = {
+        var bt = UIButton(type: .system)
+        bt.setTitle("Cancel", for: .normal)
+        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        bt.layer.cornerRadius = 8
+        bt.backgroundColor = UIColor(named: "Card Background")
+        bt.setTitleColor(UIColor(named: "Normal Words"), for: .normal)
+        return bt
+    }()
+    
+    lazy var amountTextField: UITextField = {
+        var tf = UITextField()
+        tf.placeholder = "50.00"
+        tf.textAlignment = .center
+        tf.text = "50.00"
+        tf.font = UIFont.boldSystemFont(ofSize: 40)
+        tf.textColor = UIColor(named: "Small Titles")
+        tf.backgroundColor = UIColor(named: "Card Background")
+        return tf
+    }()
+    
+    lazy var lessButton: UIButton = {
+        var bt = UIButton(type: .system)
+        bt.setTitle("-", for: .normal)
+        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
+        bt.layer.cornerRadius = 16
+        bt.backgroundColor = UIColor(named: "Sent Transaction Button")
+        bt.setTitleColor(UIColor(named: "Sent Transaction Text"), for: .normal)
+        return bt
+    }()
+    
+    lazy var plusButton: UIButton = {
+        var bt = UIButton(type: .system)
+        bt.setTitle("+", for: .normal)
+        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
+        bt.layer.cornerRadius = 16
+        bt.backgroundColor = UIColor(named: "Received Transaction Button")
+        bt.setTitleColor(UIColor(named: "Received Transaction Text"), for: .normal)
+        return bt
+    }()
+    
+    lazy var chooseAmountLabel: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.lineBreakMode = .byWordWrapping
+        label.text = "Choose or enter amount"
+        label.textColor = UIColor(named: "Normal Words")
+        return label
+    }()
+    
     lazy var menuContainer: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor(named: "Card Background")
@@ -76,15 +126,15 @@ class WalletView: UIView {
     
     lazy var addButton: UIButton = {
         var bt = UIButton(type: .system)
-        bt.setTitle("Add", for: .normal)
-        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        bt.layer.cornerRadius = 16
+        bt.setTitle("Add To Wallet", for: .normal)
+        bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        bt.layer.cornerRadius = 8
         bt.backgroundColor = UIColor(named: "Buttons Background")
         bt.setTitleColor(UIColor(named: "Card Background"), for: .normal)
         return bt
     }()
     
-    var menuContainerHeight: NSLayoutConstraint?
+    // var menuContainerHeight: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -103,7 +153,6 @@ class WalletView: UIView {
         setUpMiddleContainer()
         calculateFontSizes()
         
-        // setUpBackgroundView()
     }
     
     fileprivate func setUpTopLabels() {
@@ -137,20 +186,71 @@ class WalletView: UIView {
     
     fileprivate func setUpBackgroundView() {
         
-        // addSubviewForAutolayout(menuContainer)
+        if let window = UIApplication.shared.keyWindow {
+            window.addSubviewForAutolayout(blackView)
+            blackView.anchor(top: window.topAnchor, leading: window.leadingAnchor, bottom: window.bottomAnchor, trailing: window.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
+            
+            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeMenu)))
+            
+            blackView.addSubviewForAutolayout(menuContainer)
+            NSLayoutConstraint.activate([
+                menuContainer.bottomAnchor.constraint(equalTo: blackView.bottomAnchor),
+                menuContainer.leadingAnchor.constraint(equalTo: blackView.leadingAnchor),
+                menuContainer.trailingAnchor.constraint(equalTo: blackView.trailingAnchor),
+                menuContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5)
+            ])
+            
+            menuContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(prueba)))
+            
+            menuContainer.alpha = 0
+            
+            menuContainer.addSubviewForAutolayout(chooseAmountLabel)
+            NSLayoutConstraint.activate([
+                chooseAmountLabel.centerXAnchor.constraint(equalTo: menuContainer.centerXAnchor),
+                chooseAmountLabel.topAnchor.constraint(equalTo: menuContainer.topAnchor, constant: 24)
+            ])
+            
+            menuContainer.addSubviewForAutolayout(amountTextField)
+            NSLayoutConstraint.activate([
+                amountTextField.centerXAnchor.constraint(equalTo: menuContainer.centerXAnchor),
+                amountTextField.topAnchor.constraint(equalTo: chooseAmountLabel.bottomAnchor, constant: 24)
+            ])
+            
+            menuContainer.addSubviewForAutolayout(lessButton)
+            NSLayoutConstraint.activate([
+                lessButton.centerYAnchor.constraint(equalTo: amountTextField.centerYAnchor),
+                lessButton.leadingAnchor.constraint(equalTo: menuContainer.leadingAnchor, constant: 20)
+            ])
+            lessButton.withSize(CGSize(width: 60, height: 60))
+            lessButton.layer.cornerRadius = 30
+            
+            menuContainer.addSubviewForAutolayout(plusButton)
+            NSLayoutConstraint.activate([
+                plusButton.centerYAnchor.constraint(equalTo: amountTextField.centerYAnchor),
+                plusButton.trailingAnchor.constraint(equalTo: menuContainer.trailingAnchor, constant: -20)
+            ])
+            plusButton.withSize(CGSize(width: 60, height: 60))
+            plusButton.layer.cornerRadius = 30
+            
+            NSLayoutConstraint.activate([
+                amountTextField.leadingAnchor.constraint(equalTo: lessButton.trailingAnchor, constant: 12),
+                amountTextField.trailingAnchor.constraint(equalTo: plusButton.leadingAnchor, constant: -12),
+            ])
+            
+            menuContainer.addSubviewForAutolayout(addButton)
+            addButton.anchor(top: amountTextField.bottomAnchor, leading: lessButton.leadingAnchor, bottom: nil, trailing: plusButton.trailingAnchor, padding: UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
+            addButton.withHeight(60)
+            
+            menuContainer.addSubviewForAutolayout(cancelButton)
+            cancelButton.anchor(top: addButton.bottomAnchor, leading: lessButton.leadingAnchor, bottom: nil, trailing: plusButton.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
+            
+        }
         
-        // menuContainerHeight = menuContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0)
-        // menuContainerHeight = menuContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7)
         
-        NSLayoutConstraint.activate([
-            menuContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            menuContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            menuContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
-        ])
-        
-        menuContainerHeight?.isActive = true
-        
-        
+    }
+    
+    @objc func prueba() {
+        print("PRUEBA")
     }
     
     var midHeight: CGFloat = 0
@@ -163,116 +263,77 @@ class WalletView: UIView {
             
             print("MID HEIGHT \(midHeight), \(midHeight*2)")
             
-            
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             
-            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeMenu)))
+            setUpBackgroundView()
             
-            window.addSubviewForAutolayout(blackView)
-            window.addSubviewForAutolayout(menuContainer)
-            
-            
-            menuContainer.frame = CGRect(x: 0, y: window.frame.height, width: window.frame
-                .width, height: midHeight)
-            // setUpBackgroundView()
-            blackView.frame = window.frame
             blackView.alpha = 0
             
-            
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .transitionCrossDissolve, animations: {
                 self.blackView.alpha = 1
                 
-                self.menuContainer.frame = CGRect(x: 0, y: window.frame.height - self.midHeight, width: self.menuContainer.frame.width, height: self.menuContainer.frame.height)
+                self.menuContainer.alpha = 1
+                
             }, completion: nil)
             
         }
     }
     
     @objc func closeMenu() {
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 1) {
             print("CLOSING MENU")
             self.blackView.alpha = 0
-            
-            if let window = UIApplication.shared.keyWindow {
-                
-                self.menuContainer.frame = CGRect(x: 0, y: window.frame.height, width: self.menuContainer.frame.width, height: self.menuContainer.frame.height)
-                
-            }
+            self.menuContainer.alpha = 0
+            // self.menuContainer.isHidden = true
         }
     }
     
     fileprivate func calculateFontSizes() {
         let deviceType = UIDevice.current.deviceType
         
-        switch deviceType {
-            
-        case .iPhone4_4S:
-            
+        // Small Devices
+        if (deviceType == .iPhone4_4S || deviceType == .iPhones_5_5s_5c_SE || deviceType == .iPhones_6_6s_7_8) {
             balanceLabel.font = UIFont.boldSystemFont(ofSize: 60)
             coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 20)
             
             transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 16)
             
+            chooseAmountLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            amountTextField.font = UIFont.boldSystemFont(ofSize: 40)
+            lessButton.titleLabel!.font = UIFont.boldSystemFont(ofSize: 40)
+            plusButton.titleLabel!.font = UIFont.boldSystemFont(ofSize: 40)
             
-            break
+            plusButton.withSize(CGSize(width: 60, height: 60))
+            plusButton.layer.cornerRadius = 30
+            lessButton.withSize(CGSize(width: 60, height: 60))
+            lessButton.layer.cornerRadius = 30
             
-        case .iPhones_5_5s_5c_SE:
-            
-            balanceLabel.font = UIFont.boldSystemFont(ofSize: 60)
-            coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 20)
-            
-            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            
-            break
-            
-            
-        case .iPhones_6_6s_7_8:
-            
-            balanceLabel.font = UIFont.boldSystemFont(ofSize: 60)
-            coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 20)
-            
-            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            
-            break
-            
-            
-        case .iPhones_6Plus_6sPlus_7Plus_8Plus:
-            
-            balanceLabel.font = UIFont.boldSystemFont(ofSize: 70)
-            coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 30)
-            
-            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 20)
-            
-            break
-            
-            
-        case .iPhoneX:
-            
+            addButton.withHeight(60)
+            addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+            cancelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        }
+        // Large Devices
+        else {
             balanceLabel.font = UIFont.boldSystemFont(ofSize: 70)
             coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 30)
             
             transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 22)
             
-            break
+            chooseAmountLabel.font = UIFont.boldSystemFont(ofSize: 18)
+            amountTextField.font = UIFont.boldSystemFont(ofSize: 50)
+            lessButton.titleLabel!.font = UIFont.boldSystemFont(ofSize: 50)
+            plusButton.titleLabel!.font = UIFont.boldSystemFont(ofSize: 50)
             
-        case .iPhoneXR:
+            plusButton.withSize(CGSize(width: 100, height: 100))
+            plusButton.layer.cornerRadius = 50
+            lessButton.withSize(CGSize(width: 100, height: 100))
+            lessButton.layer.cornerRadius = 50
             
-            balanceLabel.font = UIFont.boldSystemFont(ofSize: 70)
-            coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 30)
-            
-            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 22)
-            
-            break
-            
-        default:
-            
-            balanceLabel.font = UIFont.boldSystemFont(ofSize: 70)
-            coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 30)
-            
-            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 22)
-            
-            break
+            addButton.withHeight(70)
+            addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+            cancelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
             
         }
+        
     }
 }

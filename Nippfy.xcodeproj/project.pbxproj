@@ -8,13 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		075DBA569AA196D8FA4C8664 /* Pods_NippfyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 695AB60110DC7B99AC66CCFD /* Pods_NippfyTests.framework */; };
-		65313E252424CACE00843642 /* AddCreditPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E1F2424CACE00843642 /* AddCreditPresenter.swift */; };
-		65313E262424CACE00843642 /* AddCreditWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E202424CACE00843642 /* AddCreditWorker.swift */; };
-		65313E272424CACE00843642 /* AddCreditRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E212424CACE00843642 /* AddCreditRouter.swift */; };
-		65313E282424CACE00843642 /* AddCreditModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E222424CACE00843642 /* AddCreditModels.swift */; };
-		65313E292424CACE00843642 /* AddCreditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E232424CACE00843642 /* AddCreditViewController.swift */; };
-		65313E2A2424CACE00843642 /* AddCreditInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E242424CACE00843642 /* AddCreditInteractor.swift */; };
-		65313E2C2424CAF000843642 /* AddCreditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E2B2424CAF000843642 /* AddCreditView.swift */; };
+		65313E2E2424DBD500843642 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E2D2424DBD500843642 /* MenuView.swift */; };
 		656ECC38240A8275007F93D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC37240A8275007F93D4 /* AppDelegate.swift */; };
 		656ECC3A240A8275007F93D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC39240A8275007F93D4 /* SceneDelegate.swift */; };
 		656ECC3C240A8275007F93D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC3B240A8275007F93D4 /* ViewController.swift */; };
@@ -97,13 +91,7 @@
 /* Begin PBXFileReference section */
 		105BC543A6BA721FF050746C /* Pods-Nippfy-NippfyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nippfy-NippfyUITests.release.xcconfig"; path = "Target Support Files/Pods-Nippfy-NippfyUITests/Pods-Nippfy-NippfyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		246A700076AD5F4E89680694 /* Pods_Nippfy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nippfy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		65313E1F2424CACE00843642 /* AddCreditPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCreditPresenter.swift; sourceTree = "<group>"; };
-		65313E202424CACE00843642 /* AddCreditWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCreditWorker.swift; sourceTree = "<group>"; };
-		65313E212424CACE00843642 /* AddCreditRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCreditRouter.swift; sourceTree = "<group>"; };
-		65313E222424CACE00843642 /* AddCreditModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCreditModels.swift; sourceTree = "<group>"; };
-		65313E232424CACE00843642 /* AddCreditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCreditViewController.swift; sourceTree = "<group>"; };
-		65313E242424CACE00843642 /* AddCreditInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCreditInteractor.swift; sourceTree = "<group>"; };
-		65313E2B2424CAF000843642 /* AddCreditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCreditView.swift; sourceTree = "<group>"; };
+		65313E2D2424DBD500843642 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		656ECC34240A8275007F93D4 /* Nippfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nippfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		656ECC37240A8275007F93D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		656ECC39240A8275007F93D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -229,28 +217,6 @@
 				7826E1169C89AC3890AE313C /* Pods-NippfyTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		65313E1D2424CAA500843642 /* AddCredit */ = {
-			isa = PBXGroup;
-			children = (
-				65313E1E2424CAB800843642 /* Views */,
-				65313E1F2424CACE00843642 /* AddCreditPresenter.swift */,
-				65313E202424CACE00843642 /* AddCreditWorker.swift */,
-				65313E212424CACE00843642 /* AddCreditRouter.swift */,
-				65313E222424CACE00843642 /* AddCreditModels.swift */,
-				65313E232424CACE00843642 /* AddCreditViewController.swift */,
-				65313E242424CACE00843642 /* AddCreditInteractor.swift */,
-			);
-			path = AddCredit;
-			sourceTree = "<group>";
-		};
-		65313E1E2424CAB800843642 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				65313E2B2424CAF000843642 /* AddCreditView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		656ECC2B240A8275007F93D4 = {
@@ -380,7 +346,6 @@
 		656ECC7E240A8561007F93D4 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				65313E1D2424CAA500843642 /* AddCredit */,
 				656F81BE2422AB0D004AE4CF /* Wallet */,
 				656F81AC242290F2004AE4CF /* Payment */,
 				656ECC81240A8578007F93D4 /* ForgottenPassword */,
@@ -497,6 +462,7 @@
 			children = (
 				656F81C02422AB1D004AE4CF /* WalletView.swift */,
 				65E6E75124242EB1001E6736 /* TransactionCell.swift */,
+				65313E2D2424DBD500843642 /* MenuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -775,8 +741,6 @@
 				656F81BA2422911F004AE4CF /* PaymentViewController.swift in Sources */,
 				656ECC90240A859F007F93D4 /* LoginInteractor.swift in Sources */,
 				656F81CA2422AB3A004AE4CF /* WalletRouter.swift in Sources */,
-				65313E282424CACE00843642 /* AddCreditModels.swift in Sources */,
-				65313E292424CACE00843642 /* AddCreditViewController.swift in Sources */,
 				656ECC9D240A85FD007F93D4 /* RegisterRouter.swift in Sources */,
 				656ECCAA240A8631007F93D4 /* ForgottenPasswordWorker.swift in Sources */,
 				656F81CC2422AB3A004AE4CF /* WalletViewController.swift in Sources */,
@@ -790,7 +754,6 @@
 				656ECC94240A85F2007F93D4 /* RegisterView.swift in Sources */,
 				656F81CB2422AB3A004AE4CF /* WalletModels.swift in Sources */,
 				656ECC73240A848D007F93D4 /* DScrollViewElement.swift in Sources */,
-				65313E272424CACE00843642 /* AddCreditRouter.swift in Sources */,
 				656F81B62422911F004AE4CF /* PaymentPresenter.swift in Sources */,
 				656ECC9B240A85FD007F93D4 /* RegisterPresenter.swift in Sources */,
 				656F81B82422911F004AE4CF /* PaymentRouter.swift in Sources */,
@@ -800,7 +763,6 @@
 				656ECC7B240A84EA007F93D4 /* Repository.swift in Sources */,
 				656ECC9C240A85FD007F93D4 /* RegisterWorker.swift in Sources */,
 				656ECC8E240A859F007F93D4 /* LoginModels.swift in Sources */,
-				65313E252424CACE00843642 /* AddCreditPresenter.swift in Sources */,
 				656F81C12422AB1D004AE4CF /* WalletView.swift in Sources */,
 				656ECCAD240A8631007F93D4 /* ForgottenPasswordViewController.swift in Sources */,
 				656F81C82422AB3A004AE4CF /* WalletPresenter.swift in Sources */,
@@ -810,13 +772,11 @@
 				656ECC75240A84A9007F93D4 /* DScrollViewContainer.swift in Sources */,
 				656F81BB2422911F004AE4CF /* PaymentInteractor.swift in Sources */,
 				656F81C92422AB3A004AE4CF /* WalletWorker.swift in Sources */,
-				65313E2A2424CACE00843642 /* AddCreditInteractor.swift in Sources */,
 				656ECC3A240A8275007F93D4 /* SceneDelegate.swift in Sources */,
+				65313E2E2424DBD500843642 /* MenuView.swift in Sources */,
 				656F81BD2422942D004AE4CF /* UIViewControllerExtension.swift in Sources */,
-				65313E262424CACE00843642 /* AddCreditWorker.swift in Sources */,
 				656ECC8D240A859F007F93D4 /* LoginRouter.swift in Sources */,
 				656ECC8C240A859F007F93D4 /* LoginWorker.swift in Sources */,
-				65313E2C2424CAF000843642 /* AddCreditView.swift in Sources */,
 				656ECCAC240A8631007F93D4 /* ForgottenPasswordModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

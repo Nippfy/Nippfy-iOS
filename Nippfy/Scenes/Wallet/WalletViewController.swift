@@ -105,6 +105,7 @@ extension WalletViewController {
         
         prepareNavBar()
         setUpCollectionView()
+        prepareButtonActions()
     }
     
     func prepareNavBar() {
@@ -123,6 +124,13 @@ extension WalletViewController {
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(named: "Normal Words")], for: .selected)
     }
     
+    func prepareButtonActions() {
+        
+        myView.lessButton.addTarget(self, action: #selector(lessButtonTapped), for: .touchUpInside)
+        myView.plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
+        myView.addButton.addTarget(self, action: #selector(addToWalletButtonTapped), for: .touchUpInside)
+        myView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+    }
     
 }
 
@@ -133,8 +141,27 @@ extension WalletViewController {
         print("ADD BUTTON TAPPED")
         
         myView.showMenu()
+    }
+    
+    @objc func lessButtonTapped() {
+        print("LESS BUTTON TAPPED")
         
+    }
+    
+    @objc func plusButtonTapped() {
+        print("PLUS BUTTON TAPPED")
         
+    }
+    
+    @objc func addToWalletButtonTapped() {
+        print("ADD TO WALLET BUTTON TAPPED")
+        
+    }
+    
+    @objc func cancelButtonTapped() {
+        print("CANCEL BUTTON TAPPED")
+        
+        myView.closeMenu()
     }
     
 }
