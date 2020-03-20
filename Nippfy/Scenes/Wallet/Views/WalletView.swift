@@ -11,7 +11,16 @@ import LBTATools
 
 class WalletView: UIView {
     
-    var transactionsCollectionView: UICollectionView = {
+    lazy var transactionsTopLabel: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.lineBreakMode = .byWordWrapping
+        label.text = "Transactions"
+        label.textColor = UIColor(named: "Large Titles")
+        return label
+    }()
+    
+    lazy var transactionsCollectionView: UICollectionView = {
         var layout = UICollectionViewFlowLayout()
         var cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor(named: "Card Background")
@@ -93,8 +102,12 @@ class WalletView: UIView {
     }
     
     fileprivate func setUpMiddleContainer() {
+        
+        backgrounContainer.addSubviewForAutolayout(transactionsTopLabel)
+        transactionsTopLabel.anchor(top: backgrounContainer.topAnchor, leading: backgrounContainer.leadingAnchor, bottom: nil, trailing: backgrounContainer.trailingAnchor, padding: UIEdgeInsets(top: 24, left: 24, bottom: 0, right: 12), size: CGSize(width: 0, height: 0))
+        
         backgrounContainer.addSubviewForAutolayout(transactionsCollectionView)
-        transactionsCollectionView.anchor(top: backgrounContainer.topAnchor, leading: backgrounContainer.leadingAnchor, bottom: backgrounContainer.bottomAnchor, trailing: backgrounContainer.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12), size: CGSize(width: 0, height: 0))
+        transactionsCollectionView.anchor(top: transactionsTopLabel.bottomAnchor, leading: backgrounContainer.leadingAnchor, bottom: backgrounContainer.bottomAnchor, trailing: backgrounContainer.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 12, bottom: 12, right: 12), size: CGSize(width: 0, height: 0))
         
     }
     
@@ -108,6 +121,8 @@ class WalletView: UIView {
             balanceLabel.font = UIFont.boldSystemFont(ofSize: 60)
             coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 20)
             
+            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            
             
             break
             
@@ -115,6 +130,8 @@ class WalletView: UIView {
             
             balanceLabel.font = UIFont.boldSystemFont(ofSize: 60)
             coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 20)
+            
+            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 16)
             
             break
             
@@ -124,6 +141,8 @@ class WalletView: UIView {
             balanceLabel.font = UIFont.boldSystemFont(ofSize: 60)
             coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 20)
             
+            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            
             break
             
             
@@ -131,6 +150,8 @@ class WalletView: UIView {
             
             balanceLabel.font = UIFont.boldSystemFont(ofSize: 70)
             coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 30)
+            
+            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 20)
             
             break
             
@@ -140,12 +161,16 @@ class WalletView: UIView {
             balanceLabel.font = UIFont.boldSystemFont(ofSize: 70)
             coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 30)
             
+            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 22)
+            
             break
             
         case .iPhoneXR:
             
             balanceLabel.font = UIFont.boldSystemFont(ofSize: 70)
             coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 30)
+            
+            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 22)
             
             break
             
@@ -154,10 +179,10 @@ class WalletView: UIView {
             balanceLabel.font = UIFont.boldSystemFont(ofSize: 70)
             coinBalanceLabel.font = UIFont.boldSystemFont(ofSize: 30)
             
+            transactionsTopLabel.font = UIFont.boldSystemFont(ofSize: 22)
+            
             break
             
         }
     }
-    
-    
 }

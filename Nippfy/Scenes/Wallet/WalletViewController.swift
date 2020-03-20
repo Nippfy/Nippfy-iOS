@@ -143,7 +143,7 @@ extension WalletViewController {
         myView.transactionsCollectionView.dataSource = self
         myView.transactionsCollectionView.keyboardDismissMode = .interactive
         myView.transactionsCollectionView.alwaysBounceVertical = true
-        myView.transactionsCollectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 30, right: 0)
+        myView.transactionsCollectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         myView.transactionsCollectionView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
         
         myView.transactionsCollectionView.register(TransactionCell.self, forCellWithReuseIdentifier: transactionsCellID)
@@ -158,9 +158,9 @@ extension WalletViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: transactionsCellID, for: indexPath) as! TransactionCell
         
         if indexPath.row % 2 == 0 {
-            cell.backgroundColor = .red
+            cell.isReceived = true
         } else {
-            cell.backgroundColor = .yellow
+            cell.isReceived = false
         }
         
         return cell
@@ -170,7 +170,7 @@ extension WalletViewController {
         
         let width = myView.transactionsCollectionView.frame.width
         
-        return CGSize(width: width, height: 100)
+        return CGSize(width: width, height: 70)
     }
     
     // Spacing between cells
