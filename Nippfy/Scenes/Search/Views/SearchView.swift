@@ -168,8 +168,9 @@ class SearchView: UIView {
         var searchBar = UISearchBar()
         searchBar.searchBarStyle = UISearchBar.Style.minimal
         searchBar.placeholder = " Search..."
-        searchBar.sizeToFit()
-        searchBar.setImage(UIImage(named: "sliderx24"), for: .bookmark, state: .normal)
+        let image = UIImage(named: "sliderx24")
+        let image2 = image?.tint(with: UIColor(named: "Normal Words")!)
+        searchBar.setImage(image2, for: .bookmark, state: .normal)
         searchBar.showsBookmarkButton = true
         searchBar.isTranslucent = false
         return searchBar

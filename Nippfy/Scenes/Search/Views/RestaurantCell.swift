@@ -10,12 +10,6 @@ class RestaurantCell: UICollectionViewCell {
     var spaceImageOutOfContent: CGFloat = 12
     var spaceBetweenBackgroundAndContentView: CGFloat = 12
     
-    var isReceived: Bool? {
-        didSet {
-            
-        }
-    }
-    
     lazy var backgroundContainer: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor(named: "Background")

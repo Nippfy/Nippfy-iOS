@@ -170,14 +170,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellID, for: indexPath) as! RestaurantCell
         
-        if indexPath.row % 2 == 0 {
-            cell.isReceived = true
-            // cell.backgroundColor = .blue
-        } else {
-            cell.isReceived = false
-            // cell.backgroundColor = .white
-        }
-        
         return cell
     }
     
