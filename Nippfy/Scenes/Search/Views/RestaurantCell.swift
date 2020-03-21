@@ -59,7 +59,7 @@ class RestaurantCell: UICollectionViewCell {
     
     lazy var locationImageView: UIImageView = {
         let image = UIImage(named: "placeholder")?.withRenderingMode(.alwaysTemplate)
-        let image2 = image?.maskWithColor(color: .blue)
+        let image2 = image?.maskWithColor(color: UIColor(named: "Received Transaction Text")!)
         var imageView = UIImageView(image: image2!)
         imageView.clipsToBounds = true
         // imageView.layer.cornerRadius = 30

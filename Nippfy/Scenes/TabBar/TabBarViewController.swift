@@ -17,10 +17,7 @@ class TabBarViewController: UITabBarController {
     }
     
     func setUpTabBar() {
-        
         let walletController = UINavigationController(rootViewController: WalletViewController())
-        let image1 = UIImage(named: "mail")?.withRenderingMode(.alwaysOriginal)
-        
         walletController.tabBarItem = UITabBarItem(title: "Wallet", image: UIImage(named: "unselected_wallet"), selectedImage: UIImage(named: "selected_wallet"))
         
         let paymentController = UINavigationController(rootViewController: PaymentViewController())

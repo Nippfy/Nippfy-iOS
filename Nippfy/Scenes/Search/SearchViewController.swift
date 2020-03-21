@@ -103,6 +103,7 @@ extension SearchViewController {
         title = "Search"
         
         prepareNavBar()
+        prepareButtons()
         setUpCollectionView()
     }
     
@@ -115,6 +116,13 @@ extension SearchViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layoutIfNeeded()
     }
+    
+    func prepareButtons() {
+        myView.filterButton1.addTarget(self, action: #selector(filterButtonPressed(sender:)), for: .touchUpInside)
+        myView.filterButton2.addTarget(self, action: #selector(filterButtonPressed(sender:)), for: .touchUpInside)
+        myView.filterButton3.addTarget(self, action: #selector(filterButtonPressed(sender:)), for: .touchUpInside)
+        myView.filterButton4.addTarget(self, action: #selector(filterButtonPressed(sender:)), for: .touchUpInside)
+    }
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -126,6 +134,17 @@ extension SearchViewController: UISearchBarDelegate {
         
         myView.isScrollViewHidden = !isScrollViewHidden!
     }
+}
+
+// MARK: User Interactions
+
+extension SearchViewController {
+    
+    @objc func filterButtonPressed(sender: UIButton) {
+        print("PRESSED BUTTON 1")
+        myView.toggleButton(button: sender)
+    }
+    
 }
 
 // MARK: Collection View Methods
@@ -169,17 +188,12 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         // Small Devices
         if (deviceType == .iPhone4_4S || deviceType == .iPhones_5_5s_5c_SE || deviceType == .iPhones_6_6s_7_8) {
-            
             return CGSize(width: width, height: 100)
-            
         }
             // Large Devices
         else {
-            
             return CGSize(width: width, height: 160)
         }
-        
-        
     }
     
     // Spacing between cells

@@ -30,6 +30,7 @@ class SearchView: UIView {
     // MARK: Scroll View and containers
     lazy var scrollView: DScrollView = {
         var scrollView = DScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
         // scrollView.backgroundColor = .red
         return scrollView
     }()
@@ -57,10 +58,10 @@ class SearchView: UIView {
         bt.backgroundColor = UIColor(named: "Received Transaction Button")
         let image = UIImage(named: "foodx32")?.withRenderingMode(.alwaysTemplate)
         let normalImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Text")!)
-        let selectedImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Button")!)
+        let selectedImage = image?.maskWithColor(color: UIColor(named: "Card Background")!)
         bt.clipsToBounds = true
         bt.setImage(normalImage, for: .normal)
-        bt.setImage(selectedImage, for: .highlighted)
+        bt.setImage(selectedImage, for: .selected)
         return bt
     }()
     
@@ -81,10 +82,10 @@ class SearchView: UIView {
         bt.backgroundColor = UIColor(named: "Received Transaction Button")
         let image = UIImage(named: "forkx32")?.withRenderingMode(.alwaysTemplate)
         let normalImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Text")!)
-        let selectedImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Button")!)
+        let selectedImage = image?.maskWithColor(color: UIColor(named: "Card Background")!)
         bt.clipsToBounds = true
         bt.setImage(normalImage, for: .normal)
-        bt.setImage(selectedImage, for: .highlighted)
+        bt.setImage(selectedImage, for: .selected)
         return bt
     }()
     
@@ -105,10 +106,10 @@ class SearchView: UIView {
         bt.backgroundColor = UIColor(named: "Received Transaction Button")
         let image = UIImage(named: "waiterx32")?.withRenderingMode(.alwaysTemplate)
         let normalImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Text")!)
-        let selectedImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Button")!)
+        let selectedImage = image?.maskWithColor(color: UIColor(named: "Card Background")!)
         bt.clipsToBounds = true
         bt.setImage(normalImage, for: .normal)
-        bt.setImage(selectedImage, for: .highlighted)
+        bt.setImage(selectedImage, for: .selected)
         return bt
     }()
     
@@ -129,10 +130,10 @@ class SearchView: UIView {
         bt.backgroundColor = UIColor(named: "Received Transaction Button")
         let image = UIImage(named: "waiterx32")?.withRenderingMode(.alwaysTemplate)
         let normalImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Text")!)
-        let selectedImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Button")!)
+        let selectedImage = image?.maskWithColor(color: UIColor(named: "Card Background")!)
         bt.clipsToBounds = true
         bt.setImage(normalImage, for: .normal)
-        bt.setImage(selectedImage, for: .highlighted)
+        bt.setImage(selectedImage, for: .selected)
         return bt
     }()
     
@@ -324,4 +325,17 @@ class SearchView: UIView {
             self.layoutIfNeeded()
         }
     }
+    
+    func toggleButton(button: UIButton) {
+        
+        button.isSelected = !button.isSelected
+        
+        if (button.isSelected) {
+            button.backgroundColor = UIColor(named: "Received Transaction Text")
+        } else {
+            button.backgroundColor = UIColor(named: "Received Transaction Button")
+        }
+        
+    }
+    
 }
