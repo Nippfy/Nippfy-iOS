@@ -11,6 +11,12 @@ import LBTATools
 
 class SearchView: UIView {
     
+    // MARK: Constants
+    var scrollViewHeight: NSLayoutConstraint?
+    let spaceBetweenButtons: CGFloat = 30
+    let buttonSize: CGFloat = 60
+    let scrollViewHeightConstant: CGFloat = 90
+    
     var isScrollViewHidden: Bool? = true {
         didSet {
             if (isScrollViewHidden == true) {
@@ -34,29 +40,128 @@ class SearchView: UIView {
     }()
     
     lazy var scrollViewElement0: UIView = {
-        var scrollViewElement = DScrollViewElement(width: 400)
-        scrollViewElement.backgroundColor = .yellow
-        return scrollViewElement
-    }()
-    
-    lazy var scrollViewElement1: UIView = {
-        var scrollViewElement = DScrollViewElement(width: 400)
-        scrollViewElement.backgroundColor = .blue
+        var scrollViewElement = DScrollViewElement(width: 380)
+        // scrollViewElement.backgroundColor = .yellow
         return scrollViewElement
     }()
     
     lazy var scrollViewContainerView: UIView = {
         var view = UIView()
-        view.backgroundColor = .blue
+        view.backgroundColor = UIColor(named: "Card Background")
         return view
     }()
     
+    lazy var filterButton1: UIButton = {
+        var bt = UIButton()
+        bt.layer.cornerRadius = 16
+        bt.backgroundColor = UIColor(named: "Received Transaction Button")
+        let image = UIImage(named: "foodx32")?.withRenderingMode(.alwaysTemplate)
+        let normalImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Text")!)
+        let selectedImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Button")!)
+        bt.clipsToBounds = true
+        bt.setImage(normalImage, for: .normal)
+        bt.setImage(selectedImage, for: .highlighted)
+        return bt
+    }()
+    
+    lazy var filterButton1Label: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.lineBreakMode = .byWordWrapping
+        label.text = "Food"
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor(named: "Normal Words")
+        return label
+    }()
+    
+    lazy var filterButton2: UIButton = {
+        var bt = UIButton()
+        bt.layer.cornerRadius = 16
+        bt.backgroundColor = UIColor(named: "Received Transaction Button")
+        let image = UIImage(named: "forkx32")?.withRenderingMode(.alwaysTemplate)
+        let normalImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Text")!)
+        let selectedImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Button")!)
+        bt.clipsToBounds = true
+        bt.setImage(normalImage, for: .normal)
+        bt.setImage(selectedImage, for: .highlighted)
+        return bt
+    }()
+    
+    lazy var filterButton2Label: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.lineBreakMode = .byWordWrapping
+        label.text = "Restaurant"
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor(named: "Normal Words")
+        return label
+    }()
+    
+    lazy var filterButton3: UIButton = {
+        var bt = UIButton()
+        bt.layer.cornerRadius = 16
+        bt.backgroundColor = UIColor(named: "Received Transaction Button")
+        let image = UIImage(named: "waiterx32")?.withRenderingMode(.alwaysTemplate)
+        let normalImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Text")!)
+        let selectedImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Button")!)
+        bt.clipsToBounds = true
+        bt.setImage(normalImage, for: .normal)
+        bt.setImage(selectedImage, for: .highlighted)
+        return bt
+    }()
+    
+    lazy var filterButton3Label: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.lineBreakMode = .byWordWrapping
+        label.text = "Waiter"
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor(named: "Normal Words")
+        return label
+    }()
+    
+    lazy var filterButton4: UIButton = {
+        var bt = UIButton()
+        bt.layer.cornerRadius = 16
+        bt.backgroundColor = UIColor(named: "Received Transaction Button")
+        let image = UIImage(named: "waiterx32")?.withRenderingMode(.alwaysTemplate)
+        let normalImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Text")!)
+        let selectedImage = image?.maskWithColor(color: UIColor(named: "Received Transaction Button")!)
+        bt.clipsToBounds = true
+        bt.setImage(normalImage, for: .normal)
+        bt.setImage(selectedImage, for: .highlighted)
+        return bt
+    }()
+    
+    lazy var filterButton4Label: UILabel = {
+        var label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.lineBreakMode = .byWordWrapping
+        label.text = "Waiter"
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor(named: "Normal Words")
+        return label
+    }()
+    
+    // MARK: Collection View
     lazy var collectionViewContainerView: UIView = {
         var view = UIView()
         view.backgroundColor = .purple
         return view
     }()
     
+    lazy var collectionView: UICollectionView = {
+        var layout = UICollectionViewFlowLayout()
+        var cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = UIColor(named: "Card Background")
+        return cv
+    }()
+    
+    // MARK: Search Bar
     lazy var searchBar: UISearchBar = {
         var searchBar = UISearchBar()
         searchBar.searchBarStyle = UISearchBar.Style.minimal
@@ -82,24 +187,6 @@ class SearchView: UIView {
         return view
     }()
     
-    lazy var transactionsTopLabel: UILabel = {
-        var label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.lineBreakMode = .byWordWrapping
-        label.text = "Transactions"
-        label.textColor = UIColor(named: "Large Titles")
-        return label
-    }()
-    
-    lazy var transactionsCollectionView: UICollectionView = {
-        var layout = UICollectionViewFlowLayout()
-        var cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor(named: "Card Background")
-        return cv
-    }()
-    
-    var scrollViewHeight: NSLayoutConstraint?
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpUI()
@@ -109,11 +196,13 @@ class SearchView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Set Up UI
     func setUpUI() {
         
         setUpBackgroundContainer()
         setUpSearchBar()
         setUpScrollView()
+        setUpScrollViewElements()
         setUpCollectionView()
     }
     
@@ -125,15 +214,69 @@ class SearchView: UIView {
     
     fileprivate func setUpScrollView() {
         backgroundContainer.addSubviewForAutolayout(scrollViewContainerView)
-        scrollViewContainerView.anchor(top: searchBar.bottomAnchor, leading: searchBar.leadingAnchor, bottom: nil, trailing: searchBar.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
+        scrollViewContainerView.anchor(top: searchBar.bottomAnchor, leading: searchBar.leadingAnchor, bottom: nil, trailing: searchBar.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
         
-        scrollViewHeight = scrollViewContainerView.heightAnchor.constraint(equalToConstant: 70)
+        scrollViewHeight = scrollViewContainerView.heightAnchor.constraint(equalToConstant: scrollViewHeightConstant)
         scrollViewHeight?.isActive = true
         
         addScrollView(in: scrollViewContainerView,
                       scrollView,
                       container: scrollViewContainer,
-                      elements: [scrollViewElement0,scrollViewElement1])
+                      elements: [scrollViewElement0])
+    }
+    
+    fileprivate func setUpScrollViewElements() {
+        scrollViewElement0.addSubviewForAutolayout(filterButton1)
+        NSLayoutConstraint.activate([
+            filterButton1.centerYAnchor.constraint(equalTo: scrollViewElement0.centerYAnchor, constant: -6),
+            filterButton1.leadingAnchor.constraint(equalTo: scrollViewElement0.leadingAnchor, constant: 10)
+        ])
+        filterButton1.withSize(CGSize(width: buttonSize, height: buttonSize))
+        
+        scrollViewElement0.addSubviewForAutolayout(filterButton1Label)
+        NSLayoutConstraint.activate([
+            filterButton1Label.centerXAnchor.constraint(equalTo: filterButton1.centerXAnchor),
+            filterButton1Label.topAnchor.constraint(equalTo: filterButton1.bottomAnchor, constant: 0),
+        ])
+        
+        scrollViewElement0.addSubviewForAutolayout(filterButton2)
+        NSLayoutConstraint.activate([
+            filterButton2.centerYAnchor.constraint(equalTo: filterButton1.centerYAnchor),
+            filterButton2.leadingAnchor.constraint(equalTo: filterButton1.trailingAnchor, constant: spaceBetweenButtons)
+        ])
+        filterButton2.withSize(CGSize(width: buttonSize, height: buttonSize))
+        
+        scrollViewElement0.addSubviewForAutolayout(filterButton2Label)
+        NSLayoutConstraint.activate([
+            filterButton2Label.centerXAnchor.constraint(equalTo: filterButton2.centerXAnchor),
+            filterButton2Label.topAnchor.constraint(equalTo: filterButton2.bottomAnchor, constant: 0)
+        ])
+        
+        scrollViewElement0.addSubviewForAutolayout(filterButton3)
+        NSLayoutConstraint.activate([
+            filterButton3.centerYAnchor.constraint(equalTo: filterButton2.centerYAnchor),
+            filterButton3.leadingAnchor.constraint(equalTo: filterButton2.trailingAnchor, constant: spaceBetweenButtons)
+        ])
+        filterButton3.withSize(CGSize(width: buttonSize, height: buttonSize))
+        
+        scrollViewElement0.addSubviewForAutolayout(filterButton3Label)
+        NSLayoutConstraint.activate([
+            filterButton3Label.centerXAnchor.constraint(equalTo: filterButton3.centerXAnchor),
+            filterButton3Label.topAnchor.constraint(equalTo: filterButton3.bottomAnchor, constant: 0)
+        ])
+        
+        scrollViewElement0.addSubviewForAutolayout(filterButton4)
+        NSLayoutConstraint.activate([
+            filterButton4.centerYAnchor.constraint(equalTo: filterButton3.centerYAnchor),
+            filterButton4.leadingAnchor.constraint(equalTo: filterButton3.trailingAnchor, constant: spaceBetweenButtons)
+        ])
+        filterButton4.withSize(CGSize(width: buttonSize, height: buttonSize))
+        
+        scrollViewElement0.addSubviewForAutolayout(filterButton4Label)
+        NSLayoutConstraint.activate([
+            filterButton4Label.centerXAnchor.constraint(equalTo: filterButton4.centerXAnchor),
+            filterButton4Label.topAnchor.constraint(equalTo: filterButton4.bottomAnchor, constant: 0)
+        ])
     }
     
     fileprivate func setUpSearchBar() {
@@ -161,9 +304,10 @@ class SearchView: UIView {
         
     }
     
+    // MARK: View Methods
     func showScrollView() {
         self.scrollViewHeight?.isActive = false
-        self.scrollViewHeight = self.scrollViewContainerView.heightAnchor.constraint(equalToConstant: 70)
+        self.scrollViewHeight = self.scrollViewContainerView.heightAnchor.constraint(equalToConstant: scrollViewHeightConstant)
         self.scrollViewHeight?.isActive = true
         UIView.animate(withDuration: 1) {
             self.layoutIfNeeded()

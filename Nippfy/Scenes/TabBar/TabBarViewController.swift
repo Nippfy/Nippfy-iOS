@@ -27,7 +27,7 @@ class TabBarViewController: UITabBarController {
         paymentController.tabBarItem = UITabBarItem(title: "Payment", image: UIImage(named: ""), selectedImage: UIImage(named: ""))
         
         let searchController = UINavigationController(rootViewController: SearchViewController())
-        searchController.tabBarItem = UITabBarItem(title: "Payment", image: UIImage(named: ""), selectedImage: UIImage(named: ""))
+        searchController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "search"), selectedImage: UIImage(named: ""))
         
         viewControllers = [searchController, walletController, paymentController]
     }

@@ -99,7 +99,7 @@ extension SearchViewController {
         view = myView
         
         view.backgroundColor = UIColor(named: "Background")
-        title = "Wallet"
+        title = "Search"
         
         prepareNavBar()
     }
