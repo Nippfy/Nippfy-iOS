@@ -35,12 +35,12 @@ class SearchView: UIView {
     }()
     
     lazy var scrollViewContainer: DScrollViewContainer = {
-        var scrollViewContainer = DScrollViewContainer(axis: .horizontal, spacing: 20)
+        var scrollViewContainer = DScrollViewContainer(axis: .horizontal, spacing: 0)
         return scrollViewContainer
     }()
     
     lazy var scrollViewElement0: UIView = {
-        var scrollViewElement = DScrollViewElement(width: 380)
+        var scrollViewElement = DScrollViewElement(width: 350)
         // scrollViewElement.backgroundColor = .yellow
         return scrollViewElement
     }()
@@ -158,6 +158,7 @@ class SearchView: UIView {
         var layout = UICollectionViewFlowLayout()
         var cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor(named: "Card Background")
+        // cv.backgroundColor = .red
         return cv
     }()
     
@@ -168,7 +169,6 @@ class SearchView: UIView {
         searchBar.placeholder = " Search..."
         searchBar.sizeToFit()
         searchBar.setImage(UIImage(named: "sliderx24"), for: .bookmark, state: .normal)
-        
         searchBar.showsBookmarkButton = true
         searchBar.isTranslucent = false
         return searchBar
@@ -210,6 +210,8 @@ class SearchView: UIView {
         backgroundContainer.addSubviewForAutolayout(collectionViewContainerView)
         collectionViewContainerView.anchor(top: scrollViewContainerView.bottomAnchor, leading: scrollViewContainerView.leadingAnchor, bottom: backgroundContainer.bottomAnchor, trailing: scrollViewContainerView.trailingAnchor, padding: UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0), size: CGSize(width: 0, height: 0))
         
+        collectionViewContainerView.addSubviewForAutolayout(collectionView)
+        collectionView.anchor(top: collectionViewContainerView.topAnchor, leading: collectionViewContainerView.leadingAnchor, bottom: collectionViewContainerView.bottomAnchor, trailing: collectionViewContainerView.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
     }
     
     fileprivate func setUpScrollView() {
@@ -309,7 +311,7 @@ class SearchView: UIView {
         self.scrollViewHeight?.isActive = false
         self.scrollViewHeight = self.scrollViewContainerView.heightAnchor.constraint(equalToConstant: scrollViewHeightConstant)
         self.scrollViewHeight?.isActive = true
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             self.layoutIfNeeded()
         }
     }
@@ -318,7 +320,7 @@ class SearchView: UIView {
         self.scrollViewHeight?.isActive = false
         self.scrollViewHeight = self.scrollViewContainerView.heightAnchor.constraint(equalToConstant: 0)
         self.scrollViewHeight?.isActive = true
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             self.layoutIfNeeded()
         }
     }

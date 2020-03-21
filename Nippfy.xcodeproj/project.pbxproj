@@ -71,6 +71,7 @@
 		656F81CC2422AB3A004AE4CF /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C62422AB3A004AE4CF /* WalletViewController.swift */; };
 		656F81CD2422AB3A004AE4CF /* WalletInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C72422AB3A004AE4CF /* WalletInteractor.swift */; };
 		656F81CF2423797A004AE4CF /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81CE24237979004AE4CF /* UIDeviceExtension.swift */; };
+		65740E4224263CEA005FC227 /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65740E4124263CEA005FC227 /* RestaurantCell.swift */; };
 		65BFF1B1241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */; };
 		65BFF1B2241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.19.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */; };
 		65CD69672413B244000AB56C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65CD69692413B244000AB56C /* Localizable.strings */; };
@@ -168,6 +169,7 @@
 		656F81C62422AB3A004AE4CF /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		656F81C72422AB3A004AE4CF /* WalletInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInteractor.swift; sourceTree = "<group>"; };
 		656F81CE24237979004AE4CF /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
+		65740E4124263CEA005FC227 /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
 		65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2020-03-15 at 20.35.08.png"; sourceTree = "<group>"; };
 		65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2020-03-15 at 20.35.19.png"; sourceTree = "<group>"; };
 		65CD69632413B224000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				651FB1EF2425969700800ED4 /* SearchView.swift */,
+				65740E4124263CEA005FC227 /* RestaurantCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -833,6 +836,7 @@
 				656F81BD2422942D004AE4CF /* UIViewControllerExtension.swift in Sources */,
 				656ECC8D240A859F007F93D4 /* LoginRouter.swift in Sources */,
 				656ECC8C240A859F007F93D4 /* LoginWorker.swift in Sources */,
+				65740E4224263CEA005FC227 /* RestaurantCell.swift in Sources */,
 				656ECCAC240A8631007F93D4 /* ForgottenPasswordModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

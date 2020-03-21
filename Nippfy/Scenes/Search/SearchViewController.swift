@@ -22,6 +22,7 @@ class SearchViewController: UIViewController, SearchDisplayLogic
     var interactor: SearchBusinessLogic?
     var router: (NSObjectProtocol & SearchRoutingLogic & SearchDataPassing)?
     
+    let collectionCellID = "cellID"
     var myView = SearchView()
     
     // MARK: Object lifecycle
@@ -102,6 +103,7 @@ extension SearchViewController {
         title = "Search"
         
         prepareNavBar()
+        setUpCollectionView()
     }
     
     func prepareNavBar() {
@@ -124,4 +126,65 @@ extension SearchViewController: UISearchBarDelegate {
         
         myView.isScrollViewHidden = !isScrollViewHidden!
     }
+}
+
+// MARK: Collection View Methods
+
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func setUpCollectionView() {
+        myView.collectionView.delegate = self
+        myView.collectionView.dataSource = self
+        myView.collectionView.keyboardDismissMode = .interactive
+        myView.collectionView.alwaysBounceVertical = true
+        myView.collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        myView.collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        
+        myView.collectionView.register(RestaurantCell.self, forCellWithReuseIdentifier: collectionCellID)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionCellID, for: indexPath) as! RestaurantCell
+        
+        if indexPath.row % 2 == 0 {
+            cell.isReceived = true
+            // cell.backgroundColor = .blue
+        } else {
+            cell.isReceived = false
+            // cell.backgroundColor = .white
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let deviceType = UIDevice.current.deviceType
+        let width = myView.collectionView.frame.width
+        
+        // Small Devices
+        if (deviceType == .iPhone4_4S || deviceType == .iPhones_5_5s_5c_SE || deviceType == .iPhones_6_6s_7_8) {
+            
+            return CGSize(width: width, height: 100)
+            
+        }
+            // Large Devices
+        else {
+            
+            return CGSize(width: width, height: 160)
+        }
+        
+        
+    }
+    
+    // Spacing between cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
+    }
+    
 }
