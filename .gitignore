@@ -65,6 +65,9 @@ Carthage/Build
 
 # Accio dependency management
 Dependencies/
+Nippfy.xcodeproj/xcshareddata/
+Nippfy/Data/Private/
+Pods/
 .accio/
 
 # fastlane
