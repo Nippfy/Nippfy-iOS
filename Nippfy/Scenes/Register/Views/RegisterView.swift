@@ -14,6 +14,19 @@ import SKCountryPicker
 
 class RegisterView: UIView {
     
+    var selectedCountry: SelectedCountry = SelectedCountry() {
+        didSet {
+            
+            guard let flag = selectedCountry.flag else { return }
+            guard let name = selectedCountry.name else { return }
+            guard let countryCode = selectedCountry.countryCode else { return }
+            guard let dialingCode = selectedCountry.dialingCode else { return }
+            
+            selectCountryButton.image = flag
+            dialCodeLabel.text = dialingCode
+        }
+    }
+    
     // MARK: Scroll View and containers
     lazy var scrollView: DScrollView = {
         var scrollView = DScrollView()

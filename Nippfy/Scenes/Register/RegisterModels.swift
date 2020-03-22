@@ -28,4 +28,20 @@ enum Register
         {
         }
     }
+    
+    enum FetchStatesForCountry
+    {
+        struct Request
+        {
+            var countryCode: String
+        }
+        struct Response
+        {
+            var states: [State]
+        }
+        struct ViewModel
+        {
+            var states: [State]
+        }
+    }
 }

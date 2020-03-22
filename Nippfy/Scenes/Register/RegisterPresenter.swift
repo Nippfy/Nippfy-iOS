@@ -15,6 +15,7 @@ import UIKit
 protocol RegisterPresentationLogic
 {
     func presentSomething(response: Register.Something.Response)
+    func presentLoadedStatesForCountry(response: Register.FetchStatesForCountry.Response)
 }
 
 class RegisterPresenter: RegisterPresentationLogic
@@ -27,5 +28,10 @@ class RegisterPresenter: RegisterPresentationLogic
     {
         let viewModel = Register.Something.ViewModel()
         viewController?.displaySomething(viewModel: viewModel)
+    }
+    
+    func presentLoadedStatesForCountry(response: Register.FetchStatesForCountry.Response) {
+        let viewModel = Register.FetchStatesForCountry.ViewModel(states: response.states)
+        viewController?.displayStatesLoadedForCountry(viewModel: viewModel)
     }
 }

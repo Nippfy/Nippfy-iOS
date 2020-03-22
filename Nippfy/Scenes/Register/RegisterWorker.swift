@@ -14,7 +14,20 @@ import UIKit
 
 class RegisterWorker
 {
+    var repository = Repository.getInstance()
+    
     func doSomeWork()
     {
+    }
+    
+    func fetchStatesForCountry(request: Register.FetchStatesForCountry.Request, completionHandler: @escaping ((_ states: [State]) -> Void)) {
+        
+        let countryCode = request.countryCode
+        
+        repository.fetchJSONAccessToken {
+            self.repository.fetchStatesForCountry(countryCode: countryCode) { (states) in
+                completionHandler(states)
+            }
+        }
     }
 }

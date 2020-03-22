@@ -216,37 +216,21 @@ class PaymentView: UIView {
     fileprivate func calculateFontSizes() {
         let deviceType = UIDevice.current.deviceType
         
-        switch deviceType {
-            
-        case .iPhone4_4S:
+        // Small Devices
+        if (deviceType == .iPhone4_4S || deviceType == .iPhones_5_5s_5c_SE || deviceType == .iPhones_6_6s_7_8) {
             receiverImageView.withSize(CGSize(width: 60, height: 60))
             receiverImageView.layer.cornerRadius = 30
             
             receiverNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
             receiverPhoneNumber.font = UIFont.boldSystemFont(ofSize: 12)
             
-            tipAmountTextField.font = UIFont.boldSystemFont(ofSize: 100)
-            conceptTextField.font = UIFont.boldSystemFont(ofSize: 20)
+            tipAmountTextField.font = UIFont.boldSystemFont(ofSize: 70)
+            conceptTextField.font = UIFont.boldSystemFont(ofSize: 16)
             
             bottomContainerViewLabel.font = UIFont.systemFont(ofSize: 12)
-            break
-            
-        case .iPhones_5_5s_5c_SE:
-            receiverImageView.withSize(CGSize(width: 60, height: 60))
-            receiverImageView.layer.cornerRadius = 30
-            
-            receiverNameLabel.font = UIFont.boldSystemFont(ofSize: 18)
-            receiverPhoneNumber.font = UIFont.boldSystemFont(ofSize: 14)
-            
-            tipAmountTextField.font = UIFont.boldSystemFont(ofSize: 100)
-            conceptTextField.font = UIFont.boldSystemFont(ofSize: 20)
-            
-            bottomContainerViewLabel.font = UIFont.systemFont(ofSize: 12)
-            
-            break
-            
-            
-        case .iPhones_6_6s_7_8:
+        }
+            // Large Devices
+        else {
             receiverImageView.withSize(CGSize(width: 100, height: 100))
             receiverImageView.layer.cornerRadius = 50
             
@@ -257,64 +241,9 @@ class PaymentView: UIView {
             conceptTextField.font = UIFont.boldSystemFont(ofSize: 30)
             
             bottomContainerViewLabel.font = UIFont.systemFont(ofSize: 16)
-            break
-            
-            
-        case .iPhones_6Plus_6sPlus_7Plus_8Plus:
-            receiverImageView.withSize(CGSize(width: 100, height: 100))
-            receiverImageView.layer.cornerRadius = 50
-            
-            receiverNameLabel.font = UIFont.boldSystemFont(ofSize: 24)
-            receiverPhoneNumber.font = UIFont.boldSystemFont(ofSize: 20)
-            
-            tipAmountTextField.font = UIFont.boldSystemFont(ofSize: 120)
-            conceptTextField.font = UIFont.boldSystemFont(ofSize: 30)
-            
-            bottomContainerViewLabel.font = UIFont.systemFont(ofSize: 16)
-            break
-            
-            
-        case .iPhoneX:
-            receiverImageView.withSize(CGSize(width: 100, height: 100))
-            receiverImageView.layer.cornerRadius = 50
-            
-            receiverNameLabel.font = UIFont.boldSystemFont(ofSize: 24)
-            receiverPhoneNumber.font = UIFont.boldSystemFont(ofSize: 20)
-            
-            tipAmountTextField.font = UIFont.boldSystemFont(ofSize: 120)
-            conceptTextField.font = UIFont.boldSystemFont(ofSize: 30)
-            
-            bottomContainerViewLabel.font = UIFont.systemFont(ofSize: 16)
-            break
-            
-        case .iPhoneXR:
-            receiverImageView.withSize(CGSize(width: 100, height: 100))
-            receiverImageView.layer.cornerRadius = 50
-            
-            receiverNameLabel.font = UIFont.boldSystemFont(ofSize: 24)
-            receiverPhoneNumber.font = UIFont.boldSystemFont(ofSize: 20)
-            
-            tipAmountTextField.font = UIFont.boldSystemFont(ofSize: 120)
-            conceptTextField.font = UIFont.boldSystemFont(ofSize: 30)
-            
-            bottomContainerViewLabel.font = UIFont.systemFont(ofSize: 16)
-            break
-            
-        default:
-            receiverImageView.withSize(CGSize(width: 100, height: 100))
-            receiverImageView.layer.cornerRadius = 50
-            
-            receiverNameLabel.font = UIFont.boldSystemFont(ofSize: 24)
-            receiverPhoneNumber.font = UIFont.boldSystemFont(ofSize: 20)
-            
-            tipAmountTextField.font = UIFont.boldSystemFont(ofSize: 120)
-            conceptTextField.font = UIFont.boldSystemFont(ofSize: 30)
-            
-            bottomContainerViewLabel.font = UIFont.systemFont(ofSize: 16)
-            break
             
         }
+        
     }
-    
     
 }

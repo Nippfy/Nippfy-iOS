@@ -16,6 +16,7 @@ import SKCountryPicker
 protocol RegisterDisplayLogic: class
 {
     func displaySomething(viewModel: Register.Something.ViewModel)
+    func displayStatesLoadedForCountry(viewModel: Register.FetchStatesForCountry.ViewModel)
 }
 
 class RegisterViewController: UIViewController, RegisterDisplayLogic
@@ -72,39 +73,14 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        view = myView
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(countryButtonPressed))
-        myView.selectCountryButton.addGestureRecognizer(tap)
-        // myView.selectCountryButton.addTarget(self, action: #selector(countryButtonPressed), for: .touchUpInside)
-        
-        prepareNavBar()
+
+        prepareView()
+        fetchJSON()
         doSomething()
     }
     
-    @objc func countryButtonPressed() {
-        print("BUTTON PRESSED")
-        
-        let countryController = CountryPickerWithSectionViewController.presentController(on: self) { [weak self] (country: Country) in
-            
-            
-            guard let self = self else { return }
-            
-            self.myView.selectCountryButton.image = country.flag
-            self.myView.dialCodeLabel.text = country.dialingCode
-            // country.f
-            // self.myView.selectCountryButton.setBackgroundImage(country.flag, for: .normal)
-            
-            // self.countryImageView.image = country.flag
-            // self.countryCodeButton.setTitle(country.dialingCode, for: .normal)
-            
-        }
-        
-        // can customize the countryPicker here e.g font and color
-        countryController.detailColor = UIColor(named: "Normal Words")!
-        countryController.labelColor = UIColor(named: "Small Titles")!
-        countryController.flagStyle = .circular
-        // countryController.
+    func fetchJSON() {
+        fetchStatesForCountry(countryCode: "US")
     }
     
     // MARK: Do something
@@ -123,9 +99,67 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
     }
 }
 
+// MARK: User Responses
 
-// Prepare NavBar
 extension RegisterViewController {
+    
+    func displayStatesLoadedForCountry(viewModel: Register.FetchStatesForCountry.ViewModel) {
+        
+        let states = viewModel.states
+        
+        for state in states {
+            print(state.name)
+        }
+        
+    }
+}
+
+// MARK: User Interactions
+
+extension RegisterViewController {
+    
+    @objc func countryButtonPressed() {
+        
+        let countryController = CountryPickerWithSectionViewController.presentController(on: self) { [weak self] (country: Country) in
+            
+            guard let self = self else { return }
+            
+            let regionCode = country.countryCode
+            
+            let selectedCountry = SelectedCountry(flag: country.flag, name: country.countryName, countryCode: country.countryCode, dialingCode: country.dialingCode)
+            
+            self.myView.selectedCountry = selectedCountry
+            
+            self.fetchStatesForCountry(countryCode: regionCode)
+        }
+        
+        // can customize the countryPicker here e.g font and color
+        countryController.detailColor = UIColor(named: "Normal Words")!
+        countryController.labelColor = UIColor(named: "Small Titles")!
+        countryController.flagStyle = .circular
+    }
+    
+    fileprivate func fetchStatesForCountry(countryCode: String) {
+        let request = Register.FetchStatesForCountry.Request(countryCode: countryCode)
+        interactor?.loadStatesForCountry(request: request)
+    }
+    
+}
+
+// MARK: Prepare View
+extension RegisterViewController {
+    
+    fileprivate func prepareView() {
+        view = myView
+        
+        prepareNavBar()
+        prepareGestureRecognizers()
+    }
+    
+    fileprivate func prepareGestureRecognizers() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(countryButtonPressed))
+        myView.selectCountryButton.addGestureRecognizer(tap)
+    }
     
     fileprivate func prepareNavBar() {
         view.backgroundColor = UIColor(named: "Background")

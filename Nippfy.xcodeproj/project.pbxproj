@@ -72,6 +72,12 @@
 		656F81CD2422AB3A004AE4CF /* WalletInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C72422AB3A004AE4CF /* WalletInteractor.swift */; };
 		656F81CF2423797A004AE4CF /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81CE24237979004AE4CF /* UIDeviceExtension.swift */; };
 		65740E4224263CEA005FC227 /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65740E4124263CEA005FC227 /* RestaurantCell.swift */; };
+		659843682427BB1F00BC1840 /* JsonDecodeAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659843672427BB1F00BC1840 /* JsonDecodeAccessToken.swift */; };
+		6598436C2427BCED00BC1840 /* JSonDecodeStatesPerCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6598436B2427BCED00BC1840 /* JSonDecodeStatesPerCountry.swift */; };
+		6598436E2427C3A000BC1840 /* SelectedCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6598436D2427C3A000BC1840 /* SelectedCountry.swift */; };
+		659843702427C65B00BC1840 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6598436F2427C65B00BC1840 /* State.swift */; };
+		659843722427D04B00BC1840 /* JsonDecodeCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659843712427D04B00BC1840 /* JsonDecodeCity.swift */; };
+		659843752427F67D00BC1840 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659843742427F67D00BC1840 /* Credentials.swift */; };
 		65BFF1B1241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */; };
 		65BFF1B2241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.19.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */; };
 		65CD69672413B244000AB56C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65CD69692413B244000AB56C /* Localizable.strings */; };
@@ -170,6 +176,12 @@
 		656F81C72422AB3A004AE4CF /* WalletInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInteractor.swift; sourceTree = "<group>"; };
 		656F81CE24237979004AE4CF /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		65740E4124263CEA005FC227 /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
+		659843672427BB1F00BC1840 /* JsonDecodeAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecodeAccessToken.swift; sourceTree = "<group>"; };
+		6598436B2427BCED00BC1840 /* JSonDecodeStatesPerCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSonDecodeStatesPerCountry.swift; sourceTree = "<group>"; };
+		6598436D2427C3A000BC1840 /* SelectedCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCountry.swift; sourceTree = "<group>"; };
+		6598436F2427C65B00BC1840 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		659843712427D04B00BC1840 /* JsonDecodeCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecodeCity.swift; sourceTree = "<group>"; };
+		659843742427F67D00BC1840 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2020-03-15 at 20.35.08.png"; sourceTree = "<group>"; };
 		65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2020-03-15 at 20.35.19.png"; sourceTree = "<group>"; };
 		65CD69632413B224000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -361,6 +373,8 @@
 		656ECC78240A84DA007F93D4 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				659843732427F66F00BC1840 /* Private */,
+				6598436A2427BC1600BC1840 /* JSONDecoder */,
 				656ECC79240A84DF007F93D4 /* Models */,
 				656ECC7A240A84EA007F93D4 /* Repository.swift */,
 			);
@@ -370,6 +384,8 @@
 		656ECC79240A84DF007F93D4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6598436D2427C3A000BC1840 /* SelectedCountry.swift */,
+				6598436F2427C65B00BC1840 /* State.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -516,6 +532,24 @@
 				65313E2D2424DBD500843642 /* MenuView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		6598436A2427BC1600BC1840 /* JSONDecoder */ = {
+			isa = PBXGroup;
+			children = (
+				659843672427BB1F00BC1840 /* JsonDecodeAccessToken.swift */,
+				6598436B2427BCED00BC1840 /* JSonDecodeStatesPerCountry.swift */,
+				659843712427D04B00BC1840 /* JsonDecodeCity.swift */,
+			);
+			path = JSONDecoder;
+			sourceTree = "<group>";
+		};
+		659843732427F66F00BC1840 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				659843742427F67D00BC1840 /* Credentials.swift */,
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 		65BFF1AE241ECAFA00D03F26 /* Readme Images */ = {
@@ -786,6 +820,7 @@
 				656ECCA9240A8631007F93D4 /* ForgottenPasswordPresenter.swift in Sources */,
 				656ECC6E240A8430007F93D4 /* UIButtonExtension.swift in Sources */,
 				656ECCAB240A8631007F93D4 /* ForgottenPasswordRouter.swift in Sources */,
+				659843722427D04B00BC1840 /* JsonDecodeCity.swift in Sources */,
 				656F81AF2422910D004AE4CF /* PaymentView.swift in Sources */,
 				656F81B72422911F004AE4CF /* PaymentWorker.swift in Sources */,
 				656ECCA0240A85FD007F93D4 /* RegisterInteractor.swift in Sources */,
@@ -800,9 +835,12 @@
 				656F81B92422911F004AE4CF /* PaymentModels.swift in Sources */,
 				656ECC38240A8275007F93D4 /* AppDelegate.swift in Sources */,
 				656ECC8B240A859F007F93D4 /* LoginPresenter.swift in Sources */,
+				6598436C2427BCED00BC1840 /* JSonDecodeStatesPerCountry.swift in Sources */,
+				6598436E2427C3A000BC1840 /* SelectedCountry.swift in Sources */,
 				656ECC9E240A85FD007F93D4 /* RegisterModels.swift in Sources */,
 				656ECC6C240A8413007F93D4 /* UIViewExtension.swift in Sources */,
 				656ECCA2240A8621007F93D4 /* ForgottenPasswordView.swift in Sources */,
+				659843752427F67D00BC1840 /* Credentials.swift in Sources */,
 				656ECC71240A846F007F93D4 /* DScrollView+.swift in Sources */,
 				656ECC94240A85F2007F93D4 /* RegisterView.swift in Sources */,
 				656F81CB2422AB3A004AE4CF /* WalletModels.swift in Sources */,
@@ -817,6 +855,7 @@
 				656ECC92240A85DB007F93D4 /* LoginView.swift in Sources */,
 				651FB1EE2425967000800ED4 /* SearchInteractor.swift in Sources */,
 				656ECC7B240A84EA007F93D4 /* Repository.swift in Sources */,
+				659843702427C65B00BC1840 /* State.swift in Sources */,
 				656ECC9C240A85FD007F93D4 /* RegisterWorker.swift in Sources */,
 				656ECC8E240A859F007F93D4 /* LoginModels.swift in Sources */,
 				656F81C12422AB1D004AE4CF /* WalletView.swift in Sources */,
@@ -828,6 +867,7 @@
 				656F81CD2422AB3A004AE4CF /* WalletInteractor.swift in Sources */,
 				651FB1EB2425967000800ED4 /* SearchRouter.swift in Sources */,
 				651FB1ED2425967000800ED4 /* SearchViewController.swift in Sources */,
+				659843682427BB1F00BC1840 /* JsonDecodeAccessToken.swift in Sources */,
 				656ECC75240A84A9007F93D4 /* DScrollViewContainer.swift in Sources */,
 				656F81BB2422911F004AE4CF /* PaymentInteractor.swift in Sources */,
 				656F81C92422AB3A004AE4CF /* WalletWorker.swift in Sources */,

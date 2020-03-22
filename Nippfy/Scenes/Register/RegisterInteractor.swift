@@ -15,6 +15,7 @@ import UIKit
 protocol RegisterBusinessLogic
 {
     func doSomething(request: Register.Something.Request)
+    func loadStatesForCountry(request: Register.FetchStatesForCountry.Request)
 }
 
 protocol RegisterDataStore
@@ -24,6 +25,7 @@ protocol RegisterDataStore
 
 class RegisterInteractor: RegisterBusinessLogic, RegisterDataStore
 {
+    
     var presenter: RegisterPresentationLogic?
     var worker: RegisterWorker?
     //var name: String = ""
@@ -37,5 +39,16 @@ class RegisterInteractor: RegisterBusinessLogic, RegisterDataStore
         
         let response = Register.Something.Response()
         presenter?.presentSomething(response: response)
+    }
+    
+    func loadStatesForCountry(request: Register.FetchStatesForCountry.Request) {
+        worker = RegisterWorker()
+        worker?.fetchStatesForCountry(request: request, completionHandler: { [weak self] (states) in
+            
+            let response = Register.FetchStatesForCountry.Response(states: states)
+            self?.presenter?.presentLoadedStatesForCountry(response: response)
+            
+        })
+        
     }
 }

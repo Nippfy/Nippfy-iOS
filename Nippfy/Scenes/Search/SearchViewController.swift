@@ -141,7 +141,7 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController {
     
     @objc func filterButtonPressed(sender: UIButton) {
-        print("PRESSED BUTTON 1")
+        print("PRESSED FILTER BUTTON")
         myView.toggleButton(button: sender)
     }
     
