@@ -78,6 +78,7 @@
 		659843702427C65B00BC1840 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6598436F2427C65B00BC1840 /* State.swift */; };
 		659843722427D04B00BC1840 /* JsonDecodeCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659843712427D04B00BC1840 /* JsonDecodeCity.swift */; };
 		659843752427F67D00BC1840 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659843742427F67D00BC1840 /* Credentials.swift */; };
+		6598437B2427FD0800BC1840 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6598437A2427FD0800BC1840 /* .gitignore */; };
 		65BFF1B1241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */; };
 		65BFF1B2241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.19.png in Resources */ = {isa = PBXBuildFile; fileRef = 65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */; };
 		65CD69672413B244000AB56C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65CD69692413B244000AB56C /* Localizable.strings */; };
@@ -182,6 +183,7 @@
 		6598436F2427C65B00BC1840 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		659843712427D04B00BC1840 /* JsonDecodeCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecodeCity.swift; sourceTree = "<group>"; };
 		659843742427F67D00BC1840 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		6598437A2427FD0800BC1840 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		65BFF1AF241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2020-03-15 at 20.35.08.png"; sourceTree = "<group>"; };
 		65BFF1B0241ECB1000D03F26 /* Screenshot 2020-03-15 at 20.35.19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2020-03-15 at 20.35.19.png"; sourceTree = "<group>"; };
 		65CD69632413B224000AB56C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 		656ECC2B240A8275007F93D4 = {
 			isa = PBXGroup;
 			children = (
+				6598437A2427FD0800BC1840 /* .gitignore */,
 				656ECCAF240A8760007F93D4 /* Readme.md */,
 				656ECC36240A8275007F93D4 /* Nippfy */,
 				656ECC4D240A8279007F93D4 /* NippfyTests */,
@@ -686,6 +689,7 @@
 				656ECC69240A83EA007F93D4 /* Colors.xcassets in Resources */,
 				656ECC41240A8279007F93D4 /* Assets.xcassets in Resources */,
 				656ECC3F240A8275007F93D4 /* Main.storyboard in Resources */,
+				6598437B2427FD0800BC1840 /* .gitignore in Resources */,
 				65BFF1B1241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.08.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
