@@ -21,7 +21,7 @@ class RegisterView: UIView {
     var textFieldsHeight: CGFloat = 50
     var scrollViewHeightConstant: CGFloat = 700
     
-    var selectedCountry: SelectedCountry = SelectedCountry() {
+    var selectedCountry: SelectedCountry = SelectedCountry(flag: UIImage(), name: "United States", countryCode: "US", dialingCode: "+1") {
         didSet {
             
             guard let flag = selectedCountry.flag else { return }

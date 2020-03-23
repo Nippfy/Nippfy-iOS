@@ -17,6 +17,7 @@
 		651FB1F02425969700800ED4 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651FB1EF2425969700800ED4 /* SearchView.swift */; };
 		65313E2E2424DBD500843642 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E2D2424DBD500843642 /* MenuView.swift */; };
 		65313E312425061800843642 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65313E302425061800843642 /* TabBarViewController.swift */; };
+		656D3A362429242200541148 /* UserToRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656D3A352429242200541148 /* UserToRegister.swift */; };
 		656ECC38240A8275007F93D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC37240A8275007F93D4 /* AppDelegate.swift */; };
 		656ECC3A240A8275007F93D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC39240A8275007F93D4 /* SceneDelegate.swift */; };
 		656ECC3C240A8275007F93D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656ECC3B240A8275007F93D4 /* ViewController.swift */; };
@@ -117,6 +118,7 @@
 		651FB1EF2425969700800ED4 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		65313E2D2424DBD500843642 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		65313E302425061800843642 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		656D3A352429242200541148 /* UserToRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToRegister.swift; sourceTree = "<group>"; };
 		656ECC34240A8275007F93D4 /* Nippfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nippfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		656ECC37240A8275007F93D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		656ECC39240A8275007F93D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 			children = (
 				6598436D2427C3A000BC1840 /* SelectedCountry.swift */,
 				6598436F2427C65B00BC1840 /* State.swift */,
+				656D3A352429242200541148 /* UserToRegister.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -867,6 +870,7 @@
 				656ECC9C240A85FD007F93D4 /* RegisterWorker.swift in Sources */,
 				656ECC8E240A859F007F93D4 /* LoginModels.swift in Sources */,
 				656F81C12422AB1D004AE4CF /* WalletView.swift in Sources */,
+				656D3A362429242200541148 /* UserToRegister.swift in Sources */,
 				656ECCAD240A8631007F93D4 /* ForgottenPasswordViewController.swift in Sources */,
 				656F81C82422AB3A004AE4CF /* WalletPresenter.swift in Sources */,
 				656F81CF2423797A004AE4CF /* UIDeviceExtension.swift in Sources */,

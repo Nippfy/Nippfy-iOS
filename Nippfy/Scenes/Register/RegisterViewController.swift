@@ -75,7 +75,7 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
         prepareView()
         fetchJSON()
         doSomething()
@@ -119,10 +119,62 @@ extension RegisterViewController {
     @objc func registerButtonTapped() {
         print("REGISTER TAPPED")
         
+        // Everything is ok
+        if (checkRegisterParameters()) {
+            registerUser()
+        }
+            // Display error (A field is not completed)
+        else {
+            showFieldsNotCompletedAlert()
+        }
+        
+    }
+    
+    fileprivate func registerUser() {
         let stateSelectedIndex = myView.statePickerView.selectedRow(inComponent: 0)
         guard let stateSelected = states[stateSelectedIndex].name else { return }
         
-        print(stateSelected)
+        guard let name = myView.nameTextField.text else { return }
+        guard let surname = myView.surnameTextField.text else { return }
+        guard let phoneNumber = myView.phoneTextField.text else { return }
+        guard let country = myView.selectedCountry.name else { return }
+        guard let email = myView.emailTextField.text else { return }
+        guard let password = myView.passwordTextField.text else { return }
+        
+        let userToRegister = UserToRegister(name: name, surname: surname, phoneNumber: phoneNumber, country: country, state: stateSelected, email: email, password: password)
+    }
+    
+    fileprivate func showFieldsNotCompletedAlert() {
+        
+        let alertController = UIAlertController(title: "Fields not complete", message: "Make sure that all fields are complete before registering", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
+            
+        }
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    fileprivate func checkRegisterParameters() -> Bool {
+        
+        guard let name = myView.nameTextField.text else { return false }
+        guard let surname = myView.surnameTextField.text else { return false }
+        guard let phoneNumber = myView.phoneTextField.text else { return false }
+        guard let country = myView.selectedCountry.name else { return false }
+        guard let email = myView.emailTextField.text else { return false }
+        guard let password = myView.passwordTextField.text else { return false }
+        guard let repeatPassword = myView.repeatPasswordTextField.text else { return false }
+        
+        if (name.isEmpty || surname.isEmpty || phoneNumber.isEmpty || country.isEmpty || email.isEmpty || password.isEmpty || repeatPassword.isEmpty) {
+            return false
+        } else if (password != repeatPassword) {
+            return false
+        }
+ 
+        
+        return true
     }
     
     @objc func countryButtonPressed() {
@@ -164,7 +216,7 @@ extension RegisterViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return states.count
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 30
     }

@@ -32,7 +32,11 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
 }
 
+import Firebase
+
 class Repository {
+    
+    let database = Firestore.firestore()
     
     let credentials = Credentials()
     
@@ -138,6 +142,34 @@ class Repository {
             }
             
         }.resume()
+    }
+    
+    public func registerNewUser(user: UserToRegister, completionHandler: @escaping ((_ error: String) -> Void)) {
+        
+        let newDocument = database.collection("users").document()
+        let userID = newDocument.documentID
+        
+        newDocument.setData([
+            "uid" : userID,
+            "name" : user.name,
+            "surname" : user.surname,
+            "telephone" : user.phoneNumber,
+            "email" : user.email,
+            "country" : user.country,
+            "state" : user.state,
+            "pictureURL" : "",
+            "role" : "user"
+        ], merge: true) { (error) in
+            
+            if (error != nil) {
+                print(error)
+                return
+            }
+            
+            print("Usuario guardado con éxito")
+            
+        }
+        
     }
     
 }
