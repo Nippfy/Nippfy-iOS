@@ -26,6 +26,8 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
     
     var myView = RegisterView()
     
+    var states: [State] = [State]()
+    
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -104,19 +106,24 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
 extension RegisterViewController {
     
     func displayStatesLoadedForCountry(viewModel: Register.FetchStatesForCountry.ViewModel) {
-        
-        let states = viewModel.states
-        
-        for state in states {
-            print(state.name)
-        }
-        
+        states.removeAll()
+        states = viewModel.states
+        myView.statePickerView.reloadAllComponents()
     }
 }
 
 // MARK: User Interactions
 
 extension RegisterViewController {
+    
+    @objc func registerButtonTapped() {
+        print("REGISTER TAPPED")
+        
+        let stateSelectedIndex = myView.statePickerView.selectedRow(inComponent: 0)
+        guard let stateSelected = states[stateSelectedIndex].name else { return }
+        
+        print(stateSelected)
+    }
     
     @objc func countryButtonPressed() {
         
@@ -146,6 +153,29 @@ extension RegisterViewController {
     
 }
 
+// MARK: UIPickerView Methods
+
+extension RegisterViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return states.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 30
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let state = states[row].name!
+        return NSAttributedString(string: state, attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")!])
+    }
+    
+}
+
 // MARK: Prepare View
 extension RegisterViewController {
     
@@ -153,12 +183,15 @@ extension RegisterViewController {
         view = myView
         
         prepareNavBar()
+        preparePickerView()
         prepareGestureRecognizers()
     }
     
     fileprivate func prepareGestureRecognizers() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(countryButtonPressed))
         myView.selectCountryButton.addGestureRecognizer(tap)
+        
+        myView.registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
     }
     
     fileprivate func prepareNavBar() {
@@ -172,6 +205,11 @@ extension RegisterViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layoutIfNeeded()
+    }
+    
+    fileprivate func preparePickerView() {
+        myView.statePickerView.delegate = self
+        myView.statePickerView.dataSource = self
     }
     
 }
