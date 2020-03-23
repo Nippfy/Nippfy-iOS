@@ -29,6 +29,24 @@ enum Register
         }
     }
     
+    enum RegisterNewUser
+    {
+        struct Request
+        {
+            var userToRegister: UserToRegister
+        }
+        struct Response
+        {
+            var errorMessage: String
+            var isThereError: Bool
+        }
+        struct ViewModel
+        {
+            var errorMessage: String
+            var isThereError: Bool
+        }
+    }
+    
     enum FetchStatesForCountry
     {
         struct Request

@@ -30,4 +30,13 @@ class RegisterWorker
             }
         }
     }
+    
+    func registerNewUser(request: Register.RegisterNewUser.Request, completionHandler: @escaping ((_ error: String, _ isThereError: Bool) -> Void)) {
+        
+        let user = request.userToRegister
+        
+        repository.registerNewUser(user: user) { (errorMessage, isThereError) in
+            completionHandler(errorMessage, isThereError)
+        }
+    }
 }

@@ -17,6 +17,7 @@ protocol RegisterDisplayLogic: class
 {
     func displaySomething(viewModel: Register.Something.ViewModel)
     func displayStatesLoadedForCountry(viewModel: Register.FetchStatesForCountry.ViewModel)
+    func displayUserRegistered(viewModel: Register.RegisterNewUser.ViewModel)
 }
 
 class RegisterViewController: UIViewController, RegisterDisplayLogic
@@ -110,6 +111,21 @@ extension RegisterViewController {
         states = viewModel.states
         myView.statePickerView.reloadAllComponents()
     }
+    
+    func displayUserRegistered(viewModel: Register.RegisterNewUser.ViewModel) {
+        
+        let isThereError = viewModel.isThereError
+        
+        if (!isThereError) {
+            print("Usuario registrado con éxito")
+        } else {
+            
+            let errorMessage = viewModel.errorMessage
+            
+            print("Ha habido un problema al registrar el usuario")
+        }
+        
+    }
 }
 
 // MARK: User Interactions
@@ -137,44 +153,13 @@ extension RegisterViewController {
         guard let name = myView.nameTextField.text else { return }
         guard let surname = myView.surnameTextField.text else { return }
         guard let phoneNumber = myView.phoneTextField.text else { return }
-        guard let country = myView.selectedCountry.name else { return }
+        guard let country = myView.selectedCountry.countryCode else { return }
         guard let email = myView.emailTextField.text else { return }
         guard let password = myView.passwordTextField.text else { return }
         
         let userToRegister = UserToRegister(name: name, surname: surname, phoneNumber: phoneNumber, country: country, state: stateSelected, email: email, password: password)
-    }
-    
-    fileprivate func showFieldsNotCompletedAlert() {
-        
-        let alertController = UIAlertController(title: "Fields not complete", message: "Make sure that all fields are complete before registering", preferredStyle: .alert)
-        
-        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
-            
-        }
-        
-        alertController.addAction(defaultAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    fileprivate func checkRegisterParameters() -> Bool {
-        
-        guard let name = myView.nameTextField.text else { return false }
-        guard let surname = myView.surnameTextField.text else { return false }
-        guard let phoneNumber = myView.phoneTextField.text else { return false }
-        guard let country = myView.selectedCountry.name else { return false }
-        guard let email = myView.emailTextField.text else { return false }
-        guard let password = myView.passwordTextField.text else { return false }
-        guard let repeatPassword = myView.repeatPasswordTextField.text else { return false }
-        
-        if (name.isEmpty || surname.isEmpty || phoneNumber.isEmpty || country.isEmpty || email.isEmpty || password.isEmpty || repeatPassword.isEmpty) {
-            return false
-        } else if (password != repeatPassword) {
-            return false
-        }
- 
-        
-        return true
+        let request = Register.RegisterNewUser.Request(userToRegister: userToRegister)
+        interactor?.registerNewUser(request: request)
     }
     
     @objc func countryButtonPressed() {
@@ -267,3 +252,39 @@ extension RegisterViewController {
     
 }
 
+// MARK: Checking Registration Parameters
+
+extension RegisterViewController {
+    
+    fileprivate func showFieldsNotCompletedAlert() {
+        
+        let alertController = UIAlertController(title: "Fields not complete", message: "Make sure that all fields are complete before registering", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
+            
+        }
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    fileprivate func checkRegisterParameters() -> Bool {
+        
+        guard let name = myView.nameTextField.text else { return false }
+        guard let surname = myView.surnameTextField.text else { return false }
+        guard let phoneNumber = myView.phoneTextField.text else { return false }
+        guard let country = myView.selectedCountry.name else { return false }
+        guard let email = myView.emailTextField.text else { return false }
+        guard let password = myView.passwordTextField.text else { return false }
+        guard let repeatPassword = myView.repeatPasswordTextField.text else { return false }
+        
+        if (name.isEmpty || surname.isEmpty || phoneNumber.isEmpty || country.isEmpty || email.isEmpty || password.isEmpty || repeatPassword.isEmpty) {
+            return false
+        } else if (password != repeatPassword) {
+            return false
+        }
+        return true
+    }
+    
+}

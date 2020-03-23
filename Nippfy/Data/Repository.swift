@@ -144,7 +144,7 @@ class Repository {
         }.resume()
     }
     
-    public func registerNewUser(user: UserToRegister, completionHandler: @escaping ((_ error: String) -> Void)) {
+    public func registerNewUser(user: UserToRegister, completionHandler: @escaping ((_ error: String, _ isThereError: Bool) -> Void)) {
         
         let newDocument = database.collection("users").document()
         let userID = newDocument.documentID

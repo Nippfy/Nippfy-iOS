@@ -16,6 +16,7 @@ protocol RegisterBusinessLogic
 {
     func doSomething(request: Register.Something.Request)
     func loadStatesForCountry(request: Register.FetchStatesForCountry.Request)
+    func registerNewUser(request: Register.RegisterNewUser.Request)
 }
 
 protocol RegisterDataStore
@@ -50,5 +51,16 @@ class RegisterInteractor: RegisterBusinessLogic, RegisterDataStore
             
         })
         
+    }
+    
+    func registerNewUser(request: Register.RegisterNewUser.Request) {
+        
+        worker = RegisterWorker()
+        worker?.registerNewUser(request: request, completionHandler: { [weak self] (errorMessage, isThereError) in
+            
+            let response = Register.RegisterNewUser.Response(errorMessage: errorMessage, isThereError: isThereError)
+            self?.presenter?.presentUserRegistered(response: response)
+            
+        })
     }
 }

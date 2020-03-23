@@ -16,6 +16,7 @@ protocol RegisterPresentationLogic
 {
     func presentSomething(response: Register.Something.Response)
     func presentLoadedStatesForCountry(response: Register.FetchStatesForCountry.Response)
+    func presentUserRegistered(response: Register.RegisterNewUser.Response)
 }
 
 class RegisterPresenter: RegisterPresentationLogic
@@ -33,5 +34,10 @@ class RegisterPresenter: RegisterPresentationLogic
     func presentLoadedStatesForCountry(response: Register.FetchStatesForCountry.Response) {
         let viewModel = Register.FetchStatesForCountry.ViewModel(states: response.states)
         viewController?.displayStatesLoadedForCountry(viewModel: viewModel)
+    }
+    
+    func presentUserRegistered(response: Register.RegisterNewUser.Response) {
+        let viewModel = Register.RegisterNewUser.ViewModel(errorMessage: response.errorMessage, isThereError: response.isThereError)
+        viewController?.displayUserRegistered(viewModel: viewModel)
     }
 }
