@@ -209,6 +209,7 @@ extension RegisterViewController {
     
     fileprivate func preparePickerView() {
         myView.statePickerView.delegate = self
+        
         myView.statePickerView.dataSource = self
     }
     
