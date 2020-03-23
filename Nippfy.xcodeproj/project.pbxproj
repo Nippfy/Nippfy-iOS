@@ -71,6 +71,7 @@
 		656F81CC2422AB3A004AE4CF /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C62422AB3A004AE4CF /* WalletViewController.swift */; };
 		656F81CD2422AB3A004AE4CF /* WalletInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81C72422AB3A004AE4CF /* WalletInteractor.swift */; };
 		656F81CF2423797A004AE4CF /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F81CE24237979004AE4CF /* UIDeviceExtension.swift */; };
+		657221912428DAE6004EAF63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 657221902428DAE6004EAF63 /* GoogleService-Info.plist */; };
 		65740E4224263CEA005FC227 /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65740E4124263CEA005FC227 /* RestaurantCell.swift */; };
 		659843682427BB1F00BC1840 /* JsonDecodeAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659843672427BB1F00BC1840 /* JsonDecodeAccessToken.swift */; };
 		6598436C2427BCED00BC1840 /* JSonDecodeStatesPerCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6598436B2427BCED00BC1840 /* JSonDecodeStatesPerCountry.swift */; };
@@ -176,6 +177,7 @@
 		656F81C62422AB3A004AE4CF /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		656F81C72422AB3A004AE4CF /* WalletInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInteractor.swift; sourceTree = "<group>"; };
 		656F81CE24237979004AE4CF /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
+		657221902428DAE6004EAF63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65740E4124263CEA005FC227 /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
 		659843672427BB1F00BC1840 /* JsonDecodeAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecodeAccessToken.swift; sourceTree = "<group>"; };
 		6598436B2427BCED00BC1840 /* JSonDecodeStatesPerCountry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSonDecodeStatesPerCountry.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 		656ECC36240A8275007F93D4 /* Nippfy */ = {
 			isa = PBXGroup;
 			children = (
+				657221902428DAE6004EAF63 /* GoogleService-Info.plist */,
 				65CD69602413B046000AB56C /* Localizable */,
 				656ECC7E240A8561007F93D4 /* Scenes */,
 				656ECC7D240A854E007F93D4 /* Delegates */,
@@ -689,6 +692,7 @@
 				656ECC69240A83EA007F93D4 /* Colors.xcassets in Resources */,
 				656ECC41240A8279007F93D4 /* Assets.xcassets in Resources */,
 				656ECC3F240A8275007F93D4 /* Main.storyboard in Resources */,
+				657221912428DAE6004EAF63 /* GoogleService-Info.plist in Resources */,
 				6598437B2427FD0800BC1840 /* .gitignore in Resources */,
 				65BFF1B1241ECB1100D03F26 /* Screenshot 2020-03-15 at 20.35.08.png in Resources */,
 			);

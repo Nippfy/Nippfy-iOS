@@ -10,6 +10,10 @@ target 'Nippfy' do
   pod 'LBTATools'
   pod 'CountryPickerView'
   pod 'SKCountryPicker'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Firestore'
 
   target 'NippfyTests' do
     inherit! :search_paths

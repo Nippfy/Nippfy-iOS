@@ -75,15 +75,13 @@ class Repository {
                 
                 do {
                     let decoder = JSONDecoder()
-                    print(data)
-                    print("HE LLEGADO HASTA AQUÍ")
+                    
                     let webResponse = try decoder.decode(JsonDecodeAccessToken.self, from: data)
                     guard let accessToken = webResponse.auth_token else { return }
                     self.accessTokenAPI = accessToken
                     
                     print(self.accessTokenAPI)
                     
-                    print("FINALIZADO")
                     completionHandler()
 
                 } catch let jsonErr {
@@ -103,12 +101,9 @@ class Repository {
             fatalError(message)
         }
         
-        print(localisedCountryName)
-        
         let sanitazedString = localisedCountryName.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
     
         let urlString = "https://www.universal-tutorial.com/api/states/\(sanitazedString)"
-        print(urlString)
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
         request.setValue("Bearer " + accessTokenAPI, forHTTPHeaderField: "Authorization")
