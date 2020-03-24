@@ -84,7 +84,7 @@ class Repository {
                     guard let accessToken = webResponse.auth_token else { return }
                     self.accessTokenAPI = accessToken
                     
-                    print(self.accessTokenAPI)
+                    print("Auth Token " + self.accessTokenAPI)
                     
                     completionHandler()
 
@@ -101,16 +101,17 @@ class Repository {
         
         let locale = Locale(identifier: "en")
         guard let localisedCountryName = locale.localizedString(forRegionCode: countryCode) else {
-            let message = "Failed to localised country name for Country Code:- \("regionCode")"
+            let message = "Failed to localised country name for Country Code:- \(countryCode)"
             fatalError(message)
         }
         
         let sanitazedString = localisedCountryName.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
     
+        print("Country \(sanitazedString)")
         let urlString = "https://www.universal-tutorial.com/api/states/\(sanitazedString)"
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
-        request.setValue("Bearer " + accessTokenAPI, forHTTPHeaderField: "Authorization")
+        request.setValue(UUID().uuidString + self.accessTokenAPI, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         
         URLSession.shared.dataTask(with: request) { data, response, error in

@@ -9,6 +9,16 @@
 import Foundation
 import UIKit
 
+extension Locale {
+    
+    // Get the currency for a specific country given the country code "US / ES"
+    static let currency: [String: (code: String?, symbol: String?)] = Locale.isoRegionCodes.reduce(into: [:]) {
+        let locale = Locale(identifier: Locale.identifier(fromComponents: [NSLocale.Key.countryCode.rawValue: $1]))
+        $0[$1] = (locale.currencyCode, locale.currencySymbol)
+    }
+    
+}
+
 extension UIImage {
     
     func tint(with color: UIColor) -> UIImage
