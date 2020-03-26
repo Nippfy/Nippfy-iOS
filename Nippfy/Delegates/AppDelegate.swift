@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         // Initial View Controller 
-        let rootViewController = UINavigationController(rootViewController: RegisterViewController())
+        let rootViewController = UINavigationController(rootViewController: ForgottenPasswordViewController())
         let rootViewController2 = TabBarViewController()
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()

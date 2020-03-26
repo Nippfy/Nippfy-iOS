@@ -15,6 +15,7 @@ import UIKit
 protocol ForgottenPasswordBusinessLogic
 {
     func doSomething(request: ForgottenPassword.Something.Request)
+    func sendResetPasswordEmail(request: ForgottenPassword.SendForgottenPasswordEmail.Request)
 }
 
 protocol ForgottenPasswordDataStore
@@ -37,5 +38,15 @@ class ForgottenPasswordInteractor: ForgottenPasswordBusinessLogic, ForgottenPass
         
         let response = ForgottenPassword.Something.Response()
         presenter?.presentSomething(response: response)
+    }
+    
+    func sendResetPasswordEmail(request: ForgottenPassword.SendForgottenPasswordEmail.Request) {
+        worker = ForgottenPasswordWorker()
+        
+        worker?.sendEmailToRecoverPassword(request: request, completionHandler: { [weak self](error) in
+            
+            let response = ForgottenPassword.SendForgottenPasswordEmail.Response(error: error)
+            self?.presenter?.presentResetPasswordEmailSent(response: response)
+        })
     }
 }

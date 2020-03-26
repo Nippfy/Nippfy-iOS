@@ -28,4 +28,20 @@ enum ForgottenPassword
         {
         }
     }
+    
+    enum SendForgottenPasswordEmail
+    {
+        struct Request
+        {
+            var email: String
+        }
+        struct Response
+        {
+            var error: Error?
+        }
+        struct ViewModel
+        {
+            var error: Error?
+        }
+    }
 }

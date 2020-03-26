@@ -14,7 +14,18 @@ import UIKit
 
 class ForgottenPasswordWorker
 {
+    
+    var repository = Repository.getInstance()
+    
     func doSomeWork()
     {
+    }
+    
+    public func sendEmailToRecoverPassword(request: ForgottenPassword.SendForgottenPasswordEmail.Request, completionHandler: @escaping(_ error: Error?) -> Void) {
+        
+        repository.sendEmailToRecoverPassword(request: request) { (error) in
+            completionHandler(error)
+        }
+        
     }
 }

@@ -15,6 +15,7 @@ import UIKit
 protocol ForgottenPasswordPresentationLogic
 {
     func presentSomething(response: ForgottenPassword.Something.Response)
+    func presentResetPasswordEmailSent(response: ForgottenPassword.SendForgottenPasswordEmail.Response)
 }
 
 class ForgottenPasswordPresenter: ForgottenPasswordPresentationLogic
@@ -27,5 +28,12 @@ class ForgottenPasswordPresenter: ForgottenPasswordPresentationLogic
     {
         let viewModel = ForgottenPassword.Something.ViewModel()
         viewController?.displaySomething(viewModel: viewModel)
+    }
+    
+    func presentResetPasswordEmailSent(response: ForgottenPassword.SendForgottenPasswordEmail.Response) {
+        
+        let viewModel = ForgottenPassword.SendForgottenPasswordEmail.ViewModel(error: response.error)
+        viewController?.displayForgottenPasswordEmailSent(viewModel: viewModel)
+        
     }
 }

@@ -15,6 +15,7 @@ import UIKit
 protocol ForgottenPasswordDisplayLogic: class
 {
     func displaySomething(viewModel: ForgottenPassword.Something.ViewModel)
+    func displayForgottenPasswordEmailSent(viewModel: ForgottenPassword.SendForgottenPasswordEmail.ViewModel)
 }
 
 class ForgottenPasswordViewController: UIViewController, ForgottenPasswordDisplayLogic
@@ -92,7 +93,7 @@ class ForgottenPasswordViewController: UIViewController, ForgottenPasswordDispla
     }
 }
 
-// Prepare NavBar
+// MARK: Prepare View
 extension ForgottenPasswordViewController {
     
     fileprivate func prepareNavBar() {
@@ -105,7 +106,110 @@ extension ForgottenPasswordViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layoutIfNeeded()
+        
+        prepareGestureRecognizers()
+    }
+    
+    fileprivate func prepareGestureRecognizers() {
+        myView.sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
     }
     
 }
 
+// MARK: User Interactions
+
+extension ForgottenPasswordViewController {
+    
+    
+    @objc func sendButtonTapped() {
+        
+        if (checkForgottenPasswordParameters()) {
+            sendResetEmail()
+        } else {
+            showInvalidEmailAlert()
+        }
+    }
+    
+    private func sendResetEmail() {
+        
+        myView.showActivityIndicator()
+        
+        guard let email = myView.emailTextField.text else { return }
+        
+        let request = ForgottenPassword.SendForgottenPasswordEmail.Request(email: email)
+        interactor?.sendResetPasswordEmail(request: request)
+    }
+    
+    fileprivate func checkForgottenPasswordParameters() -> Bool {
+        
+        guard let email = myView.emailTextField.text else { return false }
+        
+        if (!email.isEmail()) {
+            showInvalidEmailAlert()
+            return false
+        }
+        
+        if (email.isEmpty) {
+            return false
+        }
+        return true
+    }
+}
+
+
+// MARK: User Response
+
+extension ForgottenPasswordViewController {
+    
+    func displayForgottenPasswordEmailSent(viewModel: ForgottenPassword.SendForgottenPasswordEmail.ViewModel) {
+        
+        myView.hideActivityIndicator()
+        
+        let error = viewModel.error
+        
+        if let error = error {
+            showErrorWhileSendingEmailAlert(error: error.localizedDescription)
+        } else {
+            showEmailSuccessfulySentAlert()
+        }
+    }
+    
+    fileprivate func showEmailSuccessfulySentAlert() {
+        
+        let alertController = UIAlertController(title: "Email sent succesfully", message: "Please check your email to reset your password", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
+            
+        }
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    fileprivate func showErrorWhileSendingEmailAlert(error: String) {
+        
+        let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
+            
+        }
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    fileprivate func showInvalidEmailAlert() {
+        
+        let alertController = UIAlertController(title: "Invalid Email", message: "Please type a valid email address", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
+            
+        }
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+}

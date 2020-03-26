@@ -40,7 +40,7 @@ class Repository {
     
     let credentials = Credentials()
     
-    private var accessTokenAPI: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZW1haWwiOiJnZXN0aW9ubmlwcGZ5QGdtYWlsLmNvbSIsImFwaV90b2tlbiI6IjM1TGFyYk10SFB2ZlRvLUdmVUF4VnhMSS16U3Q4Z0swYUNJR0JYNXZWZDlRWXR3S1o1bTNQMGp6NGZaN2ZMLWNWa3MifSwiZXhwIjoxNTg1MzI0MTE4fQ.YdcczfX3sqDE-8HYpYWm7rKfz6YO4AIBO5OCxWImTeI"
+    private var accessTokenAPI: String = ""
     
     private static var INSTANCE: Repository?
     
@@ -84,7 +84,7 @@ class Repository {
                     guard let accessToken = webResponse.auth_token else { return }
                     self.accessTokenAPI = accessToken
                     
-                    print("Auth Token " + self.accessTokenAPI)
+                    // print("Auth Token " + self.accessTokenAPI)
                     
                     completionHandler()
 
@@ -107,7 +107,7 @@ class Repository {
         
         let sanitazedString = localisedCountryName.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
     
-        print("Country \(sanitazedString)")
+        // print("Country \(sanitazedString)")
         let urlString = "https://www.universal-tutorial.com/api/states/\(sanitazedString)"
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
@@ -194,5 +194,21 @@ class Repository {
             
             completionHandler(false, nil)
         })
+    }
+    
+    // MARK: Forgotten Password Email
+    public func sendEmailToRecoverPassword(request: ForgottenPassword.SendForgottenPasswordEmail.Request, completionHandler: @escaping(_ error: Error?) -> Void) {
+        
+        let email = request.email
+        
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            
+            if let error = error {
+                completionHandler(error)
+                return
+            }
+            
+            completionHandler(nil)
+        }
     }
 }
