@@ -28,7 +28,6 @@ class RegisterPresenter: RegisterPresentationLogic
     func presentSomething(response: Register.Something.Response)
     {
         let viewModel = Register.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
     }
     
     func presentLoadedStatesForCountry(response: Register.FetchStatesForCountry.Response) {

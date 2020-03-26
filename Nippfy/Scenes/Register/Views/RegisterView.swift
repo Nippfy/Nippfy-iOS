@@ -298,6 +298,23 @@ class RegisterView: UIView {
         return tf
     }()
     
+    // MARK: Activity Indicator
+    
+    var activityIndicator: UIActivityIndicatorView = {
+        var indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
+        indicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
+    var activityIndicatorContainer: UIView = {
+        var view = UIView()
+        view.backgroundColor = UIColor(named: "Activity Indicator")
+        view.isHidden = true
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpUI()
@@ -316,6 +333,7 @@ class RegisterView: UIView {
         setUpButtons()
         prepareScrollView()
         prepareElementsInsideScrollView()
+        setUpActivityIndicator()
     }
     
     fileprivate func setUpContainer() {
@@ -455,6 +473,24 @@ extension RegisterView {
         repeatPasswordSeparatorLine.anchor(top: repeatPasswordTextField.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 1))
     }
     
+    fileprivate func setUpActivityIndicator() {
+        addSubviewForAutolayout(activityIndicatorContainer)
+        
+        NSLayoutConstraint.activate([
+            activityIndicatorContainer.widthAnchor.constraint(equalToConstant: 100),
+            activityIndicatorContainer.heightAnchor.constraint(equalToConstant: 100),
+            activityIndicatorContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
+            activityIndicatorContainer.centerXAnchor.constraint(equalTo: centerXAnchor)
+            ])
+        
+        activityIndicatorContainer.addSubviewForAutolayout(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor)
+            ])
+    }
+    
     // MARK: Calculate Font Sizes
     fileprivate func calculateFontSizes() {
         let deviceType = UIDevice.current.deviceType
@@ -477,4 +513,20 @@ extension RegisterView {
             
         }
     }
+}
+
+// MARK: Methods for UI
+
+extension RegisterView {
+    
+    func showActivityIndicator() {
+        self.activityIndicatorContainer.isHidden = false
+        self.activityIndicator.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        self.activityIndicatorContainer.isHidden = true
+        self.activityIndicator.stopAnimating()
+    }
+    
 }

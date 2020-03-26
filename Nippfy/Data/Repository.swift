@@ -40,7 +40,7 @@ class Repository {
     
     let credentials = Credentials()
     
-    private var accessTokenAPI: String = ""
+    private var accessTokenAPI: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZW1haWwiOiJnZXN0aW9ubmlwcGZ5QGdtYWlsLmNvbSIsImFwaV90b2tlbiI6IjM1TGFyYk10SFB2ZlRvLUdmVUF4VnhMSS16U3Q4Z0swYUNJR0JYNXZWZDlRWXR3S1o1bTNQMGp6NGZaN2ZMLWNWa3MifSwiZXhwIjoxNTg1MzI0MTE4fQ.YdcczfX3sqDE-8HYpYWm7rKfz6YO4AIBO5OCxWImTeI"
     
     private static var INSTANCE: Repository?
     
@@ -111,7 +111,7 @@ class Repository {
         let urlString = "https://www.universal-tutorial.com/api/states/\(sanitazedString)"
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
-        request.setValue("a" + self.accessTokenAPI, forHTTPHeaderField: "Authorization")
+        request.setValue(UUID().uuidString + " " + self.accessTokenAPI, forHTTPHeaderField: "Authorization")
         // request.setValue("application/json", forHTTPHeaderField: "Accept")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -124,7 +124,7 @@ class Repository {
                 
                 guard let data = data else { return }
                 
-                print(data.last)
+                print(data)
                 do {
                     let decoder = JSONDecoder()
                     

@@ -16,7 +16,6 @@ import PhoneNumberKit
 
 protocol RegisterDisplayLogic: class
 {
-    func displaySomething(viewModel: Register.Something.ViewModel)
     func displayStatesLoadedForCountry(viewModel: Register.FetchStatesForCountry.ViewModel)
     func displayUserRegistered(viewModel: Register.RegisterNewUser.ViewModel)
 }
@@ -79,27 +78,19 @@ class RegisterViewController: UIViewController, RegisterDisplayLogic
         super.viewDidLoad()
         
         prepareView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("VIEW WILL APPEAR")
+        
         fetchJSON()
-        doSomething()
     }
     
     func fetchJSON() {
-        fetchStatesForCountry(countryCode: "US")
-    }
-    
-    // MARK: Do something
-    
-    //@IBOutlet weak var nameTextField: UITextField!
-    
-    func doSomething()
-    {
-        let request = Register.Something.Request()
-        interactor?.doSomething(request: request)
-    }
-    
-    func displaySomething(viewModel: Register.Something.ViewModel)
-    {
-        //nameTextField.text = viewModel.name
+        let countryCode = myView.phoneTextField.currentRegion
+        fetchStatesForCountry(countryCode: countryCode)
     }
 }
 
@@ -116,6 +107,8 @@ extension RegisterViewController {
     func displayUserRegistered(viewModel: Register.RegisterNewUser.ViewModel) {
         
         let isThereError = viewModel.isThereError
+        
+        myView.hideActivityIndicator()
         
         if (!isThereError) {
             print("Usuario registrado con éxito")
@@ -141,6 +134,7 @@ extension RegisterViewController {
         
         // Everything is ok
         if (checkRegisterParameters()) {
+            myView.showActivityIndicator()
             registerUser()
         }
             // Display error (A field is not completed)
@@ -154,10 +148,10 @@ extension RegisterViewController {
         
         // TODO: Hay que corregir el error de la API
         
-        // let stateSelectedIndex = myView.statePickerView.selectedRow(inComponent: 0)
-        // guard let stateSelected = states[stateSelectedIndex].name else { return }
+        let stateSelectedIndex = myView.statePickerView.selectedRow(inComponent: 0)
+        guard let stateSelected = states[stateSelectedIndex].name else { return }
         
-        let stateSelected = "Andalucia"
+        // let stateSelected = "Andalucia"
         
         guard let name = myView.nameTextField.text else { return }
         guard let surname = myView.surnameTextField.text else { return }
