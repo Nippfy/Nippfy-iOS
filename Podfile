@@ -14,6 +14,7 @@ target 'Nippfy' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Firestore'
+  pod 'PhoneNumberKit', '~> 3.1'
 
   target 'NippfyTests' do
     inherit! :search_paths

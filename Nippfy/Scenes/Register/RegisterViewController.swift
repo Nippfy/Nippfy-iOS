@@ -12,6 +12,7 @@
 
 import UIKit
 import SKCountryPicker
+import PhoneNumberKit
 
 protocol RegisterDisplayLogic: class
 {
@@ -144,7 +145,6 @@ extension RegisterViewController {
         }
             // Display error (A field is not completed)
         else {
-            
             showFieldsNotCompletedAlert()
         }
         
@@ -162,7 +162,7 @@ extension RegisterViewController {
         guard let name = myView.nameTextField.text else { return }
         guard let surname = myView.surnameTextField.text else { return }
         guard let phoneNumber = myView.phoneTextField.text else { return }
-        guard let country = myView.selectedCountry.countryCode else { return }
+        let country = myView.phoneTextField.currentRegion
         guard let email = myView.emailTextField.text else { return }
         guard let password = myView.passwordTextField.text else { return }
         
@@ -183,6 +183,9 @@ extension RegisterViewController {
             let selectedCountry = SelectedCountry(flag: country.flag, name: country.countryName, countryCode: country.countryCode, dialingCode: country.dialingCode)
             
             self.myView.selectedCountry = selectedCountry
+            
+            self.myView.phoneTextField.defaultRegion = regionCode
+            self.myView.phoneTextField.updatePlaceholder()
             
             self.fetchStatesForCountry(countryCode: regionCode)
         }
@@ -284,7 +287,7 @@ extension RegisterViewController {
         guard let name = myView.nameTextField.text else { return false }
         guard let surname = myView.surnameTextField.text else { return false }
         guard let phoneNumber = myView.phoneTextField.text else { return false }
-        guard let country = myView.selectedCountry.name else { return false }
+        // guard let country = myView.selectedCountry.name else { return false }
         guard let email = myView.emailTextField.text else { return false }
         guard let password = myView.passwordTextField.text else { return false }
         guard let repeatPassword = myView.repeatPasswordTextField.text else { return false }
@@ -294,7 +297,7 @@ extension RegisterViewController {
             return false
         }
         
-        if (name.isEmpty || surname.isEmpty || phoneNumber.isEmpty || country.isEmpty || email.isEmpty || password.isEmpty || repeatPassword.isEmpty) {
+        if (name.isEmpty || surname.isEmpty || phoneNumber.isEmpty || email.isEmpty || password.isEmpty || repeatPassword.isEmpty) {
             return false
         } else if (password != repeatPassword) {
             return false

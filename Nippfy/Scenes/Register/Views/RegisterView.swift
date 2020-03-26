@@ -11,6 +11,7 @@ import LBTATools
 import UIKit
 import CountryPickerView
 import SKCountryPicker
+import PhoneNumberKit
 
 class RegisterView: UIView {
     
@@ -206,13 +207,16 @@ class RegisterView: UIView {
         return sp
     }()
     
-    lazy var phoneTextField: UITextField = {
-        var tf = UITextField()
+    lazy var phoneTextField: PhoneNumberTextField = {
+        var tf = PhoneNumberTextField()
         // tf.placeholder = "123456789"
-        tf.attributedPlaceholder = NSAttributedString(string: "123456789",
-                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        tf.setInnerPadding()
+        
+        tf.withPrefix = true
+        tf.withFlag = true
+        tf.withExamplePlaceholder = true
         tf.keyboardType = .phonePad
+        tf.withDefaultPickerUI = true
+        // tf.setInnerPadding()
         tf.backgroundColor = UIColor(named: "Card Background")
         return tf
     }()
@@ -397,19 +401,20 @@ extension RegisterView {
         scrollViewElement0.addSubviewForAutolayout(phoneTextField)
         scrollViewElement0.addSubviewForAutolayout(phoneSeparatorLine)
         
-        scrollViewElement0.addSubviewForAutolayout(selectCountryButton)
-        scrollViewElement0.addSubviewForAutolayout(dialCodeLabel)
-        scrollViewElement0.addSubviewForAutolayout(verticalPhoneSeparatorLine)
+        // scrollViewElement0.addSubviewForAutolayout(selectCountryButton)
+        // scrollViewElement0.addSubviewForAutolayout(dialCodeLabel)
+        // scrollViewElement0.addSubviewForAutolayout(verticalPhoneSeparatorLine)
         
         phoneLabel.anchor(top: surnameSeparatorLine.topAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 0))
         
+        /*
         selectCountryButton.anchor(top: phoneLabel.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nil, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), size: CGSize(width: 50, height: 50))
         dialCodeLabel.anchor(top: selectCountryButton.topAnchor, leading: selectCountryButton.trailingAnchor, bottom: selectCountryButton.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0), size: CGSize(width: 60, height: 0))
         verticalPhoneSeparatorLine.anchor(top: dialCodeLabel.topAnchor, leading: dialCodeLabel.trailingAnchor, bottom: dialCodeLabel.bottomAnchor, trailing: nil, padding: UIEdgeInsets(top: 7, left: 0, bottom: 7, right: 0), size: CGSize(width: 1, height: 0))
         
         
-        
-        phoneTextField.anchor(top: dialCodeLabel.topAnchor, leading: verticalPhoneSeparatorLine.trailingAnchor, bottom: dialCodeLabel.bottomAnchor, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: textFieldsHeight))
+        */
+        phoneTextField.anchor(top: phoneLabel.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: textFieldsHeight))
         
         phoneSeparatorLine.anchor(top: phoneTextField.bottomAnchor, leading: nameLabel.leadingAnchor, bottom: nil, trailing: nameLabel.trailingAnchor, padding: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 1))
         
