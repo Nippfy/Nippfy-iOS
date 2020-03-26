@@ -31,12 +31,34 @@ class RegisterWorker
         }
     }
     
-    func registerNewUser(request: Register.RegisterNewUser.Request, completionHandler: @escaping ((_ error: String, _ isThereError: Bool) -> Void)) {
+    func registerNewUser(request: Register.RegisterNewUser.Request, completionHandler: @escaping ((_ error: Error?, _ isThereError: Bool) -> Void)) {
         
         let user = request.userToRegister
         
-        repository.registerNewUser(user: user) { (errorMessage, isThereError) in
-            completionHandler(errorMessage, isThereError)
+        repository.registerNewUser(request) { (isError, error) in
+            
+            // Si existe error al registrar el usuario
+            if (isError) {
+                completionHandler(error, true)
+                return
+            } else {
+                
+                // Si no hay error guardamos el usuario en la base de datos
+                self.repository.saveUserToDatabase(user: user) { (error, isError) in
+                    
+                    // Error al guardar el usuario en la base de datos
+                    if (isError) {
+                        completionHandler(error, true)
+                        return
+                    } else {
+                        
+                        // No hay error al guardar el usuario en la base de datos
+                        completionHandler(nil, false)
+                    }
+                    
+                }
+            }
+            
         }
     }
 }

@@ -118,10 +118,13 @@ extension RegisterViewController {
         
         if (!isThereError) {
             print("Usuario registrado con éxito")
+            showRegistrationSuccesfulAlert()
+            
         } else {
             
             let errorMessage = viewModel.errorMessage
             
+            showErrorWhileRegisteringAlert(error: errorMessage!.localizedDescription)
             print("Ha habido un problema al registrar el usuario")
         }
         
@@ -141,14 +144,20 @@ extension RegisterViewController {
         }
             // Display error (A field is not completed)
         else {
+            
             showFieldsNotCompletedAlert()
         }
         
     }
     
     fileprivate func registerUser() {
-        let stateSelectedIndex = myView.statePickerView.selectedRow(inComponent: 0)
-        guard let stateSelected = states[stateSelectedIndex].name else { return }
+        
+        // TODO: Hay que corregir el error de la API
+        
+        // let stateSelectedIndex = myView.statePickerView.selectedRow(inComponent: 0)
+        // guard let stateSelected = states[stateSelectedIndex].name else { return }
+        
+        let stateSelected = "Andalucia"
         
         guard let name = myView.nameTextField.text else { return }
         guard let surname = myView.surnameTextField.text else { return }
@@ -158,6 +167,7 @@ extension RegisterViewController {
         guard let password = myView.passwordTextField.text else { return }
         
         let userToRegister = UserToRegister(name: name, surname: surname, phoneNumber: phoneNumber, country: country, state: stateSelected, email: email, password: password)
+        
         let request = Register.RegisterNewUser.Request(userToRegister: userToRegister)
         interactor?.registerNewUser(request: request)
     }
@@ -279,12 +289,56 @@ extension RegisterViewController {
         guard let password = myView.passwordTextField.text else { return false }
         guard let repeatPassword = myView.repeatPasswordTextField.text else { return false }
         
+        if (!email.isEmail()) {
+            showInvalidEmailAlert()
+            return false
+        }
+        
         if (name.isEmpty || surname.isEmpty || phoneNumber.isEmpty || country.isEmpty || email.isEmpty || password.isEmpty || repeatPassword.isEmpty) {
             return false
         } else if (password != repeatPassword) {
             return false
         }
         return true
+    }
+    
+    fileprivate func showRegistrationSuccesfulAlert() {
+        
+        let alertController = UIAlertController(title: "Registration Successful", message: "You have been registered successfully", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
+            
+        }
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    fileprivate func showErrorWhileRegisteringAlert(error: String) {
+        
+        let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
+            
+        }
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    fileprivate func showInvalidEmailAlert() {
+        
+        let alertController = UIAlertController(title: "Invalid Email", message: "Please type a valid email address", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
+            
+        }
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
 }

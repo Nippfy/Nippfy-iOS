@@ -37,12 +37,12 @@ enum Register
         }
         struct Response
         {
-            var errorMessage: String
+            var errorMessage: Error?
             var isThereError: Bool
         }
         struct ViewModel
         {
-            var errorMessage: String
+            var errorMessage: Error?
             var isThereError: Bool
         }
     }

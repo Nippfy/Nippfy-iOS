@@ -111,8 +111,8 @@ class Repository {
         let urlString = "https://www.universal-tutorial.com/api/states/\(sanitazedString)"
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
-        request.setValue(UUID().uuidString + self.accessTokenAPI, forHTTPHeaderField: "Authorization")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("a" + self.accessTokenAPI, forHTTPHeaderField: "Authorization")
+        // request.setValue("application/json", forHTTPHeaderField: "Accept")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -124,6 +124,7 @@ class Repository {
                 
                 guard let data = data else { return }
                 
+                print(data.last)
                 do {
                     let decoder = JSONDecoder()
                     
@@ -145,7 +146,7 @@ class Repository {
         }.resume()
     }
     
-    public func registerNewUser(user: UserToRegister, completionHandler: @escaping ((_ error: String, _ isThereError: Bool) -> Void)) {
+    public func saveUserToDatabase(user: UserToRegister, completionHandler: @escaping ((_ error: Error?, _ isThereError: Bool) -> Void)) {
         
         let newDocument = database.collection("users").document()
         let userID = newDocument.documentID
@@ -164,13 +165,34 @@ class Repository {
             
             if (error != nil) {
                 print(error)
+                completionHandler(error, true)
                 return
             }
             
+            
             print("Usuario guardado con éxito")
             
+            completionHandler(nil, false)
+            return
         }
         
     }
     
+    public func registerNewUser(_ request: Register.RegisterNewUser.Request, _ completionHandler: @escaping ((_ error: Bool, _ errorMessage: Error?) -> Void)) {
+        
+        let email = request.userToRegister.email
+        let password = request.userToRegister.password
+        
+        // 1. Create user with email and password
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (res, error) in
+            
+            if let error = error {
+                print(error)
+                completionHandler(true, error)
+                return
+            }
+            
+            completionHandler(false, nil)
+        })
+    }
 }
