@@ -178,8 +178,8 @@ extension ForgottenPasswordViewController {
         
         let alertController = UIAlertController(title: "Email sent succesfully", message: "Please check your email to reset your password", preferredStyle: .alert)
         
-        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
-            
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { [weak self] (a) in
+            self?.router?.routeLoginScene()
         }
         
         alertController.addAction(defaultAction)

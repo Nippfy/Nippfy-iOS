@@ -303,8 +303,8 @@ extension RegisterViewController {
         
         let alertController = UIAlertController(title: "Registration Successful", message: "You have been registered successfully", preferredStyle: .alert)
         
-        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
-            
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { [weak self] (a) in
+            self?.router?.routeLoginScene()
         }
         
         alertController.addAction(defaultAction)
