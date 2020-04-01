@@ -14,7 +14,16 @@ import UIKit
 
 class LoginWorker
 {
+    
+    var repository = Repository.getInstance()
+    
     func doSomeWork()
     {
+    }
+    
+    func loginUser(request: Login.LoginButtonPressed.Request, error completion: @escaping(_ err: Error?) -> Void) {
+        repository.loginUser(request: request) { (error) in
+            completion(error)
+        }
     }
 }

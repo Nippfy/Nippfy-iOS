@@ -15,6 +15,7 @@ import UIKit
 protocol LoginBusinessLogic
 {
     func doSomething(request: Login.Something.Request)
+    func loginUser(request: Login.LoginButtonPressed.Request)
 }
 
 protocol LoginDataStore
@@ -37,5 +38,15 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
         
         let response = Login.Something.Response()
         presenter?.presentSomething(response: response)
+    }
+    
+    func loginUser(request: Login.LoginButtonPressed.Request) {
+        
+        worker = LoginWorker()
+        
+        worker?.loginUser(request: request, error: { [weak self](error) in
+            let response = Login.LoginButtonPressed.Response(error: error)
+            self?.presenter?.presentLoginButtonPressed(response: response)
+        })
     }
 }

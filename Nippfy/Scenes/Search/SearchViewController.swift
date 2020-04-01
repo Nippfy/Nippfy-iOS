@@ -15,6 +15,7 @@ import UIKit
 protocol SearchDisplayLogic: class
 {
     func displaySomething(viewModel: Search.Something.ViewModel)
+    func displayIsUserLoggedIn(viewModel: Search.IsUserLoggedIn.ViewModel)
 }
 
 class SearchViewController: UIViewController, SearchDisplayLogic
@@ -75,6 +76,28 @@ class SearchViewController: UIViewController, SearchDisplayLogic
         myView.searchBar.delegate = self
         prepareView()
         doSomething()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        print("SEARCH VIEW CONTROLLER WILL APPEAR")
+        
+        checkIfUserIsLoggedIn()
+    }
+    
+    func checkIfUserIsLoggedIn() {
+        let request = Search.IsUserLoggedIn.Request()
+        interactor?.checkIfUserIsLoggedIn(request: request)
+    }
+    
+    func displayIsUserLoggedIn(viewModel: Search.IsUserLoggedIn.ViewModel) {
+        let isLoggedIn = viewModel.isLoggedIn
+        
+        // Si no está logueado lo sacamos
+        if (!isLoggedIn) {
+            router?.routeToLogin()
+        }
     }
     
     // MARK: Do something

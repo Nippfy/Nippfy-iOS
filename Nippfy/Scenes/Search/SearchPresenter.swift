@@ -15,6 +15,7 @@ import UIKit
 protocol SearchPresentationLogic
 {
     func presentSomething(response: Search.Something.Response)
+    func presentIsUserLoggedIn(response: Search.IsUserLoggedIn.Response)
 }
 
 class SearchPresenter: SearchPresentationLogic
@@ -27,5 +28,10 @@ class SearchPresenter: SearchPresentationLogic
     {
         let viewModel = Search.Something.ViewModel()
         viewController?.displaySomething(viewModel: viewModel)
+    }
+    
+    func presentIsUserLoggedIn(response: Search.IsUserLoggedIn.Response) {
+        let viewModel = Search.IsUserLoggedIn.ViewModel(isLoggedIn: response.isLoggedIn)
+        viewController?.displayIsUserLoggedIn(viewModel: viewModel)
     }
 }

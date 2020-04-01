@@ -15,6 +15,7 @@ import UIKit
 protocol SearchBusinessLogic
 {
     func doSomething(request: Search.Something.Request)
+    func checkIfUserIsLoggedIn(request: Search.IsUserLoggedIn.Request)
 }
 
 protocol SearchDataStore
@@ -37,5 +38,14 @@ class SearchInteractor: SearchBusinessLogic, SearchDataStore
         
         let response = Search.Something.Response()
         presenter?.presentSomething(response: response)
+    }
+    
+    func checkIfUserIsLoggedIn(request: Search.IsUserLoggedIn.Request) {
+        worker = SearchWorker()
+        
+        worker?.checkIfUserIsLoggedIn(completion: { [weak self](isLoggedIn) in
+            let response = Search.IsUserLoggedIn.Response(isLoggedIn: isLoggedIn)
+            self?.presenter?.presentIsUserLoggedIn(response: response)
+        })
     }
 }

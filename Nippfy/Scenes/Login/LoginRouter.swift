@@ -17,6 +17,7 @@ import UIKit
     //func routeToSomewhere(segue: UIStoryboardSegue?)
     func routeForgotPasswordScene()
     func routeRegisterScene()
+    func routeToSearchScene()
 }
 
 protocol LoginDataPassing
@@ -33,6 +34,11 @@ class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing
     func routeForgotPasswordScene() {
         let destinationVC = ForgottenPasswordViewController()
         navigateToForgotPasswordScene(source: viewController!, destination: destinationVC)
+    }
+    
+    func routeToSearchScene() {
+        let destinationVC = SearchViewController()
+        navigateToSearchViewController(source: viewController!, destination: destinationVC)
     }
     
     func routeRegisterScene() {
@@ -55,5 +61,8 @@ class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing
         // source.present(UINavigationController(rootViewController: destination), animated: true, completion: nil)
     }
     
+    func navigateToSearchViewController(source: LoginViewController, destination: SearchViewController) {
+        source.dismiss(animated: true, completion: nil)
+    }
     
 }

@@ -28,4 +28,20 @@ enum Login
         {
         }
     }
+    
+    enum LoginButtonPressed {
+        struct Request
+        {
+            var email: String
+            var password: String
+        }
+        struct Response
+        {
+            var error: Error?
+        }
+        struct ViewModel
+        {
+            var error: Error?
+        }
+    }
 }

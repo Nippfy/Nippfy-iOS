@@ -15,6 +15,7 @@ import UIKit
 protocol LoginPresentationLogic
 {
     func presentSomething(response: Login.Something.Response)
+    func presentLoginButtonPressed(response: Login.LoginButtonPressed.Response)
 }
 
 class LoginPresenter: LoginPresentationLogic
@@ -27,5 +28,11 @@ class LoginPresenter: LoginPresentationLogic
     {
         let viewModel = Login.Something.ViewModel()
         viewController?.displaySomething(viewModel: viewModel)
+    }
+    
+    func presentLoginButtonPressed(response: Login.LoginButtonPressed.Response)
+    {
+        let viewModel = Login.LoginButtonPressed.ViewModel(error: response.error)
+        viewController?.displayLoginButtonPressed(viewModel: viewModel)
     }
 }

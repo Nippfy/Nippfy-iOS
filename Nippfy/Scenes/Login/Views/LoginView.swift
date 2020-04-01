@@ -114,6 +114,23 @@ class LoginView: UIView {
         return tf
     }()
     
+    // MARK: Activity Indicator
+    
+    var activityIndicator: UIActivityIndicatorView = {
+        var indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
+        indicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
+    var activityIndicatorContainer: UIView = {
+        var view = UIView()
+        view.backgroundColor = UIColor(named: "Activity Indicator")
+        view.isHidden = true
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpUI()
@@ -126,6 +143,7 @@ class LoginView: UIView {
     func setUpUI() {
         setUpContainer()
         setUpMiddleContainer()
+        setUpActivityIndicator()
         // setUpTopElements()
         // setUpButtons()
     }
@@ -223,4 +241,38 @@ class LoginView: UIView {
         createAccountButton.heightAnchor.constraint(equalTo: backgrounContainer.heightAnchor, multiplier: 0.15).isActive = true
         
     }
+    
+    fileprivate func setUpActivityIndicator() {
+        addSubviewForAutolayout(activityIndicatorContainer)
+        
+        NSLayoutConstraint.activate([
+            activityIndicatorContainer.widthAnchor.constraint(equalToConstant: 100),
+            activityIndicatorContainer.heightAnchor.constraint(equalToConstant: 100),
+            activityIndicatorContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
+            activityIndicatorContainer.centerXAnchor.constraint(equalTo: centerXAnchor)
+            ])
+        
+        activityIndicatorContainer.addSubviewForAutolayout(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor)
+            ])
+    }
+}
+
+// MARK: Methods for UI
+
+extension LoginView {
+    
+    func showActivityIndicator() {
+        self.activityIndicatorContainer.isHidden = false
+        self.activityIndicator.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        self.activityIndicatorContainer.isHidden = true
+        self.activityIndicator.stopAnimating()
+    }
+    
 }

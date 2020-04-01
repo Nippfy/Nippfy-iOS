@@ -211,4 +211,39 @@ class Repository {
             completionHandler(nil)
         }
     }
+    
+    // MARK: Login User
+    
+    func loginUser(request: Login.LoginButtonPressed.Request, error completion: @escaping(_ err: Error?) -> Void) {
+        
+        Auth.auth().signIn(withEmail: request.email, password: request.password) { (user, error) in
+            
+            if error != nil {
+                completion(error)
+                return
+            }
+            
+            // User Signed In Succesfully
+            completion(nil)
+        }
+    }
+    
+    func checkIfUserIsLoggedIn(completion: @escaping((_ isLoggedIn: Bool) -> Void)) {
+        if Auth.auth().currentUser?.uid != nil {
+            // User is logged in
+            completion(true)
+            return
+        }
+        completion(false)
+    }
+    
+    func logoutUser(completion: @escaping(() -> Void)) {
+        do {
+            try Auth.auth().signOut()
+            completion()
+            return
+        } catch let error {
+            print(error)
+        }
+    }
 }

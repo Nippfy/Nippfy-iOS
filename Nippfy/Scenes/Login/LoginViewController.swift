@@ -15,6 +15,7 @@ import UIKit
 protocol LoginDisplayLogic: class
 {
     func displaySomething(viewModel: Login.Something.ViewModel)
+    func displayLoginButtonPressed(viewModel: Login.LoginButtonPressed.ViewModel)
 }
 
 class LoginViewController: UIViewController, LoginDisplayLogic
@@ -148,5 +149,53 @@ extension LoginViewController {
     
     @objc func sigInButtonTapped() {
         print("SIGN IN TAPPED")
+        
+        guard let email = myView.emailTextField.text else { return }
+        guard let password = myView.passwordTextField.text else { return }
+        
+        myView.showActivityIndicator()
+        
+        let request = Login.LoginButtonPressed.Request(email: email, password: password)
+        interactor?.loginUser(request: request)
+    }
+}
+
+// MARK: User Responses
+
+extension LoginViewController {
+    
+    func displayLoginButtonPressed(viewModel: Login.LoginButtonPressed.ViewModel) {
+        
+        myView.hideActivityIndicator()
+        
+        let error = viewModel.error
+        
+        // There is an error
+        if let error = error {
+            let errorString = error.localizedDescription
+            showErrorAlert(error: errorString)
+            return
+        }
+        
+        // Go to main
+        
+        print("Acceso garantizado con éxito")
+        router?.routeToSearchScene()
+        
+        //dismiss(animated: true, completion: nil)
+    }
+    
+    
+    fileprivate func showErrorAlert(error: String) {
+        
+        let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
+            
+        }
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
