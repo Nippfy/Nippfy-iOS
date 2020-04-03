@@ -24,6 +24,7 @@ extension UIViewController {
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         )
     }
+    
     @objc private func goToWalletController() {
         let vc = WalletViewController()
         // vc.view.backgroundColor = .blue

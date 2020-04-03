@@ -261,6 +261,12 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - PhoneNumberKit (3.2.0):
+    - PhoneNumberKit/PhoneNumberKitCore (= 3.2.0)
+    - PhoneNumberKit/UIKit (= 3.2.0)
+  - PhoneNumberKit/PhoneNumberKitCore (3.2.0)
+  - PhoneNumberKit/UIKit (3.2.0):
+    - PhoneNumberKit/PhoneNumberKitCore
   - SKCountryPicker (1.2.7)
 
 DEPENDENCIES:
@@ -270,6 +276,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - LBTATools
+  - PhoneNumberKit (~> 3.1)
   - SKCountryPicker
 
 SPEC REPOS:
@@ -295,6 +302,7 @@ SPEC REPOS:
     - LBTATools
     - leveldb-library
     - nanopb
+    - PhoneNumberKit
     - SKCountryPicker
 
 SPEC CHECKSUMS:
@@ -319,8 +327,9 @@ SPEC CHECKSUMS:
   LBTATools: 389a901a01b9a56bea5682c40cd6e23530f40015
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  PhoneNumberKit: df411d46177d1492da84e10b6c093846dd861452
   SKCountryPicker: 9abf4993e9e21683e8d58d56279daaa09b705a91
 
-PODFILE CHECKSUM: 3dec957d96187ab2f9020a6464462110aaf74be2
+PODFILE CHECKSUM: 39eb844d149b5720f2e4b8e4ddaff519ab09f899
 
 COCOAPODS: 1.8.4

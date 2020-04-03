@@ -146,6 +146,9 @@ class Repository {
         }.resume()
     }
     
+    
+    // MARK: Create New User
+    
     public func saveUserToDatabase(user: UserToRegister, completionHandler: @escaping ((_ error: Error?, _ isThereError: Bool) -> Void)) {
         
         let newDocument = database.collection("users").document()
@@ -160,7 +163,8 @@ class Repository {
             "country" : user.country,
             "state" : user.state,
             "pictureURL" : "",
-            "role" : "user"
+            "role" : "user",
+            "walletID" : ""
         ], merge: true) { (error) in
             
             if (error != nil) {
@@ -169,13 +173,59 @@ class Repository {
                 return
             }
             
-            
             print("Usuario guardado con éxito")
+            // Crear el Wallet para el usuario
             
-            completionHandler(nil, false)
-            return
+            self.createWalletForUser(forUserID: userID, amount: 0, completionHandler: completionHandler)
+            // completionHandler(nil, false)
+            // return
         }
         
+    }
+    
+    private func createWalletForUser(forUserID: String,  amount: Int, completionHandler: @escaping ((_ error: Error?, _ isThereError: Bool) -> Void)) {
+        
+        let newDocument = database.collection("wallets").document()
+        let walletID = newDocument.documentID
+        
+        newDocument.setData([
+            "uid" : walletID,
+            "balance" : amount
+        ], merge: true) { (error) in
+            
+            if (error != nil) {
+                print(error)
+                completionHandler(error, true)
+                return
+            }
+            
+            print("Wallet creado con éxito")
+            
+            // Update the user walletID
+            
+            self.updateUserWalletID(forUserID: forUserID, withWalletID: walletID, completionHandler: completionHandler)
+            
+            // completionHandler(nil, false)
+            // return
+        }
+        
+        
+    }
+    
+    private func updateUserWalletID(forUserID: String, withWalletID: String, completionHandler: @escaping ((_ error: Error?, _ isThereError: Bool) -> Void)) {
+
+        let user1 = database.collection("users").document(forUserID)
+        
+        user1.setData([
+            "walletID" : withWalletID
+        ]) { (error) in
+            if let error = error {
+                completionHandler(error, true)
+                return
+            }
+            
+            completionHandler(nil, false)
+        }
     }
     
     public func registerNewUser(_ request: Register.RegisterNewUser.Request, _ completionHandler: @escaping ((_ error: Bool, _ errorMessage: Error?) -> Void)) {

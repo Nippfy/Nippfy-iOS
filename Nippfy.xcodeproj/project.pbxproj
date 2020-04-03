@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		075DBA569AA196D8FA4C8664 /* Pods_NippfyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 695AB60110DC7B99AC66CCFD /* Pods_NippfyTests.framework */; };
+		6504C5932434E3590040A02A /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504C58D2434E3590040A02A /* ProfilePresenter.swift */; };
+		6504C5942434E3590040A02A /* ProfileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504C58E2434E3590040A02A /* ProfileWorker.swift */; };
+		6504C5952434E3590040A02A /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504C58F2434E3590040A02A /* ProfileRouter.swift */; };
+		6504C5962434E3590040A02A /* ProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504C5902434E3590040A02A /* ProfileModels.swift */; };
+		6504C5972434E3590040A02A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504C5912434E3590040A02A /* ProfileViewController.swift */; };
+		6504C5982434E3590040A02A /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504C5922434E3590040A02A /* ProfileInteractor.swift */; };
+		6507E85C243785D600178300 /* GoogleApiHelper+Nearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6507E859243785D600178300 /* GoogleApiHelper+Nearby.swift */; };
+		6507E85D243785D600178300 /* NearByEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6507E85A243785D600178300 /* NearByEnum.swift */; };
+		6507E85E243785D600178300 /* GoogleApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6507E85B243785D600178300 /* GoogleApiHelper.swift */; };
 		651FB1E92425967000800ED4 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651FB1E32425967000800ED4 /* SearchPresenter.swift */; };
 		651FB1EA2425967000800ED4 /* SearchWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651FB1E42425967000800ED4 /* SearchWorker.swift */; };
 		651FB1EB2425967000800ED4 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651FB1E52425967000800ED4 /* SearchRouter.swift */; };
@@ -109,6 +118,15 @@
 /* Begin PBXFileReference section */
 		105BC543A6BA721FF050746C /* Pods-Nippfy-NippfyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nippfy-NippfyUITests.release.xcconfig"; path = "Target Support Files/Pods-Nippfy-NippfyUITests/Pods-Nippfy-NippfyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		246A700076AD5F4E89680694 /* Pods_Nippfy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nippfy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6504C58D2434E3590040A02A /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		6504C58E2434E3590040A02A /* ProfileWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileWorker.swift; sourceTree = "<group>"; };
+		6504C58F2434E3590040A02A /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		6504C5902434E3590040A02A /* ProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModels.swift; sourceTree = "<group>"; };
+		6504C5912434E3590040A02A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		6504C5922434E3590040A02A /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
+		6507E859243785D600178300 /* GoogleApiHelper+Nearby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GoogleApiHelper+Nearby.swift"; sourceTree = "<group>"; };
+		6507E85A243785D600178300 /* NearByEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearByEnum.swift; sourceTree = "<group>"; };
+		6507E85B243785D600178300 /* GoogleApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleApiHelper.swift; sourceTree = "<group>"; };
 		651FB1E32425967000800ED4 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		651FB1E42425967000800ED4 /* SearchWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorker.swift; sourceTree = "<group>"; };
 		651FB1E52425967000800ED4 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
@@ -255,6 +273,46 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6504C58B2434E33F0040A02A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6504C58C2434E3480040A02A /* Views */,
+				6504C58D2434E3590040A02A /* ProfilePresenter.swift */,
+				6504C58E2434E3590040A02A /* ProfileWorker.swift */,
+				6504C58F2434E3590040A02A /* ProfileRouter.swift */,
+				6504C5902434E3590040A02A /* ProfileModels.swift */,
+				6504C5912434E3590040A02A /* ProfileViewController.swift */,
+				6504C5922434E3590040A02A /* ProfileInteractor.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		6504C58C2434E3480040A02A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6507E858243785C300178300 /* GoogleMapsResources */ = {
+			isa = PBXGroup;
+			children = (
+				6507E85B243785D600178300 /* GoogleApiHelper.swift */,
+				6507E859243785D600178300 /* GoogleApiHelper+Nearby.swift */,
+				6507E85A243785D600178300 /* NearByEnum.swift */,
+			);
+			path = GoogleMapsResources;
+			sourceTree = "<group>";
+		};
+		6507E85F2437862A00178300 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				656ECC6F240A8455007F93D4 /* DScrollViewResources */,
+				6507E858243785C300178300 /* GoogleMapsResources */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		651FB1E12425964800800ED4 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,12 +372,12 @@
 			isa = PBXGroup;
 			children = (
 				657221922428E75D004EAF63 /* GoogleService-Info.plist */,
+				6507E85F2437862A00178300 /* Resources */,
 				65CD69602413B046000AB56C /* Localizable */,
 				656ECC7E240A8561007F93D4 /* Scenes */,
 				656ECC7D240A854E007F93D4 /* Delegates */,
 				656ECC7C240A8538007F93D4 /* Storyboards */,
 				656ECC78240A84DA007F93D4 /* Data */,
-				656ECC6F240A8455007F93D4 /* DScrollViewResources */,
 				656ECC6A240A8400007F93D4 /* Extensions */,
 				656ECC67240A83D4007F93D4 /* Assets */,
 				656ECC3B240A8275007F93D4 /* ViewController.swift */,
@@ -420,6 +478,7 @@
 		656ECC7E240A8561007F93D4 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				6504C58B2434E33F0040A02A /* Profile */,
 				651FB1E12425964800800ED4 /* Search */,
 				65313E2F242505F800843642 /* TabBar */,
 				656F81BE2422AB0D004AE4CF /* Wallet */,
@@ -849,6 +908,8 @@
 				6598436C2427BCED00BC1840 /* JSonDecodeStatesPerCountry.swift in Sources */,
 				6598436E2427C3A000BC1840 /* SelectedCountry.swift in Sources */,
 				656ECC9E240A85FD007F93D4 /* RegisterModels.swift in Sources */,
+				6507E85D243785D600178300 /* NearByEnum.swift in Sources */,
+				6504C5952434E3590040A02A /* ProfileRouter.swift in Sources */,
 				656ECC6C240A8413007F93D4 /* UIViewExtension.swift in Sources */,
 				656ECCA2240A8621007F93D4 /* ForgottenPasswordView.swift in Sources */,
 				659843752427F67D00BC1840 /* Credentials.swift in Sources */,
@@ -856,10 +917,13 @@
 				656ECC94240A85F2007F93D4 /* RegisterView.swift in Sources */,
 				656F81CB2422AB3A004AE4CF /* WalletModels.swift in Sources */,
 				656ECC73240A848D007F93D4 /* DScrollViewElement.swift in Sources */,
+				6504C5972434E3590040A02A /* ProfileViewController.swift in Sources */,
 				656F81B62422911F004AE4CF /* PaymentPresenter.swift in Sources */,
+				6504C5962434E3590040A02A /* ProfileModels.swift in Sources */,
 				656ECC9B240A85FD007F93D4 /* RegisterPresenter.swift in Sources */,
 				656F81B82422911F004AE4CF /* PaymentRouter.swift in Sources */,
 				651FB1EC2425967000800ED4 /* SearchModels.swift in Sources */,
+				6507E85E243785D600178300 /* GoogleApiHelper.swift in Sources */,
 				651FB1EA2425967000800ED4 /* SearchWorker.swift in Sources */,
 				656ECCAE240A8631007F93D4 /* ForgottenPasswordInteractor.swift in Sources */,
 				656ECC9F240A85FD007F93D4 /* RegisterViewController.swift in Sources */,
@@ -869,7 +933,10 @@
 				659843702427C65B00BC1840 /* State.swift in Sources */,
 				656ECC9C240A85FD007F93D4 /* RegisterWorker.swift in Sources */,
 				656ECC8E240A859F007F93D4 /* LoginModels.swift in Sources */,
+				6504C5982434E3590040A02A /* ProfileInteractor.swift in Sources */,
+				6504C5932434E3590040A02A /* ProfilePresenter.swift in Sources */,
 				656F81C12422AB1D004AE4CF /* WalletView.swift in Sources */,
+				6507E85C243785D600178300 /* GoogleApiHelper+Nearby.swift in Sources */,
 				656D3A362429242200541148 /* UserToRegister.swift in Sources */,
 				656ECCAD240A8631007F93D4 /* ForgottenPasswordViewController.swift in Sources */,
 				656F81C82422AB3A004AE4CF /* WalletPresenter.swift in Sources */,
@@ -882,6 +949,7 @@
 				659843682427BB1F00BC1840 /* JsonDecodeAccessToken.swift in Sources */,
 				656ECC75240A84A9007F93D4 /* DScrollViewContainer.swift in Sources */,
 				656F81BB2422911F004AE4CF /* PaymentInteractor.swift in Sources */,
+				6504C5942434E3590040A02A /* ProfileWorker.swift in Sources */,
 				656F81C92422AB3A004AE4CF /* WalletWorker.swift in Sources */,
 				656ECC3A240A8275007F93D4 /* SceneDelegate.swift in Sources */,
 				65313E2E2424DBD500843642 /* MenuView.swift in Sources */,

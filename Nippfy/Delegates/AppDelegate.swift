@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+        GoogleApi.shared.initialiseWithKey("")
+        
         // Initial View Controller 
         let rootViewController = UINavigationController(rootViewController: LoginViewController())
         let rootViewController2 = TabBarViewController()
