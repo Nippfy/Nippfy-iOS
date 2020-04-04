@@ -15,6 +15,11 @@ target 'Nippfy' do
   pod 'Firebase/Storage'
   pod 'Firebase/Firestore'
   pod 'PhoneNumberKit', '~> 3.1'
+  pod 'Braintree' 
+  pod 'BraintreeDropIn'
+  pod 'Braintree/PayPal'
+  pod 'Braintree/Venmo'
+  pod 'Braintree/Apple-Pay'
 
   target 'NippfyTests' do
     inherit! :search_paths

@@ -11,6 +11,8 @@
 //
 
 import UIKit
+import Braintree
+import BraintreeDropIn
 
 protocol WalletDisplayLogic: class
 {
@@ -24,6 +26,9 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
     
     let blackView = UIView()
     let transactionsCellID = "transactionsID"
+    
+    let tokenationKey = Credentials().tokenizationKey
+    var braintreeClient: BTAPIClient!
     
     var myView = WalletView()
     
@@ -156,7 +161,49 @@ extension WalletViewController {
     @objc func addToWalletButtonTapped() {
         print("ADD TO WALLET BUTTON TAPPED")
         
+        myView.closeMenu()
+        
+        showDropIn(clientTokenOrTokenizationKey: tokenationKey)
+        
+        /*
+        // Example: Initialize BTAPIClient, if you haven't already
+        braintreeClient = BTAPIClient(authorization: tokenationKey)
+        let payPalDriver = BTPayPalDriver(apiClient: braintreeClient)
+        payPalDriver.viewControllerPresentingDelegate = self
+        payPalDriver.appSwitchDelegate = self // Optional
+        
+        // Specify the transaction amount here. "2.32" is used in this example.
+        let request = BTPayPalRequest(amount: "2.32")
+        request.currencyCode = "USD" // Optional; see BTPayPalRequest.h for more options
+        
+        payPalDriver.requestOneTimePayment(request) { (tokenizedPayPalAccount, error) in
+            if let tokenizedPayPalAccount = tokenizedPayPalAccount {
+                print("Got a nonce: \(tokenizedPayPalAccount.nonce)")
+                
+                // Access additional information
+                let email = tokenizedPayPalAccount.email
+                
+                let firstName = tokenizedPayPalAccount.firstName
+                let lastName = tokenizedPayPalAccount.lastName
+                let phone = tokenizedPayPalAccount.phone
+                
+                print(email)
+                print(firstName)
+                print(lastName)
+                
+                // See BTPostalAddress.h for details
+                let billingAddress = tokenizedPayPalAccount.billingAddress
+                let shippingAddress = tokenizedPayPalAccount.shippingAddress
+            } else if let error = error {
+                // Handle error here...
+            } else {
+                // Buyer canceled payment approval
+            }
+        }
+ */
+        
     }
+    
     
     @objc func cancelButtonTapped() {
         print("CANCEL BUTTON TAPPED")
@@ -208,6 +255,80 @@ extension WalletViewController {
     // Spacing between cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 12
+    }
+    
+}
+
+// MARK: Show DropIn Menu for Payment
+extension WalletViewController {
+    
+    
+    
+    func showDropIn(clientTokenOrTokenizationKey: String) {
+        let request =  BTDropInRequest()
+        request.cardDisabled = false
+        request.paypalDisabled = false
+        
+        
+        
+        let paypalRequest = BTPayPalRequest(amount: "20")
+        // paypalRequest.currencyCode = "USD"
+        
+        request.payPalRequest = paypalRequest
+        
+        
+        let dropIn = BTDropInController(authorization: clientTokenOrTokenizationKey, request: request)
+        { (controller, result, error) in
+            if (error != nil) {
+                print("ERROR")
+            } else if (result?.isCancelled == true) {
+                print("CANCELLED")
+                // controller.dismiss(animated: true, completion: nil)
+            } else if let result = result {
+                
+                print("Algun boton presionado")
+                
+                print(result.paymentDescription)
+                print(result.paymentMethod)
+                print(result.paymentOptionType.rawValue)
+                
+                // Use the BTDropInResult properties to update your UI
+                // result.paymentOptionType
+                // result.paymentMethod
+                // result.paymentIcon
+                // result.paymentDescription
+            }
+            controller.dismiss(animated: true, completion: nil)
+        }
+        self.present(dropIn!, animated: true, completion: nil)
+    }
+    
+    
+}
+
+extension WalletViewController : BTViewControllerPresentingDelegate {
+    
+    func paymentDriver(_ driver: Any, requestsPresentationOf viewController: UIViewController) {
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    func paymentDriver(_ driver: Any, requestsDismissalOf viewController: UIViewController) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension WalletViewController : BTAppSwitchDelegate {
+    
+    func appSwitcherWillPerformAppSwitch(_ appSwitcher: Any) {
+        
+    }
+    
+    func appSwitcher(_ appSwitcher: Any, didPerformSwitchTo target: BTAppSwitchTarget) {
+        
+    }
+    
+    func appSwitcherWillProcessPaymentInfo(_ appSwitcher: Any) {
+        
     }
     
 }

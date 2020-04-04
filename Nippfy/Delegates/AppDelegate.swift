@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Braintree
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,8 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow()
         
+        // Braintree Paypal
+        BTAppSwitch.setReturnURLScheme("es.nippfygestion.Nippfy.payments")
+        
+        // Firebase
         FirebaseApp.configure()
         
+        // Google API
         GoogleApi.shared.initialiseWithKey("")
         
         // Initial View Controller 
@@ -30,6 +36,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
+    
+    
+    // MARK: Braintree Paypal
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if url.scheme?.localizedCaseInsensitiveCompare("es.nippfygestion.Nippfy.payments") == .orderedSame {
+            print("RETURN TRUE")
+            return BTAppSwitch.handleOpen(url, options: options)
+        }
+        print("RETURN FALSE")
+        return false
+    }
+    
 }
 
