@@ -101,6 +101,12 @@ extension ForgottenPasswordViewController {
         title = "Nippfy"
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        if #available(iOS 13.0, *) {
+            isModalInPresentation = true
+        } else {
+            // Fallback on earlier versions
+        }
+        
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")!]
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)

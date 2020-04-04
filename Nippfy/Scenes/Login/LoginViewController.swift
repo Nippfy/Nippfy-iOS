@@ -114,6 +114,12 @@ extension LoginViewController {
         title = "Nippfy"
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        if #available(iOS 13.0, *) {
+            isModalInPresentation = true
+        } else {
+            // Fallback on earlier versions
+        }
+        
         // self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")!]
         

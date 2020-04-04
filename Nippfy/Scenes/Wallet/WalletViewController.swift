@@ -261,18 +261,12 @@ extension WalletViewController {
 
 // MARK: Show DropIn Menu for Payment
 extension WalletViewController {
-    
-    
-    
+
     func showDropIn(clientTokenOrTokenizationKey: String) {
         let request =  BTDropInRequest()
-        request.cardDisabled = false
         request.paypalDisabled = false
         
-        
-        
         let paypalRequest = BTPayPalRequest(amount: "20")
-        // paypalRequest.currencyCode = "USD"
         
         request.payPalRequest = paypalRequest
         
@@ -283,15 +277,7 @@ extension WalletViewController {
                 print("ERROR")
             } else if (result?.isCancelled == true) {
                 print("CANCELLED")
-                // controller.dismiss(animated: true, completion: nil)
             } else if let result = result {
-                
-                print("Algun boton presionado")
-                
-                print(result.paymentDescription)
-                print(result.paymentMethod)
-                print(result.paymentOptionType.rawValue)
-                
                 // Use the BTDropInResult properties to update your UI
                 // result.paymentOptionType
                 // result.paymentMethod

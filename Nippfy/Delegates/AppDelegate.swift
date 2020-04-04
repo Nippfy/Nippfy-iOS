@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import Braintree
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Google API
         GoogleApi.shared.initialiseWithKey("")
+        
+        // Enable the automatic hiding and showing keyboard
+        IQKeyboardManager.shared.enable = true
+        
+        // When is tapped outside of the TextField/TextView, the keyboard dismisses
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
+        IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
         
         // Initial View Controller 
         let rootViewController = UINavigationController(rootViewController: LoginViewController())

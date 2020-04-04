@@ -226,6 +226,12 @@ extension RegisterViewController {
     fileprivate func prepareView() {
         view = myView
         
+        if #available(iOS 13.0, *) {
+            isModalInPresentation = true
+        } else {
+            // Fallback on earlier versions
+        }
+        
         prepareNavBar()
         preparePickerView()
         prepareGestureRecognizers()
