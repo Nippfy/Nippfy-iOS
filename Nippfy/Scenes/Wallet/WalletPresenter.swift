@@ -16,6 +16,7 @@ protocol WalletPresentationLogic
 {
     func presentSomething(response: Wallet.Something.Response)
     func presentBraintreeToken(response: Wallet.GetBraintreeToken.Response)
+    func presentPerformTransaction(response: Wallet.PerformTransaction.Response)
 }
 
 class WalletPresenter: WalletPresentationLogic
@@ -33,5 +34,10 @@ class WalletPresenter: WalletPresentationLogic
     func presentBraintreeToken(response: Wallet.GetBraintreeToken.Response) {
         let viewModel = Wallet.GetBraintreeToken.ViewModel(error: response.error, token: response.token)
         viewController?.displayBraintreeToken(viewModel: viewModel)
+    }
+    
+    func presentPerformTransaction(response: Wallet.PerformTransaction.Response) {
+        let viewModel = Wallet.PerformTransaction.ViewModel()
+        viewController?.displayPerformTransaction(viewModel: viewModel)
     }
 }

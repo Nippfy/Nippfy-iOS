@@ -45,4 +45,21 @@ enum Wallet
             let token: String
         }
     }
+    
+    enum PerformTransaction
+    {
+        struct Request
+        {
+            let nonce: String
+            let amount: String
+        }
+        struct Response
+        {
+            
+        }
+        struct ViewModel
+        {
+            
+        }
+    }
 }

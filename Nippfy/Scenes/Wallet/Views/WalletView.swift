@@ -23,9 +23,9 @@ class WalletView: UIView {
     
     lazy var amountTextField: UITextField = {
         var tf = UITextField()
-        tf.placeholder = "50.00"
+        tf.placeholder = "1.00"
         tf.textAlignment = .center
-        tf.text = "50.00"
+        tf.text = "1.00"
         tf.font = UIFont.boldSystemFont(ofSize: 40)
         tf.textColor = UIColor(named: "Small Titles")
         tf.backgroundColor = UIColor(named: "Card Background")
@@ -336,4 +336,18 @@ class WalletView: UIView {
         }
         
     }
+}
+
+
+// MARK: View Methods
+extension WalletView {
+    
+    func increaseTipAmount() {
+        guard let amount = amountTextField.text else { return }
+    }
+    
+    func decreaseTipAmount() {
+        guard let amount = amountTextField.text else { return }
+    }
+    
 }

@@ -16,6 +16,7 @@ protocol WalletBusinessLogic
 {
     func doSomething(request: Wallet.Something.Request)
     func getBraintreeToken(request: Wallet.GetBraintreeToken.Request)
+    func performTransaction(request: Wallet.PerformTransaction.Request)
 }
 
 protocol WalletDataStore
@@ -47,6 +48,14 @@ class WalletInteractor: WalletBusinessLogic, WalletDataStore
             let response = Wallet.GetBraintreeToken.Response(error: error, token: braintreeToken)
             self?.presenter?.presentBraintreeToken(response: response)
             
+        })
+    }
+    
+    func performTransaction(request: Wallet.PerformTransaction.Request) {
+        worker = WalletWorker()
+        worker?.performTransaction(request: request, completionHandler: {
+            let response = Wallet.PerformTransaction.Response()
+            self.presenter?.presentPerformTransaction(response: response)
         })
     }
 }

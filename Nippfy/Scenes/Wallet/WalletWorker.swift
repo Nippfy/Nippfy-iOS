@@ -26,4 +26,16 @@ class WalletWorker
             completionHandler(error, braintreeToken)
         }
     }
+    
+    public func performTransaction(request: Wallet.PerformTransaction.Request, completionHandler: @escaping (() -> Void)) {
+        
+        let nonce = request.nonce
+        let amount = request.amount
+        
+        repository.performTransaction(nonce: nonce, amount: amount) {
+            // Save transaction to dabase and Update UI
+            
+            completionHandler()
+        }
+    }
 }

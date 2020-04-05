@@ -33,6 +33,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 import Firebase
+import Alamofire
 
 class Repository {
     
@@ -100,7 +101,7 @@ class Repository {
     
     public func getBraintreeToken(completionHandler:  @escaping ((_ error: Error? ,_ braintreeToken: String) -> Void)) {
         
-        let urlString = "http://localhost:3000/get_token"
+        let urlString = "https://nippfyserver.herokuapp.com/get_token"
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
         
@@ -134,6 +135,22 @@ class Repository {
                 }
             }
         }.resume()
+    }
+    
+    public func performTransaction(nonce: String, amount: String, completionHandler: @escaping (() -> Void)) {
+        let parameters: [String: Any] = [
+            "payment_method_nonce" : nonce,
+            "amount" : amount,
+        ]
+        
+        let urlString = "https://nippfyserver.herokuapp.com/pay"
+
+        AF.request(urlString, method: .post, parameters: parameters).response { (response) in
+            print("Transaction completed")
+            print(response)
+            
+            completionHandler()
+        }
     }
     
     // MARK: Fetch States For Country when user is registering

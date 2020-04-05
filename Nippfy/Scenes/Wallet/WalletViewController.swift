@@ -18,6 +18,7 @@ protocol WalletDisplayLogic: class
 {
     func displaySomething(viewModel: Wallet.Something.ViewModel)
     func displayBraintreeToken(viewModel: Wallet.GetBraintreeToken.ViewModel)
+    func displayPerformTransaction(viewModel: Wallet.PerformTransaction.ViewModel)
 }
 
 class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
@@ -97,6 +98,18 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
         self.tokenationKey = braintreeToken
     }
     
+    // MARK: Perform Transaction
+    
+    private func performTransaction(nonce: String, amount: String) {
+        let request = Wallet.PerformTransaction.Request(nonce: nonce, amount: amount)
+        interactor?.performTransaction(request: request)
+    }
+    
+    func displayPerformTransaction(viewModel: Wallet.PerformTransaction.ViewModel) {
+        
+    }
+    
+    
     // MARK: Do something
     
     //@IBOutlet weak var nameTextField: UITextField!
@@ -144,7 +157,6 @@ extension WalletViewController {
     }
     
     func prepareButtonActions() {
-        
         myView.lessButton.addTarget(self, action: #selector(lessButtonTapped), for: .touchUpInside)
         myView.plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
         myView.addButton.addTarget(self, action: #selector(addToWalletButtonTapped), for: .touchUpInside)
@@ -158,35 +170,29 @@ extension WalletViewController {
     
     @objc func addButtonTapped() {
         print("ADD BUTTON TAPPED")
-        
         myView.showMenu()
     }
     
     @objc func lessButtonTapped() {
         print("LESS BUTTON TAPPED")
-        
+        myView.decreaseTipAmount()
     }
     
     @objc func plusButtonTapped() {
         print("PLUS BUTTON TAPPED")
-        
+        myView.increaseTipAmount()
     }
     
     @objc func addToWalletButtonTapped() {
         print("ADD TO WALLET BUTTON TAPPED")
-        
         myView.closeMenu()
-        
         showDropIn(clientTokenOrTokenizationKey: tokenationKey)
     }
     
-    
     @objc func cancelButtonTapped() {
         print("CANCEL BUTTON TAPPED")
-        
         myView.closeMenu()
     }
-    
 }
 
 // MARK: Collection View Methods
@@ -262,21 +268,11 @@ extension WalletViewController {
                 
                 self.performTransaction(nonce: nonce, amount: amount)
                 
-                // Use the BTDropInResult properties to update your UI
-                // result.paymentOptionType
-                // result.paymentMethod
-                // result.paymentIcon
-                // result.paymentDescription
             }
             controller.dismiss(animated: true, completion: nil)
         }
         self.present(dropIn!, animated: true, completion: nil)
     }
-    
-    private func performTransaction(nonce: String, amount: String) {
-        
-    }
-    
 }
 
 extension WalletViewController : BTViewControllerPresentingDelegate {
