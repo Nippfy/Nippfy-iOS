@@ -243,7 +243,7 @@ extension WalletViewController {
 
 // MARK: Show DropIn Menu for Payment
 extension WalletViewController {
-
+    
     func showDropIn(clientTokenOrTokenizationKey: String) {
         let request =  BTDropInRequest()
         request.paypalDisabled = false

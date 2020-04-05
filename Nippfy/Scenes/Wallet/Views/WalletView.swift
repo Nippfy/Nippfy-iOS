@@ -21,9 +21,8 @@ class WalletView: UIView {
         return bt
     }()
     
-    lazy var amountTextField: UITextField = {
-        var tf = UITextField()
-        tf.placeholder = "1.00"
+    lazy var amountTextField: UILabel = {
+        var tf = UILabel()
         tf.textAlignment = .center
         tf.text = "1.00"
         tf.font = UIFont.boldSystemFont(ofSize: 40)
@@ -334,7 +333,6 @@ class WalletView: UIView {
             cancelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
             
         }
-        
     }
 }
 
@@ -343,11 +341,26 @@ class WalletView: UIView {
 extension WalletView {
     
     func increaseTipAmount() {
-        guard let amount = amountTextField.text else { return }
+        guard let amount = amountTextField.text else { return }
+        
+        if let floatValue = Float(amount) {
+            let increasedAmount = floatValue + 1
+            amountTextField.text = String(format: "%.2f", increasedAmount)
+        }
     }
     
     func decreaseTipAmount() {
-        guard let amount = amountTextField.text else { return }
+        guard let amount = amountTextField.text else { return }
+        
+        if let floatValue = Float(amount) {
+            let decreasedAmount = floatValue - 1
+            
+            if (decreasedAmount <= 1) {
+                amountTextField.text = "1.00"
+            } else {
+                amountTextField.text = String(format: "%.2f", decreasedAmount)
+            }
+        }
     }
     
 }
