@@ -17,6 +17,7 @@ import BraintreeDropIn
 protocol WalletDisplayLogic: class
 {
     func displaySomething(viewModel: Wallet.Something.ViewModel)
+    func displayBraintreeToken(viewModel: Wallet.GetBraintreeToken.ViewModel)
 }
 
 class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
@@ -27,7 +28,7 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
     let blackView = UIView()
     let transactionsCellID = "transactionsID"
     
-    let tokenationKey = Credentials().tokenizationKey
+    var tokenationKey = Credentials().tokenizationKey // Only for testing purposes --> For production request the token from your server (ALREADY IMPLEMENTED)
     var braintreeClient: BTAPIClient!
     
     var myView = WalletView()
@@ -80,7 +81,20 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
     {
         super.viewDidLoad()
         prepareView()
+        getToken()
         doSomething()
+    }
+    
+    // MARK: Get Braintree Token
+    
+    func getToken() {
+        let request = Wallet.GetBraintreeToken.Request()
+        interactor?.getBraintreeToken(request: request)
+    }
+    
+    func displayBraintreeToken(viewModel: Wallet.GetBraintreeToken.ViewModel) {
+        let braintreeToken = viewModel.token
+        self.tokenationKey = braintreeToken
     }
     
     // MARK: Do something
@@ -164,44 +178,6 @@ extension WalletViewController {
         myView.closeMenu()
         
         showDropIn(clientTokenOrTokenizationKey: tokenationKey)
-        
-        /*
-        // Example: Initialize BTAPIClient, if you haven't already
-        braintreeClient = BTAPIClient(authorization: tokenationKey)
-        let payPalDriver = BTPayPalDriver(apiClient: braintreeClient)
-        payPalDriver.viewControllerPresentingDelegate = self
-        payPalDriver.appSwitchDelegate = self // Optional
-        
-        // Specify the transaction amount here. "2.32" is used in this example.
-        let request = BTPayPalRequest(amount: "2.32")
-        request.currencyCode = "USD" // Optional; see BTPayPalRequest.h for more options
-        
-        payPalDriver.requestOneTimePayment(request) { (tokenizedPayPalAccount, error) in
-            if let tokenizedPayPalAccount = tokenizedPayPalAccount {
-                print("Got a nonce: \(tokenizedPayPalAccount.nonce)")
-                
-                // Access additional information
-                let email = tokenizedPayPalAccount.email
-                
-                let firstName = tokenizedPayPalAccount.firstName
-                let lastName = tokenizedPayPalAccount.lastName
-                let phone = tokenizedPayPalAccount.phone
-                
-                print(email)
-                print(firstName)
-                print(lastName)
-                
-                // See BTPostalAddress.h for details
-                let billingAddress = tokenizedPayPalAccount.billingAddress
-                let shippingAddress = tokenizedPayPalAccount.shippingAddress
-            } else if let error = error {
-                // Handle error here...
-            } else {
-                // Buyer canceled payment approval
-            }
-        }
- */
-        
     }
     
     
@@ -266,10 +242,11 @@ extension WalletViewController {
         let request =  BTDropInRequest()
         request.paypalDisabled = false
         
-        let paypalRequest = BTPayPalRequest(amount: "20")
+        guard let amount = self.myView.amountTextField.text else { return }
+        
+        let paypalRequest = BTPayPalRequest(amount: amount)
         
         request.payPalRequest = paypalRequest
-        
         
         let dropIn = BTDropInController(authorization: clientTokenOrTokenizationKey, request: request)
         { (controller, result, error) in
@@ -278,6 +255,13 @@ extension WalletViewController {
             } else if (result?.isCancelled == true) {
                 print("CANCELLED")
             } else if let result = result {
+                
+                guard let nonce = result.paymentMethod?.nonce else { return }
+                
+                print("Nonce from Braintree server: \(nonce)")
+                
+                self.performTransaction(nonce: nonce, amount: amount)
+                
                 // Use the BTDropInResult properties to update your UI
                 // result.paymentOptionType
                 // result.paymentMethod
@@ -289,6 +273,9 @@ extension WalletViewController {
         self.present(dropIn!, animated: true, completion: nil)
     }
     
+    private func performTransaction(nonce: String, amount: String) {
+        
+    }
     
 }
 

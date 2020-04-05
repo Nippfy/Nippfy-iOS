@@ -14,7 +14,16 @@ import UIKit
 
 class WalletWorker
 {
+    
+    var repository = Repository.getInstance()
+    
     func doSomeWork()
     {
+    }
+    
+    public func getBraintreeToken(completionHandler:  @escaping ((_ error: Error? ,_ braintreeToken: String) -> Void)) {
+        repository.getBraintreeToken { (error, braintreeToken) in
+            completionHandler(error, braintreeToken)
+        }
     }
 }

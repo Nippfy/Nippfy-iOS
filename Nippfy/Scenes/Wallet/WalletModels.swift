@@ -28,4 +28,21 @@ enum Wallet
         {
         }
     }
+    
+    enum GetBraintreeToken
+    {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            let error: Error?
+            let token: String
+        }
+        struct ViewModel
+        {
+            let error: Error?
+            let token: String
+        }
+    }
 }

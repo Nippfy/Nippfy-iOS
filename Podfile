@@ -21,6 +21,7 @@ target 'Nippfy' do
   pod 'Braintree/Venmo'
   pod 'Braintree/Apple-Pay'
   pod 'IQKeyboardManagerSwift'
+  pod 'Alamofire'
 
   target 'NippfyTests' do
     inherit! :search_paths

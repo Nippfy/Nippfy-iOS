@@ -96,6 +96,46 @@ class Repository {
         }.resume()
     }
     
+    // MARK: Get Braintree Token for transaction
+    
+    public func getBraintreeToken(completionHandler:  @escaping ((_ error: Error? ,_ braintreeToken: String) -> Void)) {
+        
+        let urlString = "http://localhost:3000/get_token"
+        guard let url = URL(string: urlString) else { return }
+        var request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Failed to get data from url \(error)")
+                    return
+                }
+                
+                guard let data = data else { return }
+                
+                print(data)
+                
+                do {
+                    let decoder = JSONDecoder()
+                    
+                    let webResponse = try decoder.decode(JsonDecodeClientTokenBraintree.self, from: data)
+                    
+                    let clientToken = webResponse.clientToken
+                    
+                    print("CLIENT TOKEN \(clientToken)")
+                    
+                    completionHandler(nil, clientToken)
+
+                } catch let jsonErr {
+                    print("Failed to decode: \(jsonErr)")
+                    
+                    completionHandler(error, "")
+                }
+            }
+        }.resume()
+    }
+    
     // MARK: Fetch States For Country when user is registering
     public func fetchStatesForCountry(countryCode: String, completionHandler: @escaping ((_ states: [State]) -> Void)) {
         

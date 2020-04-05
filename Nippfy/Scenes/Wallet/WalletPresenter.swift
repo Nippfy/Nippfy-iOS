@@ -15,6 +15,7 @@ import UIKit
 protocol WalletPresentationLogic
 {
     func presentSomething(response: Wallet.Something.Response)
+    func presentBraintreeToken(response: Wallet.GetBraintreeToken.Response)
 }
 
 class WalletPresenter: WalletPresentationLogic
@@ -27,5 +28,10 @@ class WalletPresenter: WalletPresentationLogic
     {
         let viewModel = Wallet.Something.ViewModel()
         viewController?.displaySomething(viewModel: viewModel)
+    }
+    
+    func presentBraintreeToken(response: Wallet.GetBraintreeToken.Response) {
+        let viewModel = Wallet.GetBraintreeToken.ViewModel(error: response.error, token: response.token)
+        viewController?.displayBraintreeToken(viewModel: viewModel)
     }
 }

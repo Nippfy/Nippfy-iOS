@@ -15,6 +15,7 @@ import UIKit
 protocol WalletBusinessLogic
 {
     func doSomething(request: Wallet.Something.Request)
+    func getBraintreeToken(request: Wallet.GetBraintreeToken.Request)
 }
 
 protocol WalletDataStore
@@ -37,5 +38,15 @@ class WalletInteractor: WalletBusinessLogic, WalletDataStore
         
         let response = Wallet.Something.Response()
         presenter?.presentSomething(response: response)
+    }
+    
+    func getBraintreeToken(request: Wallet.GetBraintreeToken.Request) {
+        worker = WalletWorker()
+        worker?.getBraintreeToken(completionHandler: { [weak self] (error, braintreeToken) in
+            
+            let response = Wallet.GetBraintreeToken.Response(error: error, token: braintreeToken)
+            self?.presenter?.presentBraintreeToken(response: response)
+            
+        })
     }
 }

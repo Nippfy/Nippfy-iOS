@@ -17,6 +17,7 @@
 		6507E85C243785D600178300 /* GoogleApiHelper+Nearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6507E859243785D600178300 /* GoogleApiHelper+Nearby.swift */; };
 		6507E85D243785D600178300 /* NearByEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6507E85A243785D600178300 /* NearByEnum.swift */; };
 		6507E85E243785D600178300 /* GoogleApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6507E85B243785D600178300 /* GoogleApiHelper.swift */; };
+		650981F8243A1E1B00B24F36 /* JsonDecodeClientTokenBraintree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650981F7243A1E1B00B24F36 /* JsonDecodeClientTokenBraintree.swift */; };
 		651FB1E92425967000800ED4 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651FB1E32425967000800ED4 /* SearchPresenter.swift */; };
 		651FB1EA2425967000800ED4 /* SearchWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651FB1E42425967000800ED4 /* SearchWorker.swift */; };
 		651FB1EB2425967000800ED4 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651FB1E52425967000800ED4 /* SearchRouter.swift */; };
@@ -127,6 +128,7 @@
 		6507E859243785D600178300 /* GoogleApiHelper+Nearby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GoogleApiHelper+Nearby.swift"; sourceTree = "<group>"; };
 		6507E85A243785D600178300 /* NearByEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearByEnum.swift; sourceTree = "<group>"; };
 		6507E85B243785D600178300 /* GoogleApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleApiHelper.swift; sourceTree = "<group>"; };
+		650981F7243A1E1B00B24F36 /* JsonDecodeClientTokenBraintree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecodeClientTokenBraintree.swift; sourceTree = "<group>"; };
 		651FB1E32425967000800ED4 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		651FB1E42425967000800ED4 /* SearchWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorker.swift; sourceTree = "<group>"; };
 		651FB1E52425967000800ED4 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 				659843672427BB1F00BC1840 /* JsonDecodeAccessToken.swift */,
 				6598436B2427BCED00BC1840 /* JSonDecodeStatesPerCountry.swift */,
 				659843712427D04B00BC1840 /* JsonDecodeCity.swift */,
+				650981F7243A1E1B00B24F36 /* JsonDecodeClientTokenBraintree.swift */,
 			);
 			path = JSONDecoder;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 				656F81CA2422AB3A004AE4CF /* WalletRouter.swift in Sources */,
 				656ECC9D240A85FD007F93D4 /* RegisterRouter.swift in Sources */,
 				656ECCAA240A8631007F93D4 /* ForgottenPasswordWorker.swift in Sources */,
+				650981F8243A1E1B00B24F36 /* JsonDecodeClientTokenBraintree.swift in Sources */,
 				651FB1E92425967000800ED4 /* SearchPresenter.swift in Sources */,
 				656F81CC2422AB3A004AE4CF /* WalletViewController.swift in Sources */,
 				656F81B92422911F004AE4CF /* PaymentModels.swift in Sources */,
