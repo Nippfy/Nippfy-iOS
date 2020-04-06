@@ -38,10 +38,11 @@ import Alamofire
 class Repository {
     
     let database = Firestore.firestore()
-    
     let credentials = Credentials()
     
     private var accessTokenAPI: String = ""
+    
+    private var currentUser: Currentser?
     
     private static var INSTANCE: Repository?
     
@@ -88,7 +89,7 @@ class Repository {
                     // print("Auth Token " + self.accessTokenAPI)
                     
                     completionHandler()
-
+                    
                 } catch let jsonErr {
                     print("Failed to decode: \(jsonErr)")
                 }
@@ -127,7 +128,7 @@ class Repository {
                     print("CLIENT TOKEN \(clientToken)")
                     
                     completionHandler(nil, clientToken)
-
+                    
                 } catch let jsonErr {
                     print("Failed to decode: \(jsonErr)")
                     
@@ -144,12 +145,33 @@ class Repository {
         ]
         
         let urlString = "https://nippfyserver.herokuapp.com/pay"
-
-        AF.request(urlString, method: .post, parameters: parameters).response { (response) in
+        
+        AF.request(urlString, method: .post, parameters: parameters).responseData { (response) in
             print("Transaction completed")
             print(response)
             
-            completionHandler()
+            guard let data = response.data else { return }
+            
+            do {
+                let decoder = JSONDecoder()
+                
+                let webResponse = try decoder.decode(JsonDecodeTransactionReceipt.self, from: data)
+                
+                print(webResponse)
+                
+                let transactionID = webResponse.transaction.id
+                let currencyIsoCode = webResponse.transaction.currencyIsoCode
+                let amount = webResponse.transaction.amount
+                let timestamp = webResponse.transaction.createdAt
+                
+                
+                
+                completionHandler()
+                return 
+            } catch let jsonErr {
+                print("Failed to decode: \(jsonErr)")
+                
+            }
         }
     }
     
@@ -163,7 +185,7 @@ class Repository {
         }
         
         let sanitazedString = localisedCountryName.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
-    
+        
         // print("Country \(sanitazedString)")
         let urlString = "https://www.universal-tutorial.com/api/states/\(sanitazedString)"
         guard let url = URL(string: urlString) else { return }
@@ -193,7 +215,7 @@ class Repository {
                         let state = State(name: city.state_name)
                         self.states.append(state)
                     }
-                
+                    
                     completionHandler(self.states)
                 } catch let jsonErr {
                     print("Failed to decode: \(jsonErr)")
@@ -216,7 +238,7 @@ class Repository {
             "name" : user.name,
             "surname" : user.surname,
             "telephone" : user.phoneNumber,
-            "email" : user.email,
+            "email" : user.email.lowercased(),
             "country" : user.country,
             "state" : user.state,
             "pictureURL" : "",
@@ -234,10 +256,7 @@ class Repository {
             // Crear el Wallet para el usuario
             
             self.createWalletForUser(forUserID: userID, amount: 0, completionHandler: completionHandler)
-            // completionHandler(nil, false)
-            // return
         }
-        
     }
     
     private func createWalletForUser(forUserID: String,  amount: Int, completionHandler: @escaping ((_ error: Error?, _ isThereError: Bool) -> Void)) {
@@ -261,21 +280,16 @@ class Repository {
             // Update the user walletID
             
             self.updateUserWalletID(forUserID: forUserID, withWalletID: walletID, completionHandler: completionHandler)
-            
-            // completionHandler(nil, false)
-            // return
         }
-        
-        
     }
     
     private func updateUserWalletID(forUserID: String, withWalletID: String, completionHandler: @escaping ((_ error: Error?, _ isThereError: Bool) -> Void)) {
-
+        
         let user1 = database.collection("users").document(forUserID)
         
         user1.setData([
             "walletID" : withWalletID
-        ]) { (error) in
+        ], merge: true) { (error) in
             if let error = error {
                 completionHandler(error, true)
                 return
@@ -330,14 +344,19 @@ class Repository {
                 return
             }
             
+            self.getCurrentUser(userEmail: user!.user.email!)
             // User Signed In Succesfully
             completion(nil)
         }
     }
     
     func checkIfUserIsLoggedIn(completion: @escaping((_ isLoggedIn: Bool) -> Void)) {
-        if Auth.auth().currentUser?.uid != nil {
+        
+        let uid = Auth.auth().currentUser?.uid
+        
+        if uid != nil {
             // User is logged in
+            self.getCurrentUser(userEmail: Auth.auth().currentUser!.email!)
             completion(true)
             return
         }
@@ -351,6 +370,44 @@ class Repository {
             return
         } catch let error {
             print(error)
+        }
+    }
+    
+    private func getCurrentUser(userEmail: String) {
+        print("User Email " + userEmail)
+        
+        let users = database.collection("users").whereField("email", isEqualTo: userEmail).limit(to: 1)
+        
+        users.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    
+                    let uid = document.get("uid") as! String
+                    let walletID = document.get("walletID") as! String
+                    let name = document.get("name") as! String
+                    let country = document.get("country") as! String
+                    let email = document.get("email") as! String
+                    let surname = document.get("surname") as! String
+                    let telephone = document.get("telephone") as! String
+                    
+                    let wallet = self.database.collection("wallets").document(walletID)
+                    
+                    wallet.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            
+                            let amount = document.get("balance") as! Int
+                            let userWallet = UserWallet(walletID: walletID, amount: amount)
+                            
+                            self.currentUser = Currentser(uid: uid, wallet: userWallet, name: name, surname: surname, email: email, country: country, telephone: telephone)
+                            print(self.currentUser)
+                        } else {
+                            print("Document does not exist")
+                        }
+                    }
+                }
+            }
         }
     }
 }

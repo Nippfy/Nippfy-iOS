@@ -32,10 +32,12 @@ class WalletWorker
         let nonce = request.nonce
         let amount = request.amount
         
+        
         repository.performTransaction(nonce: nonce, amount: amount) {
             // Save transaction to dabase and Update UI
             
             completionHandler()
         }
+ 
     }
 }

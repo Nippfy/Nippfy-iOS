@@ -75,15 +75,8 @@ class SearchViewController: UIViewController, SearchDisplayLogic
         super.viewDidLoad()
         myView.searchBar.delegate = self
         prepareView()
-        doSomething()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        print("SEARCH VIEW CONTROLLER WILL APPEAR")
-        
         checkIfUserIsLoggedIn()
+        doSomething()
     }
     
     func checkIfUserIsLoggedIn() {

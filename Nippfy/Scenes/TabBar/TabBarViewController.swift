@@ -26,7 +26,7 @@ class TabBarViewController: UITabBarController {
         let searchController = UINavigationController(rootViewController: SearchViewController())
         searchController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "search"), selectedImage: UIImage(named: "search-2"))
         
-        viewControllers = [walletController, searchController, profileController]
+        viewControllers = [searchController, walletController, profileController]
     }
     
 }

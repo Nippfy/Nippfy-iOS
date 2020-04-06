@@ -51,7 +51,6 @@ class RegisterWorker
                         completionHandler(error, true)
                         return
                     } else {
-                        
                         // No hay error al guardar el usuario en la base de datos
                         completionHandler(nil, false)
                     }
