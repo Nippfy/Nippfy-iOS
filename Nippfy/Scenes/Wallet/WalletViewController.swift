@@ -91,6 +91,7 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
     // MARK: Load User Information
     
     func loadUserInformation() {
+        let request = Wallet.LoadUserInformation.Request()
         
     }
     

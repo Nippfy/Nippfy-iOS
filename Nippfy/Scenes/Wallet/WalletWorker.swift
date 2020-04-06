@@ -32,16 +32,30 @@ class WalletWorker
         let nonce = request.nonce
         let amount = request.amount
         
-        repository.addMoneyToWallet(nonce: nonce, amount: amount) { (error, transaction) in
+        repository.performTransactionToWallet(nonce: nonce, amount: amount) { (error, transaction) in
             if let error = error {
                 completionHandler(error)
                 return
             } else {
+                print("Transaction Completed ")
+                // Save Transaction To Database
+                
                 guard let transaction = transaction else { return }
                 self.repository.saveTransactionToDatabase(transaction: transaction) { (error) in
-                    completionHandler(error)
+                    print("Transaction Saved To Database")
+                    
+                    if let error = error {
+                        completionHandler(error)
+                        return
+                    } else {
+                        // Update User Wallet and Nippfy Wallet
+                        self.repository.addMoneyToUserAndNippfyWallet(transaction: transaction) { (error) in
+                            
+                            print("Money added to User and Nippfy Wallets")
+                            completionHandler(error)
+                        }
+                    }
                 }
-                
             }
         }
     }

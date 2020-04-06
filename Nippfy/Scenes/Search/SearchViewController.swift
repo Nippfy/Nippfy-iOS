@@ -75,10 +75,15 @@ class SearchViewController: UIViewController, SearchDisplayLogic
         super.viewDidLoad()
         myView.searchBar.delegate = self
         prepareView()
-        checkIfUserIsLoggedIn()
         doSomething()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkIfUserIsLoggedIn()
+    }
+    
+    // MARK: Check if User is LoggedIn
     func checkIfUserIsLoggedIn() {
         let request = Search.IsUserLoggedIn.Request()
         interactor?.checkIfUserIsLoggedIn(request: request)

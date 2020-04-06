@@ -139,7 +139,7 @@ class Repository {
     }
     
     // MARK: Add Money to Wallet
-    public func addMoneyToWallet(nonce: String, amount: String, completionHandler: @escaping ((_ error: Error?, _ transaction: Transaction?) -> Void)) {
+    public func performTransactionToWallet(nonce: String, amount: String, completionHandler: @escaping ((_ error: Error?, _ transaction: Transaction?) -> Void)) {
         let parameters: [String: Any] = [
             "payment_method_nonce" : nonce,
             "amount" : amount,
@@ -200,6 +200,51 @@ class Repository {
                 completionHandler(nil)
             }
         }
+    }
+    
+    public func addMoneyToUserAndNippfyWallet(transaction: Transaction, completionHandler: @escaping ((_ error: Error?) -> Void)) {
+        
+        let userWalletRef = database.collection("wallets").document(currentUser!.wallet.walletID)
+        
+        let transactionAmount = Float(transaction.amount)!
+        let currentUserAmount = Float(currentUser!.wallet.amount)
+        
+        let userBalanceAfterMoneyAdded = transactionAmount + currentUserAmount
+        
+        // Update user Wallet
+        userWalletRef.setData([
+            "balance" : userBalanceAfterMoneyAdded
+            ], merge: true, completion: { (error) in
+                
+                // Si hay error
+                if let error = error {
+                    completionHandler(error)
+                    return
+                } else {
+                    
+                    // Get Nippfy Current Wallet Amount of Money
+                    let nippfyWalletRef = self.database.collection("wallets").document("0")
+                    nippfyWalletRef.getDocument { (document, error) in
+                        if let error = error {
+                            completionHandler(error)
+                            return
+                        }
+                        
+                        let nippfyAmount = document?.get("balance") as! Float
+                        let nippfyAmountAfterMoneyAdded = nippfyAmount + transactionAmount
+                        
+                        nippfyWalletRef.setData([
+                            "balance" : nippfyAmountAfterMoneyAdded
+                        ]) { (error) in
+                            if let error = error {
+                                completionHandler(error)
+                            } else {
+                                completionHandler(nil)
+                            }
+                        }
+                    }
+                }
+        })
     }
     
     // MARK: Fetch States For Country when user is registering
@@ -425,7 +470,7 @@ class Repository {
                         if let document = document, document.exists {
                             
                             let amount = document.get("balance") as! Int
-                            let userWallet = UserWallet(walletID: walletID, amount: amount)
+                            let userWallet = UserWallet(walletID: walletID, amount: Float(amount))
                             
                             self.currentUser = CurrentUser(uid: uid, wallet: userWallet, name: name, surname: surname, email: email, country: country, telephone: telephone)
                             print(self.currentUser!)
