@@ -27,17 +27,22 @@ class WalletWorker
         }
     }
     
-    public func performTransaction(request: Wallet.PerformTransaction.Request, completionHandler: @escaping (() -> Void)) {
+    public func performTransaction(request: Wallet.PerformTransaction.Request, completionHandler: @escaping ((_ error: Error?) -> Void)) {
         
         let nonce = request.nonce
         let amount = request.amount
         
-        
-        repository.performTransaction(nonce: nonce, amount: amount) {
-            // Save transaction to dabase and Update UI
-            
-            completionHandler()
+        repository.addMoneyToWallet(nonce: nonce, amount: amount) { (error, transaction) in
+            if let error = error {
+                completionHandler(error)
+                return
+            } else {
+                guard let transaction = transaction else { return }
+                self.repository.saveTransactionToDatabase(transaction: transaction) { (error) in
+                    completionHandler(error)
+                }
+                
+            }
         }
- 
     }
 }

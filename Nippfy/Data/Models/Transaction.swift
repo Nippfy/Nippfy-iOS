@@ -15,7 +15,7 @@ struct Transaction {
     var walletID_Rx: String
     var walletID_Tx: String
     var timestamp: String
-    var amount: Int
+    var amount: String
     var currencyCode: String
     var message: String?
     

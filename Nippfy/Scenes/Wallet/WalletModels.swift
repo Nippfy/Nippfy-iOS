@@ -55,11 +55,25 @@ enum Wallet
         }
         struct Response
         {
-            
+            let error: Error?
         }
         struct ViewModel
         {
-            
+            let error: Error?
+        }
+    }
+    
+    enum LoadUserInformation {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            let currentUser: CurrentUser
+        }
+        struct ViewModel
+        {
+            let currentUser: CurrentUser
         }
     }
 }

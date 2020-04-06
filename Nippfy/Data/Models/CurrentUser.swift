@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Currentser {
+struct CurrentUser {
     
     var uid: String
     var wallet: UserWallet

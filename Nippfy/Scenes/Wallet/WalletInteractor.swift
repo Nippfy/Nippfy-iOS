@@ -53,9 +53,9 @@ class WalletInteractor: WalletBusinessLogic, WalletDataStore
     
     func performTransaction(request: Wallet.PerformTransaction.Request) {
         worker = WalletWorker()
-        worker?.performTransaction(request: request, completionHandler: {
-            let response = Wallet.PerformTransaction.Response()
-            self.presenter?.presentPerformTransaction(response: response)
+        worker?.performTransaction(request: request, completionHandler: { [weak self] (error) in
+            let response = Wallet.PerformTransaction.Response(error: error)
+            self?.presenter?.presentPerformTransaction(response: response)
         })
     }
 }

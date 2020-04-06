@@ -42,7 +42,7 @@ class Repository {
     
     private var accessTokenAPI: String = ""
     
-    private var currentUser: Currentser?
+    private var currentUser: CurrentUser?
     
     private static var INSTANCE: Repository?
     
@@ -104,7 +104,7 @@ class Repository {
         
         let urlString = "https://nippfyserver.herokuapp.com/get_token"
         guard let url = URL(string: urlString) else { return }
-        var request = URLRequest(url: url)
+        let request = URLRequest(url: url)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -138,7 +138,8 @@ class Repository {
         }.resume()
     }
     
-    public func performTransaction(nonce: String, amount: String, completionHandler: @escaping (() -> Void)) {
+    // MARK: Add Money to Wallet
+    public func addMoneyToWallet(nonce: String, amount: String, completionHandler: @escaping ((_ error: Error?, _ transaction: Transaction?) -> Void)) {
         let parameters: [String: Any] = [
             "payment_method_nonce" : nonce,
             "amount" : amount,
@@ -164,13 +165,39 @@ class Repository {
                 let amount = webResponse.transaction.amount
                 let timestamp = webResponse.transaction.createdAt
                 
+                let transaction = Transaction(transactionID: transactionID, walletID_Rx: (self.currentUser!.wallet.walletID), walletID_Tx: self.currentUser!.wallet.walletID, timestamp: timestamp, amount: amount, currencyCode: currencyIsoCode, message: nil)
                 
-                
-                completionHandler()
+                completionHandler(nil, transaction)
                 return 
             } catch let jsonErr {
                 print("Failed to decode: \(jsonErr)")
-                
+                completionHandler(jsonErr, nil)
+                return
+            }
+        }
+    }
+    
+    public func saveTransactionToDatabase(transaction: Transaction, completionHandler: @escaping ((_ error: Error?) -> Void)) {
+        
+        let transactionRef = database.collection("transactions").document()
+        let transactionFirestoreID = transactionRef.documentID
+        
+        transactionRef.setData([
+            "uid" : transactionFirestoreID,
+            "transactionID" : transaction.transactionID,
+            "walletID_Rx" : transaction.walletID_Rx,
+            "walletID_Tx" : transaction.walletID_Tx,
+            "timestamp" : transaction.timestamp,
+            "amount" : transaction.amount,
+            "currencyCode" : transaction.currencyCode,
+            "message" : ""
+        ]) { (error) in
+            
+            if let error = error {
+                completionHandler(error)
+                return
+            } else {
+                completionHandler(nil)
             }
         }
     }
@@ -247,7 +274,7 @@ class Repository {
         ], merge: true) { (error) in
             
             if (error != nil) {
-                print(error)
+                print(error!)
                 completionHandler(error, true)
                 return
             }
@@ -270,7 +297,7 @@ class Repository {
         ], merge: true) { (error) in
             
             if (error != nil) {
-                print(error)
+                print(error!)
                 completionHandler(error, true)
                 return
             }
@@ -400,8 +427,8 @@ class Repository {
                             let amount = document.get("balance") as! Int
                             let userWallet = UserWallet(walletID: walletID, amount: amount)
                             
-                            self.currentUser = Currentser(uid: uid, wallet: userWallet, name: name, surname: surname, email: email, country: country, telephone: telephone)
-                            print(self.currentUser)
+                            self.currentUser = CurrentUser(uid: uid, wallet: userWallet, name: name, surname: surname, email: email, country: country, telephone: telephone)
+                            print(self.currentUser!)
                         } else {
                             print("Document does not exist")
                         }

@@ -154,8 +154,8 @@ extension RegisterViewController {
         // let stateSelected = "Andalucia"
         
         guard let name = myView.nameTextField.text else { return }
-        guard let surname = myView.surnameTextField.text else { return }
-        guard let phoneNumber = myView.phoneTextField.text else { return }
+        guard let surname = myView.surnameTextField.text else { return }
+        guard let phoneNumber = myView.phoneTextField.text else { return }
         let country = myView.phoneTextField.currentRegion
         guard let email = myView.emailTextField.text else { return }
         guard let password = myView.passwordTextField.text else { return }
@@ -250,7 +250,7 @@ extension RegisterViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         // self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")!]
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()

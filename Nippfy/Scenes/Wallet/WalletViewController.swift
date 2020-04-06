@@ -19,6 +19,7 @@ protocol WalletDisplayLogic: class
     func displaySomething(viewModel: Wallet.Something.ViewModel)
     func displayBraintreeToken(viewModel: Wallet.GetBraintreeToken.ViewModel)
     func displayPerformTransaction(viewModel: Wallet.PerformTransaction.ViewModel)
+    func displayCurrentUser(viewModel: Wallet.LoadUserInformation.ViewModel)
 }
 
 class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
@@ -82,8 +83,19 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
     {
         super.viewDidLoad()
         prepareView()
+        loadUserInformation()
         getToken()
         doSomething()
+    }
+    
+    // MARK: Load User Information
+    
+    func loadUserInformation() {
+        
+    }
+    
+    func displayCurrentUser(viewModel: Wallet.LoadUserInformation.ViewModel) {
+        
     }
     
     // MARK: Get Braintree Token
@@ -107,6 +119,15 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
     
     func displayPerformTransaction(viewModel: Wallet.PerformTransaction.ViewModel) {
         
+        let error = viewModel.error
+        
+        if let error = error {
+            // Display error message
+            showErrorWhilePerformingTransactionAlert(error: error.localizedDescription)
+        } else {
+            // Display transaction successful
+            showTransactionSuccessfulyAlert()
+        }
     }
     
     
@@ -143,7 +164,7 @@ extension WalletViewController {
     func prepareNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "Small Titles")!]
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -151,9 +172,9 @@ extension WalletViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addButtonTapped))
         
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(named: "Small Titles")], for: .normal)
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(named: "Small Titles")!], for: .normal)
         
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(named: "Normal Words")], for: .selected)
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), .foregroundColor: UIColor(named: "Normal Words")!], for: .selected)
     }
     
     func prepareButtonActions() {
@@ -300,4 +321,34 @@ extension WalletViewController : BTAppSwitchDelegate {
         
     }
     
+}
+
+// MARK: Display Alerts
+
+extension WalletViewController {
+    fileprivate func showTransactionSuccessfulyAlert() {
+        
+        let alertController = UIAlertController(title: "Transaction Successful", message: "The money has been transfered to your Nippfy Account", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
+            
+        }
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    fileprivate func showErrorWhilePerformingTransactionAlert(error: String) {
+        
+        let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "Dismiss", style: .default) { (a) in
+            
+        }
+        
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }
