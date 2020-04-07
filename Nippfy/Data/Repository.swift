@@ -138,7 +138,8 @@ class Repository {
         }.resume()
     }
     
-    // MARK: Add Money to Wallet
+    // MARK: Add Money to Wallet (Call Braintree)
+    
     public func performTransactionToWallet(nonce: String, amount: String, completionHandler: @escaping ((_ error: Error?, _ transaction: Transaction?) -> Void)) {
         let parameters: [String: Any] = [
             "payment_method_nonce" : nonce,
@@ -182,6 +183,8 @@ class Repository {
         let transactionRef = database.collection("transactions").document()
         let transactionFirestoreID = transactionRef.documentID
         
+        print("Amount to save to database after token received \(transaction.amount)")
+        
         transactionRef.setData([
             "uid" : transactionFirestoreID,
             "transactionID" : transaction.transactionID,
@@ -207,13 +210,14 @@ class Repository {
         let userWalletRef = database.collection("wallets").document(currentUser!.wallet.walletID)
         
         let transactionAmount = Float(transaction.amount)!
-        let currentUserAmount = Float(currentUser!.wallet.amount)
+        let currentUserAmount = Float(currentUser!.wallet.amount)!
         
-        let userBalanceAfterMoneyAdded = transactionAmount + currentUserAmount
+        let userBalanceAfterMoneyAdded = Float(transactionAmount + currentUserAmount)
+        print("User Balance after money added \(userBalanceAfterMoneyAdded)")
         
         // Update user Wallet
         userWalletRef.setData([
-            "balance" : userBalanceAfterMoneyAdded
+            "balance" : String(format: "%.2f", userBalanceAfterMoneyAdded)
             ], merge: true, completion: { (error) in
                 
                 // Si hay error
@@ -230,11 +234,12 @@ class Repository {
                             return
                         }
                         
-                        let nippfyAmount = document?.get("balance") as! Float
-                        let nippfyAmountAfterMoneyAdded = nippfyAmount + transactionAmount
+                        let nippfyAmount = document?.get("balance") as! String
+                        let nippfyAmountFloat = Float(nippfyAmount)!
+                        let nippfyAmountAfterMoneyAdded = Float(nippfyAmountFloat + transactionAmount)
                         
                         nippfyWalletRef.setData([
-                            "balance" : nippfyAmountAfterMoneyAdded
+                            "balance" : String(format: "%.2f", nippfyAmountAfterMoneyAdded)
                         ]) { (error) in
                             if let error = error {
                                 completionHandler(error)
@@ -327,14 +332,16 @@ class Repository {
             print("Usuario guardado con éxito")
             // Crear el Wallet para el usuario
             
-            self.createWalletForUser(forUserID: userID, amount: 0, completionHandler: completionHandler)
+            self.createWalletForUser(forUserID: userID, amount: "0.00", completionHandler: completionHandler)
         }
     }
     
-    private func createWalletForUser(forUserID: String,  amount: Int, completionHandler: @escaping ((_ error: Error?, _ isThereError: Bool) -> Void)) {
+    private func createWalletForUser(forUserID: String,  amount: String, completionHandler: @escaping ((_ error: Error?, _ isThereError: Bool) -> Void)) {
         
         let newDocument = database.collection("wallets").document()
         let walletID = newDocument.documentID
+        
+        print("Amount to save in wallet when creating user \(amount)")
         
         newDocument.setData([
             "uid" : walletID,
@@ -469,8 +476,8 @@ class Repository {
                     wallet.getDocument { (document, error) in
                         if let document = document, document.exists {
                             
-                            let amount = document.get("balance") as! Int
-                            let userWallet = UserWallet(walletID: walletID, amount: Float(amount))
+                            let amount = document.get("balance") as! String
+                            let userWallet = UserWallet(walletID: walletID, amount: String(amount))
                             
                             self.currentUser = CurrentUser(uid: uid, wallet: userWallet, name: name, surname: surname, email: email, country: country, telephone: telephone)
                             print(self.currentUser!)

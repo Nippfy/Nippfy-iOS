@@ -287,6 +287,7 @@ extension WalletViewController {
                 guard let nonce = result.paymentMethod?.nonce else { return }
                 
                 print("Nonce from Braintree server: \(nonce)")
+                print("Amount to charge \(amount)")
                 
                 self.performTransaction(nonce: nonce, amount: amount)
                 

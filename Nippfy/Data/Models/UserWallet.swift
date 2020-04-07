@@ -12,6 +12,6 @@ import UIKit
 struct UserWallet {
     
     var walletID: String
-    var amount: Float
+    var amount: String
     
 }
