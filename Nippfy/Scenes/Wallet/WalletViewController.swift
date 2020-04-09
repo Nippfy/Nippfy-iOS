@@ -19,6 +19,7 @@ protocol WalletDisplayLogic: class
     func displaySomething(viewModel: Wallet.Something.ViewModel)
     func displayBraintreeToken(viewModel: Wallet.GetBraintreeToken.ViewModel)
     func displayPerformTransaction(viewModel: Wallet.PerformTransaction.ViewModel)
+    func displayUserInformation(viewModel: Wallet.LoadUserInformation.ViewModel)
 }
 
 class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
@@ -31,6 +32,9 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
     
     var tokenationKey = Credentials().tokenizationKey // Only for testing purposes --> For production request the token from your server (ALREADY IMPLEMENTED)
     var braintreeClient: BTAPIClient!
+    
+    var currentUser: CurrentUser?
+    var transactions = [Transaction]()
     
     var myView = WalletView()
     
@@ -82,10 +86,38 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
     {
         super.viewDidLoad()
         prepareView()
+        loadUserInformation()
         getToken()
         doSomething()
     }
     
+    // MARK: Load User Information
+    
+    func loadUserInformation() {
+        let request = Wallet.LoadUserInformation.Request()
+        interactor?.loadUserInformation(request: request)
+    }
+    
+    func displayUserInformation(viewModel: Wallet.LoadUserInformation.ViewModel) {
+        let error = viewModel.error
+        
+        self.myView.hideActivityIndicator()
+        
+        if error != nil {
+            showErrorWhilePerformingTransactionAlert(error: error!.localizedDescription)
+        } else {
+            
+            let currentUser = viewModel.currentUser
+            let userTransactions = viewModel.userTransactions
+            
+            self.currentUser = currentUser
+            self.transactions = userTransactions!
+            
+            myView.updateCurrentUserInformation(currentUser: currentUser!)
+            myView.transactionsCollectionView.reloadData()
+            
+        }
+    }
     
     
     // MARK: Get Braintree Token
@@ -117,6 +149,7 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
         } else {
             // Display transaction successful
             showTransactionSuccessfulyAlert()
+            loadUserInformation()
         }
     }
     
@@ -221,7 +254,7 @@ extension WalletViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return transactions.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -271,6 +304,8 @@ extension WalletViewController {
             } else if (result?.isCancelled == true) {
                 print("CANCELLED")
             } else if let result = result {
+                
+                self.myView.showActivityIndicator()
                 
                 guard let nonce = result.paymentMethod?.nonce else { return }
                 

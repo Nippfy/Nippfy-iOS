@@ -33,7 +33,7 @@ class WalletWorker
         let amount = request.amount
         
         // 1. Make transaction with Braintree
-        repository.performTransactionToWallet(nonce: nonce, amount: amount) { (error, transaction) in
+        repository.performTransactionToWallet(nonce: nonce, amount: amount) { [weak self] (error, transaction) in
             if let error = error {
                 completionHandler(error, nil, nil)
                 return
@@ -42,7 +42,7 @@ class WalletWorker
                 
                 // 2. Save Transaction To Database
                 guard let transaction = transaction else { return }
-                self.repository.saveTransactionToDatabase(transaction: transaction) { (error) in
+                self?.repository.saveTransactionToDatabase(transaction: transaction) { (error) in
                     
                     if let error = error {
                         completionHandler(error, nil, nil)
@@ -50,26 +50,25 @@ class WalletWorker
                     } else {
                         print("Transaction Saved To Database")
                         // 3. Update User Wallet and Nippfy Wallet in Database
-                        self.repository.addMoneyToUserAndNippfyWallet(transaction: transaction) { (error) in
+                        self?.repository.addMoneyToUserAndNippfyWallet(transaction: transaction) { (error) in
                             if let error = error {
                                 completionHandler(error, nil, nil)
                                 return
                             }
+                           
                             print("Money added to User and Nippfy Wallets")
                             // 4. Get Current User Information And Transactions
-                            
-                            self.repository.getCurrentUser { (currentUser) in
-                                self.repository.getTransactionsForUser(userUID: currentUser.uid) { (error, transactions) in
+                            self?.repository.getCurrentUser { (currentUser) in
+                                self?.repository.getTransactionsForUser(walletID: currentUser.wallet.walletID) { (error, transactions) in
                                     
                                     if let error = error {
                                         completionHandler(error, nil, nil)
                                         return
                                     } else {
-                                        
+                                        print("User Transactions \(transactions!.count)")
                                         completionHandler(nil, currentUser, transactions!)
                                         
                                     }
-                                    
                                 }
                             }
                         }
@@ -79,9 +78,18 @@ class WalletWorker
         }
     }
     
-    public func getCurrentUser(completionHandler: @escaping(_ currentUser: CurrentUser) -> Void) {
-        repository.getCurrentUser { (currentUser) in
-            completionHandler(currentUser)
+    public func loadUserInformation(request: Wallet.LoadUserInformation.Request, completionHandler: @escaping(_ error: Error?, _ currentUser: CurrentUser?, _ userTransactions: [Transaction]?) -> Void) {
+        repository.getCurrentUser { [weak self] (currentUser) in
+            self?.repository.getTransactionsForUser(walletID: currentUser.wallet.walletID) { (error, transactions) in
+                
+                if error != nil {
+                    completionHandler(error, nil, nil)
+                } else {
+                    completionHandler(nil, currentUser, transactions)
+                }
+                
+                
+            }
         }
     }
 }

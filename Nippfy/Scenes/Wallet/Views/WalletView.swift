@@ -110,7 +110,7 @@ class WalletView: UIView {
     lazy var balanceLabel: UILabel = {
         var label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "2200"
+        label.text = "0.00"
         label.textColor = UIColor(named: "Small Titles")
         return label
     }()
@@ -140,6 +140,23 @@ class WalletView: UIView {
         setUpUI()
     }
     
+    // MARK: Activity Indicator
+    
+    var activityIndicator: UIActivityIndicatorView = {
+        var indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
+        indicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
+    var activityIndicatorContainer: UIView = {
+        var view = UIView()
+        view.backgroundColor = UIColor(named: "Activity Indicator")
+        view.isHidden = true
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -151,7 +168,26 @@ class WalletView: UIView {
         
         setUpMiddleContainer()
         calculateFontSizes()
+        setUpActivityIndicator()
         
+    }
+    
+    fileprivate func setUpActivityIndicator() {
+        addSubviewForAutolayout(activityIndicatorContainer)
+        
+        NSLayoutConstraint.activate([
+            activityIndicatorContainer.widthAnchor.constraint(equalToConstant: 100),
+            activityIndicatorContainer.heightAnchor.constraint(equalToConstant: 100),
+            activityIndicatorContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
+            activityIndicatorContainer.centerXAnchor.constraint(equalTo: centerXAnchor)
+            ])
+        
+        activityIndicatorContainer.addSubviewForAutolayout(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: activityIndicatorContainer.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: activityIndicatorContainer.centerYAnchor)
+            ])
     }
     
     fileprivate func setUpTopLabels() {
@@ -363,4 +399,21 @@ extension WalletView {
         }
     }
     
+    func updateCurrentUserInformation(currentUser: CurrentUser) {
+        
+        let userCurrencySymbol = (currentUser.currencySymbol != nil) ? currentUser.currencySymbol! : "$"
+        
+        self.balanceLabel.text = "\(currentUser.wallet.amount)"
+        self.coinBalanceLabel.text = "\(userCurrencySymbol)"
+    }
+    
+    func showActivityIndicator() {
+        self.activityIndicatorContainer.isHidden = false
+        self.activityIndicator.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        self.activityIndicatorContainer.isHidden = true
+        self.activityIndicator.stopAnimating()
+    }
 }
