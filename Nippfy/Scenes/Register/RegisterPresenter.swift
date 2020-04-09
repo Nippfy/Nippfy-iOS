@@ -36,7 +36,7 @@ class RegisterPresenter: RegisterPresentationLogic
     }
     
     func presentUserRegistered(response: Register.RegisterNewUser.Response) {
-        let viewModel = Register.RegisterNewUser.ViewModel(errorMessage: response.errorMessage, isThereError: response.isThereError)
+        let viewModel = Register.RegisterNewUser.ViewModel(error: response.error)
         viewController?.displayUserRegistered(viewModel: viewModel)
     }
 }

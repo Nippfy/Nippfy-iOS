@@ -19,7 +19,6 @@ protocol WalletDisplayLogic: class
     func displaySomething(viewModel: Wallet.Something.ViewModel)
     func displayBraintreeToken(viewModel: Wallet.GetBraintreeToken.ViewModel)
     func displayPerformTransaction(viewModel: Wallet.PerformTransaction.ViewModel)
-    func displayCurrentUser(viewModel: Wallet.LoadUserInformation.ViewModel)
 }
 
 class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
@@ -83,21 +82,11 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
     {
         super.viewDidLoad()
         prepareView()
-        loadUserInformation()
         getToken()
         doSomething()
     }
     
-    // MARK: Load User Information
     
-    func loadUserInformation() {
-        let request = Wallet.LoadUserInformation.Request()
-        
-    }
-    
-    func displayCurrentUser(viewModel: Wallet.LoadUserInformation.ViewModel) {
-        
-    }
     
     // MARK: Get Braintree Token
     
@@ -130,7 +119,6 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
             showTransactionSuccessfulyAlert()
         }
     }
-    
     
     // MARK: Do something
     

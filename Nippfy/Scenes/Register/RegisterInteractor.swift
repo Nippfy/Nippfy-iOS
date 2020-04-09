@@ -56,9 +56,9 @@ class RegisterInteractor: RegisterBusinessLogic, RegisterDataStore
     func registerNewUser(request: Register.RegisterNewUser.Request) {
         
         worker = RegisterWorker()
-        worker?.registerNewUser(request: request, completionHandler: { [weak self] (errorMessage, isThereError) in
+        worker?.registerNewUser(request: request, completionHandler: { [weak self] (error) in
             
-            let response = Register.RegisterNewUser.Response(errorMessage: errorMessage, isThereError: isThereError)
+            let response = Register.RegisterNewUser.Response(error: error)
             self?.presenter?.presentUserRegistered(response: response)
             
         })

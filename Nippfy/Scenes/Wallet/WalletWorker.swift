@@ -27,36 +27,61 @@ class WalletWorker
         }
     }
     
-    public func performTransaction(request: Wallet.PerformTransaction.Request, completionHandler: @escaping ((_ error: Error?) -> Void)) {
+    public func performTransaction(request: Wallet.PerformTransaction.Request, completionHandler: @escaping ((_ error: Error?, _ currentUser: CurrentUser?, _ userTransactions: [Transaction]?) -> Void)) {
         
         let nonce = request.nonce
         let amount = request.amount
         
+        // 1. Make transaction with Braintree
         repository.performTransactionToWallet(nonce: nonce, amount: amount) { (error, transaction) in
             if let error = error {
-                completionHandler(error)
+                completionHandler(error, nil, nil)
                 return
             } else {
                 print("Transaction Completed ")
-                // Save Transaction To Database
                 
+                // 2. Save Transaction To Database
                 guard let transaction = transaction else { return }
                 self.repository.saveTransactionToDatabase(transaction: transaction) { (error) in
-                    print("Transaction Saved To Database")
                     
                     if let error = error {
-                        completionHandler(error)
+                        completionHandler(error, nil, nil)
                         return
                     } else {
-                        // Update User Wallet and Nippfy Wallet
+                        print("Transaction Saved To Database")
+                        // 3. Update User Wallet and Nippfy Wallet in Database
                         self.repository.addMoneyToUserAndNippfyWallet(transaction: transaction) { (error) in
-                            
+                            if let error = error {
+                                completionHandler(error, nil, nil)
+                                return
+                            }
                             print("Money added to User and Nippfy Wallets")
-                            completionHandler(error)
+                            // 4. Get Current User Information And Transactions
+                            
+                            self.repository.getCurrentUser { (currentUser) in
+                                self.repository.getTransactionsForUser(userUID: currentUser.uid) { (error, transactions) in
+                                    
+                                    if let error = error {
+                                        completionHandler(error, nil, nil)
+                                        return
+                                    } else {
+                                        
+                                        completionHandler(nil, currentUser, transactions!)
+                                        
+                                    }
+                                    
+                                }
+                            }
                         }
                     }
                 }
             }
+        }
+    }
+    
+    public func getCurrentUser(completionHandler: @escaping(_ currentUser: CurrentUser) -> Void) {
+        repository.getCurrentUser { (currentUser) in
+            completionHandler(currentUser)
         }
     }
 }

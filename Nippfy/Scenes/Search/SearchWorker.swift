@@ -24,6 +24,12 @@ class SearchWorker
     func checkIfUserIsLoggedIn(completion: @escaping((_ isLoggedIn: Bool) -> Void)) {
         repository.checkIfUserIsLoggedIn { (isLoggedIn) in
             completion(isLoggedIn)
+            
+            if isLoggedIn {
+                self.repository.getCurrentUser { (currentUser) in
+                    
+                }
+            }
         }
     }
 }

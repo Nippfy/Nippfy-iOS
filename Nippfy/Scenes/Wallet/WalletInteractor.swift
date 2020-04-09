@@ -27,34 +27,29 @@ protocol WalletDataStore
 class WalletInteractor: WalletBusinessLogic, WalletDataStore
 {
     var presenter: WalletPresentationLogic?
-    var worker: WalletWorker?
+    var worker: WalletWorker = WalletWorker()
     //var name: String = ""
     
     // MARK: Do something
     
     func doSomething(request: Wallet.Something.Request)
     {
-        worker = WalletWorker()
-        worker?.doSomeWork()
+        worker.doSomeWork()
         
         let response = Wallet.Something.Response()
         presenter?.presentSomething(response: response)
     }
     
     func getBraintreeToken(request: Wallet.GetBraintreeToken.Request) {
-        worker = WalletWorker()
-        worker?.getBraintreeToken(completionHandler: { [weak self] (error, braintreeToken) in
-            
+        worker.getBraintreeToken(completionHandler: { [weak self] (error, braintreeToken) in
             let response = Wallet.GetBraintreeToken.Response(error: error, token: braintreeToken)
             self?.presenter?.presentBraintreeToken(response: response)
-            
         })
     }
     
     func performTransaction(request: Wallet.PerformTransaction.Request) {
-        worker = WalletWorker()
-        worker?.performTransaction(request: request, completionHandler: { [weak self] (error) in
-            let response = Wallet.PerformTransaction.Response(error: error)
+        worker.performTransaction(request: request, completionHandler: { [weak self] (error, currentUser, userTransactions) in
+            let response = Wallet.PerformTransaction.Response(error: error, currentUser: currentUser, userTransactions: userTransactions)
             self?.presenter?.presentPerformTransaction(response: response)
         })
     }

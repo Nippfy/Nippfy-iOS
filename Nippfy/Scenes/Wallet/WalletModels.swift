@@ -56,13 +56,18 @@ enum Wallet
         struct Response
         {
             let error: Error?
+            let currentUser: CurrentUser?
+            let userTransactions: [Transaction]?
         }
         struct ViewModel
         {
             let error: Error?
+            let currentUser: CurrentUser?
+            let userTransactions: [Transaction]?
         }
     }
     
+    /*
     enum LoadUserInformation {
         struct Request
         {
@@ -76,4 +81,6 @@ enum Wallet
             let currentUser: CurrentUser
         }
     }
+ */
+    
 }

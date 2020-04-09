@@ -37,7 +37,7 @@ class WalletPresenter: WalletPresentationLogic
     }
     
     func presentPerformTransaction(response: Wallet.PerformTransaction.Response) {
-        let viewModel = Wallet.PerformTransaction.ViewModel(error: response.error)
+        let viewModel = Wallet.PerformTransaction.ViewModel(error: response.error, currentUser: response.currentUser, userTransactions: response.userTransactions)
         viewController?.displayPerformTransaction(viewModel: viewModel)
     }
 }

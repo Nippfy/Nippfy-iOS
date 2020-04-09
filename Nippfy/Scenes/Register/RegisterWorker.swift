@@ -31,30 +31,46 @@ class RegisterWorker
         }
     }
     
-    func registerNewUser(request: Register.RegisterNewUser.Request, completionHandler: @escaping ((_ error: Error?, _ isThereError: Bool) -> Void)) {
+    func registerNewUser(request: Register.RegisterNewUser.Request, completionHandler: @escaping ((_ error: Error?) -> Void)) {
         
         let user = request.userToRegister
         
-        repository.registerNewUser(request) { (isError, error) in
+        // 1. Registrar usuario
+        repository.registerNewUser(request) { (error) in
             
             // Si existe error al registrar el usuario
-            if (isError) {
-                completionHandler(error, true)
+            if let error = error {
+                completionHandler(error)
                 return
             } else {
                 
-                // Si no hay error guardamos el usuario en la base de datos
-                self.repository.saveUserToDatabase(user: user) { (error, isError) in
-                    
+                // 2. Si no hay error guardamos el usuario en la base de datos
+                self.repository.saveUserToDatabase(user: user) { (error, userID) in
                     // Error al guardar el usuario en la base de datos
-                    if (isError) {
-                        completionHandler(error, true)
+                    if let error = error {
+                        completionHandler(error)
                         return
                     } else {
-                        // No hay error al guardar el usuario en la base de datos
-                        completionHandler(nil, false)
+                        
+                        // 3. Creamos el wallet del usuario
+                        self.repository.createWalletForUser(forUserID: userID, amount: "0.00") { (error, walletID) in
+                            if let error = error {
+                                completionHandler(error)
+                                return
+                            } else {
+                                
+                                // 4. Actualizamos el wallet del usuario
+                                self.repository.updateUserWalletID(forUserID: userID, withWalletID: walletID) { (error) in
+                                    if let error = error {
+                                        completionHandler(error)
+                                    } else {
+                                        completionHandler(nil)
+                                    }
+                                }
+                                
+                            }
+                        }
                     }
-                    
                 }
             }
             

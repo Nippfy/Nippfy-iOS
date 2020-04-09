@@ -18,5 +18,6 @@ struct CurrentUser {
     var email: String
     var country: String
     var telephone: String
+    var currencySymbol = Locale.current.currencySymbol
     
 }

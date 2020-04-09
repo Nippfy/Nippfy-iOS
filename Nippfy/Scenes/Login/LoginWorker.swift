@@ -23,6 +23,13 @@ class LoginWorker
     
     func loginUser(request: Login.LoginButtonPressed.Request, error completion: @escaping(_ err: Error?) -> Void) {
         repository.loginUser(request: request) { (error) in
+            
+            if error == nil {
+                self.repository.getCurrentUser { (currentUser) in
+                    
+                }
+            }
+            
             completion(error)
         }
     }

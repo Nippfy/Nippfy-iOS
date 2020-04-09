@@ -106,19 +106,17 @@ extension RegisterViewController {
     
     func displayUserRegistered(viewModel: Register.RegisterNewUser.ViewModel) {
         
-        let isThereError = viewModel.isThereError
+        let error = viewModel.error
         
         myView.hideActivityIndicator()
         
-        if (!isThereError) {
+        if (error == nil) {
             print("Usuario registrado con éxito")
             showRegistrationSuccesfulAlert()
             
         } else {
             
-            let errorMessage = viewModel.errorMessage
-            
-            showErrorWhileRegisteringAlert(error: errorMessage!.localizedDescription)
+            showErrorWhileRegisteringAlert(error: error!.localizedDescription)
             print("Ha habido un problema al registrar el usuario")
         }
         
@@ -181,6 +179,7 @@ extension RegisterViewController {
             self.myView.phoneTextField.defaultRegion = regionCode
             self.myView.phoneTextField.updatePlaceholder()
             
+            print(regionCode)
             self.fetchStatesForCountry(countryCode: regionCode)
         }
         
