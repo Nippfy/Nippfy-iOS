@@ -59,7 +59,7 @@ class WalletWorker
                             print("Money added to User and Nippfy Wallets")
                             // 4. Get Current User Information And Transactions
                             self?.repository.getCurrentUser { (currentUser) in
-                                self?.repository.getTransactionsForUser(walletID: currentUser.wallet.walletID) { (error, transactions) in
+                                self?.repository.getTransactionsForUser(walletID: currentUser.wallet!.walletID) { (error, transactions) in
                                     
                                     if let error = error {
                                         completionHandler(error, nil, nil)
@@ -80,7 +80,7 @@ class WalletWorker
     
     public func loadUserInformation(request: Wallet.LoadUserInformation.Request, completionHandler: @escaping(_ error: Error?, _ currentUser: CurrentUser?, _ userTransactions: [Transaction]?) -> Void) {
         repository.getCurrentUser { [weak self] (currentUser) in
-            self?.repository.getTransactionsForUser(walletID: currentUser.wallet.walletID) { (error, transactions) in
+            self?.repository.getTransactionsForUser(walletID: currentUser.wallet!.walletID) { (error, transactions) in
                 
                 if error != nil {
                     completionHandler(error, nil, nil)

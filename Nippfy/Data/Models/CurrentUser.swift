@@ -12,7 +12,7 @@ import UIKit
 struct CurrentUser {
     
     var uid: String
-    var wallet: UserWallet
+    var wallet: UserWallet?
     var name: String
     var surname: String
     var email: String

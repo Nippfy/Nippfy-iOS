@@ -86,9 +86,13 @@ class WalletViewController: UIViewController, WalletDisplayLogic, UICollectionVi
     {
         super.viewDidLoad()
         prepareView()
-        loadUserInformation()
         getToken()
         doSomething()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadUserInformation()
     }
     
     // MARK: Load User Information
@@ -261,11 +265,17 @@ extension WalletViewController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: transactionsCellID, for: indexPath) as! TransactionCell
         
+        let transaction = transactions[indexPath.row]
+        
+        cell.configureCell(currentUser: currentUser!, transaction: transaction)
+        /*
         if indexPath.row % 2 == 0 {
             cell.isReceived = true
         } else {
             cell.isReceived = false
         }
+ 
+ */
         
         return cell
     }

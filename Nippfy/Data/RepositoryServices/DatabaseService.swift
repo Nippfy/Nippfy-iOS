@@ -135,10 +135,10 @@ class DatabaseService {
     // MARK: Add Money To User And Nippfy Wallet After Transaction
     public func addMoneyToUserAndNippfyWallet(currentUser: CurrentUser, transaction: Transaction, completionHandler: @escaping ((_ error: Error?) -> Void)) {
         
-        let userWalletRef = database.collection("wallets").document(currentUser.wallet.walletID)
+        let userWalletRef = database.collection("wallets").document(currentUser.wallet!.walletID)
         
         let transactionAmount = Float(transaction.amount)!
-        let currentUserAmount = Float(currentUser.wallet.amount)!
+        let currentUserAmount = Float(currentUser.wallet!.amount)!
         
         let userBalanceAfterMoneyAdded = Float(transactionAmount + currentUserAmount)
         print("User Balance after money added \(userBalanceAfterMoneyAdded)")
@@ -223,9 +223,59 @@ class DatabaseService {
         }
     }
     
+    // MARK: Get user with WalletID
+    
+    public func getUserWithEmail(walletID: String ,completionHandler: @escaping(_ currentUser: CurrentUser) -> Void) {
+        
+        let users = database.collection("users").whereField("walletID", isEqualTo: walletID).limit(to: 1)
+        
+        users.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    
+                    let uid = document.get("uid") as! String
+                    let walletID = document.get("walletID") as! String
+                    let name = document.get("name") as! String
+                    let country = document.get("country") as! String
+                    let email = document.get("email") as! String
+                    let surname = document.get("surname") as! String
+                    let telephone = document.get("telephone") as! String
+                    
+                    let currentUser = CurrentUser(uid: uid, name: name, surname: surname, email: email, country: country, telephone: telephone)
+                    completionHandler(currentUser)
+                }
+            }
+        }
+    }
+    
     // MARK: Get Transaction For User
     
     public func getTransactionsForUser(walletID: String, completionHandler: @escaping(_ error: Error?, _ userTransactions: [Transaction]?)-> Void) {
+        
+        self.userTransactions.removeAll()
+        
+        // 1. Cojo todas las transacciones donde el usuario ha enviado
+        getSentTransactionsForUser(walletID: walletID) { [weak self] (error, transactions) in
+            if (error != nil) {
+                completionHandler(error, nil)
+                return
+            }
+            
+            // 2. Cojo todas las transacciones donde el usuario ha recibido
+            self?.getReceivedTransactionsForUser(walletID: walletID) { (error, transactions) in
+                if (error != nil) {
+                    completionHandler(error, nil)
+                    return
+                }
+                completionHandler(nil, self?.userTransactions)
+            }
+        }
+    }
+    
+    // MARK: Get Sent Transactions For User
+    private func getSentTransactionsForUser(walletID: String, completionHandler: @escaping(_ error: Error?, _ userTransactions: [Transaction]?)-> Void) {
         
         let transactionsRef = database.collection("transactions").whereField("walletID_Tx", isEqualTo: walletID)
         transactionsRef.getDocuments { (snapshot, error) in
@@ -233,7 +283,7 @@ class DatabaseService {
                 completionHandler(error, nil)
                 return
             } else {
-                self.userTransactions.removeAll()
+                // self.userTransactions.removeAll()
                 
                 for document in snapshot!.documents {
                     
@@ -245,16 +295,112 @@ class DatabaseService {
                     let currencyCode = document.get("currencyCode") as! String
                     let timestamp = document.get("timestamp") as! String
                     
-                    let transaction = Transaction(transactionID: transactionID, walletID_Rx: walletID_Rx, walletID_Tx: walletID_Tx, timestamp: timestamp, amount: amount, currencyCode: currencyCode, message: nil)
-                    self.userTransactions.append(transaction)
+                    let currencySymbol = getSymbol(forCurrencyCode: currencyCode) == nil ? "$" : getSymbol(forCurrencyCode: currencyCode)
+                    
+                    var transaction = Transaction(transactionID: transactionID, walletID_Rx: walletID_Rx, walletID_Tx: walletID_Tx, timestamp: timestamp, amount: amount, currencyCode: currencyCode, currencySymbol: currencySymbol!, message: nil, userRx: nil, userTx: self.currentUser)
+                    
+                    
+                    if (walletID_Tx == walletID_Rx) {
+                        transaction.userRx = self.currentUser
+                    } else {
+                        self.findUserWithWalletID(walletID: walletID_Rx) { (error, userFound) in
+                            if error != nil {
+                                completionHandler(error, nil)
+                                return
+                            }
+                            transaction.userRx = userFound
+                        }
+                    }
+                    
+                    print(transaction)
+                    
+                    if (!self.alreadyAdded(transactionID: transactionID)) {
+                        self.userTransactions.append(transaction)
+                    }
                 }
-                
                 completionHandler(nil, self.userTransactions)
-                
             }
         }
     }
     
+    // MARK: Get Received Transactions For User
+    private func getReceivedTransactionsForUser(walletID: String, completionHandler: @escaping(_ error: Error?, _ userTransactions: [Transaction]?)-> Void) {
+        let transactionsRef = database.collection("transactions").whereField("walletID_Rx", isEqualTo: walletID)
+        transactionsRef.getDocuments { (snapshot, error) in
+            if let error = error {
+                completionHandler(error, nil)
+                return
+            } else {
+                // self.userTransactions.removeAll()
+                
+                for document in snapshot!.documents {
+                    
+                    // let uid = document.get("uid") as! String
+                    let walletID_Rx = document.get("walletID_Rx") as! String
+                    let walletID_Tx = document.get("walletID_Tx") as! String
+                    let transactionID = document.get("transactionID") as! String
+                    let amount = document.get("amount") as! String
+                    let currencyCode = document.get("currencyCode") as! String
+                    let timestamp = document.get("timestamp") as! String
+                    
+                    let currencySymbol = getSymbol(forCurrencyCode: currencyCode) == nil ? "$" : getSymbol(forCurrencyCode: currencyCode)
+                    
+                    var transaction = Transaction(transactionID: transactionID, walletID_Rx: walletID_Rx, walletID_Tx: walletID_Tx, timestamp: timestamp, amount: amount, currencyCode: currencyCode, currencySymbol: currencySymbol!, message: nil, userRx: self.currentUser, userTx: nil)
+                    
+                    if (walletID_Tx == walletID_Rx) {
+                        transaction.userTx = self.currentUser
+                    } else {
+                        self.findUserWithWalletID(walletID: walletID_Tx) { (error, userFound) in
+                            if error != nil {
+                                completionHandler(error, nil)
+                                return
+                            }
+                            transaction.userTx = userFound
+                        }
+                        
+                    }
+                    
+                    print(transaction)
+                    if (!self.alreadyAdded(transactionID: transactionID)) {
+                        self.userTransactions.append(transaction)
+                    }
+                }
+                completionHandler(nil, self.userTransactions)
+            }
+        }
+    }
     
+    // MARK: Find user with Wallet ID
+    func findUserWithWalletID(walletID: String, completionHandler: @escaping(_ error: Error?, _ userFound: CurrentUser?) -> Void) {
+        database.collection("users").whereField("walletID", isEqualTo: walletID).limit(to: 1).getDocuments { (snapshot, error) in
+            
+            if error != nil {
+                completionHandler(error, nil)
+                return
+            }
+            
+            for document in snapshot!.documents {
+                let uid = document.get("uid") as! String
+                let name = document.get("name") as! String
+                let country = document.get("country") as! String
+                let email = document.get("email") as! String
+                let surname = document.get("surname") as! String
+                let telephone = document.get("telephone") as! String
+                
+                let userFound = CurrentUser(uid: uid, wallet: nil, name: name, surname: surname, email: email, country: country, telephone: telephone)
+                completionHandler(nil, userFound)
+            }
+        }
+    }
+    
+    // MARK: Helper Method
+    func alreadyAdded(transactionID: String) -> Bool {
+        for transaction in userTransactions {
+            if (transaction.transactionID == transactionID) {
+                return true
+            }
+        }
+        return false
+    }
     
 }

@@ -86,10 +86,11 @@ class BraintreeService {
                 
                 let transactionID = webResponse.transaction.id
                 let currencyIsoCode = webResponse.transaction.currencyIsoCode
+                let currencySymbol = getSymbol(forCurrencyCode: currencyIsoCode) == nil ? "$" : getSymbol(forCurrencyCode: currencyIsoCode)
                 let amount = webResponse.transaction.amount
                 let timestamp = webResponse.transaction.createdAt
                 
-                let transaction = Transaction(transactionID: transactionID, walletID_Rx: currentUserWalletID, walletID_Tx: currentUserWalletID, timestamp: timestamp, amount: amount, currencyCode: currencyIsoCode, message: nil)
+                let transaction = Transaction(transactionID: transactionID, walletID_Rx: currentUserWalletID, walletID_Tx: currentUserWalletID, timestamp: timestamp, amount: amount, currencyCode: currencyIsoCode, currencySymbol: currencySymbol!, message: nil)
                 
                 completionHandler(nil, transaction)
                 return

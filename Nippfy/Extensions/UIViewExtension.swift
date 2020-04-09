@@ -14,6 +14,15 @@ let __serverpart = "([A-Z0-9a-z]([A-Z0-9a-z-]{0,30}[A-Z0-9a-z])?\\.){1,5}"
 let __emailRegex = __firstpart + "@" + __serverpart + "[A-Za-z]{2,8}"
 let __emailPredicate = NSPredicate(format: "SELF MATCHES %@", __emailRegex)
 
+func getSymbol(forCurrencyCode code: String) -> String? {
+    let locale = NSLocale(localeIdentifier: code)
+    if locale.displayName(forKey: .currencySymbol, value: code) == code {
+        let newlocale = NSLocale(localeIdentifier: code.dropLast() + "_en")
+        return newlocale.displayName(forKey: .currencySymbol, value: code)
+    }
+    return locale.displayName(forKey: .currencySymbol, value: code)
+}
+
 extension String {
     
     func isEmail() -> Bool {

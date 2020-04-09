@@ -19,6 +19,31 @@ class TransactionCell: UICollectionViewCell {
         }
     }
     
+    func configureCell(currentUser: CurrentUser, transaction: Transaction) {
+        
+        let currentUserWalletID = currentUser.wallet!.walletID
+        let receiverWalletID = transaction.userRx!.wallet!.walletID
+        let senderWalletID = transaction.userTx!.wallet!.walletID
+        
+        // Received transaction (Maybe when money was added to the wallet)
+        if (currentUserWalletID == receiverWalletID) {
+            isReceived = true
+        }
+        // Sent transaction (When doing a Nipp to somebody else)
+        else {
+            isReceived = false
+        }
+        receiverNameLabel.text = transaction.userRx!.name
+        
+        if (transaction.currencySymbol == "$") {
+            transactionAmountLabel.text = "$\(transaction.amount)"
+        } else {
+            transactionAmountLabel.text = "\(transaction.amount)\(transaction.currencySymbol)"
+        }
+    }
+    
+    
+    // MARK: Views
     lazy var stateContainerView: UIView = {
         var view = UIView()
         view.backgroundColor = UIColor(named: "Received Transaction Button")

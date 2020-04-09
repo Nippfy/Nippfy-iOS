@@ -400,10 +400,9 @@ extension WalletView {
     }
     
     func updateCurrentUserInformation(currentUser: CurrentUser) {
-        
         let userCurrencySymbol = (currentUser.currencySymbol != nil) ? currentUser.currencySymbol! : "$"
         
-        self.balanceLabel.text = "\(currentUser.wallet.amount)"
+        self.balanceLabel.text = "\(currentUser.wallet!.amount)"
         self.coinBalanceLabel.text = "\(userCurrencySymbol)"
     }
     

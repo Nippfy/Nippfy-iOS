@@ -17,6 +17,9 @@ struct Transaction {
     var timestamp: String
     var amount: String
     var currencyCode: String
+    var currencySymbol: String
     var message: String?
+    var userRx: CurrentUser?
+    var userTx: CurrentUser?
     
 }

@@ -130,7 +130,7 @@ class Repository {
     }
     
     public func performTransactionToWallet(nonce: String, amount: String, completionHandler: @escaping ((_ error: Error?, _ transaction: Transaction?) -> Void)) {
-        braintreeService.performTransactionToWallet(currentUserWalletID: currentUser!.wallet.walletID, nonce: nonce, amount: amount) { (error, transaction) in
+        braintreeService.performTransactionToWallet(currentUserWalletID: currentUser!.wallet!.walletID, nonce: nonce, amount: amount) { (error, transaction) in
             completionHandler(error, transaction)
         }
     }
